@@ -1048,7 +1048,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d031f671f01e98f48825b0d862ece89a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4b5aa64d9a0fc884c919ab7336e1a224, type: 2}
+      objectReference: {fileID: 2100000, guid: e1368ab8565b5754d824eb8b81cb2baa, type: 2}
     - target: {fileID: 919132149155446097, guid: d031f671f01e98f48825b0d862ece89a, type: 3}
       propertyPath: m_Name
       value: CenterTree
@@ -1745,7 +1745,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: fcdb7edd900af5d45ac1933b80cbffe4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4b5aa64d9a0fc884c919ab7336e1a224, type: 2}
+      objectReference: {fileID: 2100000, guid: 90258bf0441223e43aa2705771d2e589, type: 2}
     - target: {fileID: 919132149155446097, guid: fcdb7edd900af5d45ac1933b80cbffe4, type: 3}
       propertyPath: m_Name
       value: Spotty Tree
