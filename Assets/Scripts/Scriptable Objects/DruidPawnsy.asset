@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8045e0012911d948b453104250524ca, type: 3}
   m_Name: DruidPawnsy
   m_EditorClassIdentifier: 
-  creatureName: 
-  health: 0
+  creatureName: Pawnsy
+  manaCost: 0
+  maxHealth: 0
   baseDamage: 0
   defense: 0
   speed: 0
   sprite: {fileID: 0}
+  actions: []
