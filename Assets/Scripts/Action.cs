@@ -79,6 +79,8 @@ public class Action
 
     // Action name
     public string actionName;
+    // Action description
+    public string description;
     
     // All effects of the action
     public List<EffectGroup> actionEffects;
