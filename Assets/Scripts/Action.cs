@@ -80,6 +80,7 @@ public class Action
     // Action name
     public string actionName;
     // Action description
+    [TextArea(3, 10)]
     public string description;
     
     // All effects of the action

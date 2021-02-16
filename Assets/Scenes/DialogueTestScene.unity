@@ -403,12 +403,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed696c95dd9f92f4080392cc569455df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
+  narratorDialogue:
+    characterName: Narrator
+    sentences:
+    - Pawnsy uses stick wack!
+    - It's super effective!
+  playerOneDialogue:
     characterName: Vlad
     sentences:
-    - This is a test
-    - Still a test!
-    - Testing this dialogue system
+    - Ouch!
+  playerTwoDialogue:
+    characterName: Chrysanthemum
+    sentences:
+    - Haha!
+    - You're goin' down!
 --- !u!1 &318101739
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,8 +762,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bb2579413b594e4abd226e91917c2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameText: {fileID: 1418361644}
   dialogueText: {fileID: 318101741}
+  nameText: {fileID: 1418361644}
   characterImage: {fileID: 1000714107}
 --- !u!4 &969759425
 Transform:

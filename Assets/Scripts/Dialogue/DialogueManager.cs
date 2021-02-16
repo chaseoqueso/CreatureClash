@@ -6,26 +6,35 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
-    public TMP_Text nameText;
     public TMP_Text dialogueText;
+    public TMP_Text nameText;
     public Image characterImage;
 
     private Queue<string> sentences;
+    private Queue<string> names;
+    private Queue<Sprite> portraits;
 
     // Start is called before the first frame update
     void Start()
     {
         sentences = new Queue<string>();
+        names = new Queue<string>();
+        portraits = new Queue<Sprite>();
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
-        nameText.text = dialogue.characterName;
-
         sentences.Clear();
+        names.Clear();
+        portraits.Clear();
 
-        foreach(string sentence in dialogue.sentences){
-            sentences.Enqueue(sentence);
+        if( dialogue.characterLines.Count != 0 ){
+            // Add each line to the queue
+            foreach(Dialogue.characterLine line in dialogue.characterLines){
+                sentences.Enqueue(line.sentence);
+                names.Enqueue(line.speaker.characterName);
+                portraits.Enqueue(line.speaker.characterPortrait);
+            }
         }
 
         DisplayNextSentence();
@@ -38,6 +47,8 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
+        nameText.text = names.Dequeue();
+        characterImage.sprite = portraits.Dequeue();
         string sentence = sentences.Dequeue();
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));

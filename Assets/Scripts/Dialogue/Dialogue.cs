@@ -5,9 +5,16 @@ using UnityEngine;
 [System.Serializable]
 public class Dialogue
 {
-    public string characterName;
-    
-    [TextArea(3, 10)]
-    public string[] sentences;
+    [System.Serializable]
+    public struct characterLine {
+        // Speaker
+        public PlayerObject speaker;
 
+        // Dialogue line
+        [TextArea(3, 10)]
+        public string sentence;
+    }
+    
+    // List of lines
+    public List<characterLine> characterLines;
 }
