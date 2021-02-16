@@ -12,12 +12,17 @@ public class GameManager : MonoBehaviour
     }
 
     public Turn currentTurn {get; private set;}
+    public int turnCount;
+    public Player player1;
+    public Player player2;
     public GameObject player1UI;
     public GameObject player2UI;
     public Text turnText;
 
-    void Awake()
+    void Start()
     {
+        turnCount = 1;
+        player1.actionPoints = player2.actionPoints = turnCount + 2;
         currentTurn = Turn.player1;
         updateUI();
     }
@@ -34,6 +39,8 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(resolveAttacks());
                 break;
             case Turn.resolveAttacks:
+                ++turnCount;
+                player1.actionPoints = player2.actionPoints = turnCount + 2;
                 currentTurn = Turn.player1; 
                 break;
             default:
