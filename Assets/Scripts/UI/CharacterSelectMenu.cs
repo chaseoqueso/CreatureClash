@@ -6,7 +6,7 @@ using TMPro;
 
 public class CharacterSelectMenu : MonoBehaviour
 {
-    CharacterSelectManager charManager;
+    public CharacterSelectManager charManager;
 
     // Player UI data
     public TMP_Text playerName;
@@ -21,8 +21,6 @@ public class CharacterSelectMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        charManager = gameObject.GetComponent<CharacterSelectManager>();
-
         charIndex = 0;
 
         // Display first character option

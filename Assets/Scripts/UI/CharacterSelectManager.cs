@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CharacterSelectManager : MonoBehaviour
 {
     public List<PlayerObject> characters;
@@ -26,6 +27,13 @@ public class CharacterSelectManager : MonoBehaviour
         if( readyP1 && readyP2 ){
             // Start game
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            Debug.Log("Start Game");
         }
+    }
+
+    public void LoadMenu()
+    {
+        //SceneManager.LoadScene("MainMenu");
+        Debug.Log("Loading menu...");
     }
 }
