@@ -9,10 +9,20 @@ public class Player : MonoBehaviour
 
     [HideInInspector] public float health;
     [HideInInspector] public int actionPoints;
+    [HideInInspector] public bool playerEnabled;
 
     void Start()
     {
         loadDeck();
+    }
+
+    void OnMouseDown()
+    {
+        if(!playerEnabled)
+            return;
+        
+        Debug.Log(GameManager.Instance);
+        GameManager.Instance.p1Front.summonCreature(drawCard());
     }
 
     public void loadDeck()
@@ -25,6 +35,13 @@ public class Player : MonoBehaviour
                 deck.Insert(Random.Range(0, deck.Count), c.creatureType);
             }
         }
+    }
+
+    public CreatureObject drawCard()
+    {
+        CreatureObject ret = deck[0];
+        deck.RemoveAt(0);
+        return ret;
     }
 
     public void shuffleDeck()

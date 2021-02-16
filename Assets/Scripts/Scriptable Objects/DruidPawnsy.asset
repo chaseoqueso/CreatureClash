@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: DruidPawnsy
   m_EditorClassIdentifier: 
   creatureName: Pawnsy
-  manaCost: 0
-  maxHealth: 0
-  baseDamage: 0
-  defense: 0
-  speed: 0
-  sprite: {fileID: 0}
+  manaCost: 1
+  maxHealth: 20
+  baseDamage: 5
+  defense: 10
+  speed: 75
+  sprite: {fileID: 21300000, guid: 06f1490df3daa284eaa344f5284d45db, type: 3}
+  heightMap: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   actions: []

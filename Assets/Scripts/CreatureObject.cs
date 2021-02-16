@@ -16,6 +16,7 @@ public class CreatureObject : ScriptableObject
 
     // Art
     [SerializeField] private Sprite sprite;
+    [SerializeField] private Sprite heightMap;
 
     // Sound Effects
     // ??? onSummon;
