@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public PlayerObject playerOne;
-    public PlayerObject playerTwo;
+    public Player playerOne;
+    public Player playerTwo;
+
+    public float almostDeadValue;
 
     private Dialogue dialogue;
+
+    void Start()
+    {
+        playerOne = GameManager.Instance.player1;
+        playerTwo = GameManager.Instance.player2;
+    }
 
     public void triggerDialogue()
     {
@@ -22,20 +30,109 @@ public class DialogueTrigger : MonoBehaviour
 
     private void selectNextDialogue()
     {
-        // Check game state
+        // If necessary, add narrator dialogue
         
-        // Pick dialogue (add lines to dialogue.sentences)
+        
+        // Check game state & add dialogue
         // Check for special dialogue conditions
+        if( checkForSpecialDialogue() ){
+            // If added special dialogue to dialogue, end here
+            return;
+        }
+        // Check for start dialogue
+        else if(GameManager.Instance.turnCount == 1){
+            // add Player One dialogue
+            int randomIndex = Random.Range(0, playerOne.playerObject.challengeDialogue.Count - 1);
+            AppendDialogueItems(playerOne.playerObject.challengeDialogue[randomIndex].characterLines);
+            // add Player Two dialogue
+            randomIndex = Random.Range(0, playerTwo.playerObject.challengeDialogue.Count - 1);
+            AppendDialogueItems(playerTwo.playerObject.challengeDialogue[randomIndex].characterLines);
+        }
+        // Check for end dialogue
+        // else if( ){
 
-        // Check for start/end dialogue
-
+        // }
+        // Check for players almost dead              UPDATE THESE TO BE CURRENT / MAX HEALTH!!!!!!!!!!!!!
+        // if both almost dead now (maybe make this it's own thing rather than using both selfAlmostDead??? or use special dialogue)
+        else if( (playerOne.health / playerOne.health) <= almostDeadValue && (playerTwo.health / playerTwo.health) <= almostDeadValue ){
+            // add Player One dialogue
+            int randomIndex = Random.Range(0, playerOne.playerObject.selfAlmostDeadDialogue.Count - 1);
+            AppendDialogueItems(playerOne.playerObject.selfAlmostDeadDialogue[randomIndex].characterLines);
+            // add Player Two dialogue
+            randomIndex = Random.Range(0, playerTwo.playerObject.selfAlmostDeadDialogue.Count - 1);
+            AppendDialogueItems(playerTwo.playerObject.selfAlmostDeadDialogue[randomIndex].characterLines);
+        }
+        // if player 1 is almost dead
+        else if( (playerOne.health / playerOne.health) <= almostDeadValue ){
+            // add Player One dialogue
+            int randomIndex = Random.Range(0, playerOne.playerObject.selfAlmostDeadDialogue.Count - 1);
+            AppendDialogueItems(playerOne.playerObject.selfAlmostDeadDialogue[randomIndex].characterLines);
+            // add Player Two dialogue
+            randomIndex = Random.Range(0, playerTwo.playerObject.opponentAlmostDeadDialogue.Count - 1);
+            AppendDialogueItems(playerTwo.playerObject.opponentAlmostDeadDialogue[randomIndex].characterLines);
+        }
+        // if player 2 is almost dead
+        else if( (playerTwo.health / playerTwo.health) <= almostDeadValue ){
+            // add Player One dialogue
+            int randomIndex = Random.Range(0, playerOne.playerObject.opponentAlmostDeadDialogue.Count - 1);
+            AppendDialogueItems(playerOne.playerObject.opponentAlmostDeadDialogue[randomIndex].characterLines);
+            // add Player Two dialogue
+            randomIndex = Random.Range(0, playerTwo.playerObject.selfAlmostDeadDialogue.Count - 1);
+            AppendDialogueItems(playerTwo.playerObject.selfAlmostDeadDialogue[randomIndex].characterLines);
+        }
         // Check for creature death
+        // else if( creaturedeath ){
 
-        // Check for self almost dead
-
-        // Check for opponent almost dead
-
+        // }
         // Check for damage dealt/taken
+        // else if( damage dealt/taken ){
 
+        // }
+    }
+
+    private bool checkForSpecialDialogue()
+    {
+        // Check if using special dialogue
+        int randomIndex = Random.Range(0, 2);
+        if( randomIndex == 0 ){
+            return false;
+        }
+
+        List<Dialogue> specialDialogue;
+        
+        if( randomIndex == 1 ){
+            specialDialogue = playerOne.playerObject.specialDialogue;
+            // If special dialogue found and added, return true
+            if(specialDialogueLoop(specialDialogue)){       // , playerOne.roundTriggers)){
+                return true;
+            }
+        }
+        else if( randomIndex == 2 ){
+            // If no special dialogue that fits these conditions, return false
+            specialDialogue = playerTwo.playerObject.specialDialogue;
+            return specialDialogueLoop(specialDialogue);        // , playerTwo.roundTriggers);
+        }
+
+        return false;
+    }
+
+    private bool specialDialogueLoop(List<Dialogue> specialDialogue) //, List<SpecialDialogue.dialogueTriggers> roundTriggers)
+    {
+        /*
+        if( roundTriggers.contains(SpecialDialogue.dialogueTriggers.TRIGGER) ){
+            
+
+
+            return true;
+        }
+        */
+        return false;
+    }
+
+    private void AppendDialogueItems( List<Dialogue.characterLine> listToAdd )
+    {
+        foreach( Dialogue.characterLine line in listToAdd ){
+            dialogue.characterLines.Add(line);
+        }
     }
 }

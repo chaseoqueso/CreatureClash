@@ -20,10 +20,12 @@ public class SpecialDialogue
         // Damage dealt/taken
         damageDealt,
         damageTaken,
+        criticalHit,
 
         // Almost dead
         opponentAlmostDead,
-        selfAlmostDead
+        selfAlmostDead,
+        bothAlmostDead
     }
 
     // List of triggers

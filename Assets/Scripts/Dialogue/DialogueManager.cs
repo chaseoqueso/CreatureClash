@@ -22,6 +22,13 @@ public class DialogueManager : MonoBehaviour
         portraits = new Queue<Sprite>();
     }
 
+    void Update()
+    {
+        if( Input.GetAxis("Submit") == 1 ){
+            DisplayNextSentence();
+        }
+    }
+
     public void StartDialogue(Dialogue dialogue)
     {
         sentences.Clear();

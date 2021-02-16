@@ -27,22 +27,22 @@ public class PlayerObject : ScriptableObject
     // Character portrait image (for dialogue)
     public Sprite characterPortrait;
 
-    // Dialogue                                         Priority
-    // ========                                         ========
+    // Dialogue
+    // ========
     // Start
-    public List<Dialogue> challengeDialogue;            // 2
+    public List<Dialogue> challengeDialogue;
     // End
-    public List<Dialogue> winDialogue;                  // 2
-    public List<Dialogue> lossDialogue;                 // 2
+    public List<Dialogue> winDialogue;
+    public List<Dialogue> lossDialogue;
     // Damage dealt/taken
-    public List<Dialogue> damageDealtDialogue;          // 6
-    public List<Dialogue> damageTakenDialogue;          // 6
+    public List<Dialogue> damageDealtDialogue;
+    public List<Dialogue> damageTakenDialogue;
     // Own creature dies
-    public List<Dialogue> creatureDeathDialogue;        // 3
+    public List<Dialogue> creatureDeathDialogue;
     // Almost dead
-    public List<Dialogue> opponentAlmostDeadDialogue;   // 5
-    public List<Dialogue> selfAlmostDeadDialogue;       // 4
+    public List<Dialogue> opponentAlmostDeadDialogue;
+    public List<Dialogue> selfAlmostDeadDialogue;
 
     // Special dialogue
-    public List<Dialogue> specialDialogue;              // 1
+    public List<Dialogue> specialDialogue;
 }
