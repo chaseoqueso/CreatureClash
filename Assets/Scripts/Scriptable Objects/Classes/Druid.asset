@@ -12,6 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c99e1a2848449c45910e9fe933a3795, type: 3}
   m_Name: Druid
   m_EditorClassIdentifier: 
+  characterName: Chrysanthemum
+  characterClass: Druid
+  characterSprite: {fileID: 0}
+  flavorText: Druid flavor text
   creatureDeck:
   - creatureType: {fileID: 11400000, guid: e58f4d046af814a478f9118256391a92, type: 2}
     quantity: 3
+  characterPortrait: {fileID: 0}
+  challengeDialogue: []
+  winDialogue: []
+  lossDialogue: []
+  damageDealtDialogue: []
+  damageTakenDialogue: []
+  creatureDeathDialogue: []
+  opponentAlmostDeadDialogue: []
+  selfAlmostDeadDialogue: []
+  specialDialogue: []

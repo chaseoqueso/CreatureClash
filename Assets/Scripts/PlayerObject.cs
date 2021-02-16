@@ -44,5 +44,5 @@ public class PlayerObject : ScriptableObject
     public List<Dialogue> selfAlmostDeadDialogue;
 
     // Special dialogue
-    public List<Dialogue> specialDialogue;
+    public List<SpecialDialogue> specialDialogue;
 }

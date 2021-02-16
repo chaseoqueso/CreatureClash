@@ -31,7 +31,7 @@ public class DialogueTrigger : MonoBehaviour
     private void selectNextDialogue()
     {
         // If necessary, add narrator dialogue
-        
+
         
         // Check game state & add dialogue
         // Check for special dialogue conditions
@@ -98,7 +98,7 @@ public class DialogueTrigger : MonoBehaviour
             return false;
         }
 
-        List<Dialogue> specialDialogue;
+        List<SpecialDialogue> specialDialogue;
         
         if( randomIndex == 1 ){
             specialDialogue = playerOne.playerObject.specialDialogue;
@@ -116,17 +116,41 @@ public class DialogueTrigger : MonoBehaviour
         return false;
     }
 
-    private bool specialDialogueLoop(List<Dialogue> specialDialogue) //, List<SpecialDialogue.dialogueTriggers> roundTriggers)
+    private bool specialDialogueLoop(List<SpecialDialogue> specialDialogue) //, List<SpecialDialogue.dialogueTrigger> roundTriggers)
     {
-        /*
-        if( roundTriggers.contains(SpecialDialogue.dialogueTriggers.TRIGGER) ){
-            
-
-
-            return true;
-        }
-        */
         return false;
+
+        /*
+        // roundTriggers must always contain the trigger for who the opponent is
+        // OR
+        // just check that here (and it's never included there)
+
+        List<SpecialDialogue> dialogueOptions = new List<SpecialDialogue>();
+
+        foreach( SpecialDialogue dialogue in specialDialogue ){
+            foreach( SpecialDialogue.dialogueTrigger trigger in dialogue.triggers ){
+                if( !roundTriggers.Contains(trigger) ){
+                    // Go to next dialogue
+                }
+            }
+            // If it makes it this far, all trigger conditions have been met - add to potential dialogue options
+            dialogueOptions.Add(dialogue);
+        }
+
+        // If there are no valid special dialogue options, return false
+        if(dialogueOptions.Count == 0){
+            return false;
+        }
+
+        int randomIndex = Random.Range(0, dialogueOptions.Count - 1);
+
+        // Append dialogue items
+        foreach( Dialogue.characterLine line in dialogueOptions[randomIndex].characterLines ){
+            dialogue.characterLines.Add(line);
+        }
+
+        return true;
+        */
     }
 
     private void AppendDialogueItems( List<Dialogue.characterLine> listToAdd )

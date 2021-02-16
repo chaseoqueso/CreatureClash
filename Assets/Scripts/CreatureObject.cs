@@ -8,6 +8,9 @@ public class CreatureObject : ScriptableObject
     [SerializeField] private string creatureName;
     [SerializeField] private int manaCost;
 
+    [TextArea(3, 10)]
+    [SerializeField] private string flavorText;
+
     // Stats
     [SerializeField] private float maxHealth;
     [SerializeField] private float baseDamage;
@@ -32,6 +35,8 @@ public class CreatureObject : ScriptableObject
     public string CreatureName(){return creatureName;}
 
     public int ManaCost(){return manaCost;}
+
+    public string FlavorText(){return flavorText;}
 
     public float MaxHealth(){return maxHealth;}
 
