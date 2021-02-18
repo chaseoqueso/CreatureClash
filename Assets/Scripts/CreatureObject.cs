@@ -29,7 +29,6 @@ public class CreatureObject : ScriptableObject
 
     // Actions
     [SerializeField] private List<Action> actions;
-    // [SerializeField] private Action action;
 
     // Getter functions
     public string CreatureName(){return creatureName;}
