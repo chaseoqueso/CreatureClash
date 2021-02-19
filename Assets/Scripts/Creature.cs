@@ -65,7 +65,7 @@ public class Creature : MonoBehaviour
 
     public void setNextAction(int actionIndex, List<List<Creature>> targets)
     {
-        if( actionIndex >= actions.Count ){
+        if( actionIndex >= actions.Count || actionIndex < 0 ){
             Debug.Log("Invalid Action Index");
             setIdle();
             return;
@@ -156,6 +156,9 @@ public class Creature : MonoBehaviour
             }
             else if( status.statusType == Action.statusEffectType.maxHealth ){
                 currentMaxHP = currentMaxHP * status.modifierMult + status.modifierValue;
+                if( currentHealth > currentMaxHP ){
+                    currentHealth = currentMaxHP;
+                }
             }
             return;
         }
