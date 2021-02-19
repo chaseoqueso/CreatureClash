@@ -54,7 +54,7 @@ public class DialogueTrigger : MonoBehaviour
         // }
         // Check for players almost dead              UPDATE THESE TO BE CURRENT / MAX HEALTH!!!!!!!!!!!!!
         // if both almost dead now (maybe make this it's own thing rather than using both selfAlmostDead??? or use special dialogue)
-        else if( (playerOne.health / playerOne.health) <= almostDeadValue && (playerTwo.health / playerTwo.health) <= almostDeadValue ){
+        else if( (playerOne.currentHealth / playerOne.maxHealth) <= almostDeadValue && (playerTwo.currentHealth / playerTwo.maxHealth) <= almostDeadValue ){
             // add Player One dialogue
             int randomIndex = Random.Range(0, playerOne.playerObject.selfAlmostDeadDialogue.Count - 1);
             AppendDialogueItems(playerOne.playerObject.selfAlmostDeadDialogue[randomIndex].characterLines);
@@ -63,7 +63,7 @@ public class DialogueTrigger : MonoBehaviour
             AppendDialogueItems(playerTwo.playerObject.selfAlmostDeadDialogue[randomIndex].characterLines);
         }
         // if player 1 is almost dead
-        else if( (playerOne.health / playerOne.health) <= almostDeadValue ){
+        else if( (playerOne.currentHealth / playerOne.maxHealth) <= almostDeadValue ){
             // add Player One dialogue
             int randomIndex = Random.Range(0, playerOne.playerObject.selfAlmostDeadDialogue.Count - 1);
             AppendDialogueItems(playerOne.playerObject.selfAlmostDeadDialogue[randomIndex].characterLines);
@@ -72,7 +72,7 @@ public class DialogueTrigger : MonoBehaviour
             AppendDialogueItems(playerTwo.playerObject.opponentAlmostDeadDialogue[randomIndex].characterLines);
         }
         // if player 2 is almost dead
-        else if( (playerTwo.health / playerTwo.health) <= almostDeadValue ){
+        else if( (playerTwo.currentHealth / playerTwo.maxHealth) <= almostDeadValue ){
             // add Player One dialogue
             int randomIndex = Random.Range(0, playerOne.playerObject.opponentAlmostDeadDialogue.Count - 1);
             AppendDialogueItems(playerOne.playerObject.opponentAlmostDeadDialogue[randomIndex].characterLines);
