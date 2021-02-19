@@ -36,13 +36,24 @@ public class Action
         status
     }
     // All possible status effects
-    public enum statusEffect{
+    public enum statusEffectType{
         // If no status effect
         none,
-        // Debuffs
-        slow,
-        // Buffs
-        haste
+        // What stat this effect adjusts
+        speed,
+        damage,
+        maxHealth,
+        healthOverTime,
+        defense
+    }
+    public struct statusEffect{
+        public statusEffectType statusType;
+
+        public float modifierValue;         // flat mod; 0 if no mod
+        public float modifierMult;          // % mod; 1 if no mult mod
+
+        // Status effect duration (in # of turns)
+        public int effectDuration;
     }
 
     
@@ -54,13 +65,11 @@ public class Action
 
         // Effect values
         public effectType type;
-        public statusEffect status;     // none if type != status
+
+        public statusEffect status;            // only used if type == status
 
         // Health or damage number (+ for heal, - for damage)
-        public float hpValue;           // 0 if type == status
-
-        // Status effect duration (in # of turns)
-        public int effectDuration;      // 0 if type != status
+        public float hpValue;                 // 0 if type == status
     }
     // EffectGroup class
     [System.Serializable]
@@ -73,7 +82,7 @@ public class Action
         public targetRestrictions targetRestriction;
 
         // Effects
-        public List<Effect> effectGroupList;
+        public List<Effect> groupEffects;
     }
 
 
@@ -84,41 +93,6 @@ public class Action
     public string description;
     
     // All effects of the action
-    public List<EffectGroup> actionEffects;
+    public List<EffectGroup> actionEffectGroups;
     
 }
-
-
-    // [CustomEditor(typeof(Effect))]
-    // public class ScriptEditor : Editor
-    // {
-    //     Effect effect;
-
-    //     void OnEnable()
-    //     {
-    //         effect = (Effect)target;
-    //     }
-
-    //     public override void OnInspectorGUI()
-    //     {
-    //         effect.type = (effectType)EditorGUILayout.EnumPopup(effect.type); // "Effect Type", 
-
-    //         switch(effect.type)
-    //         {
-    //             case effectType.status:
-    //             {
-    //                 // If this effect is a status effect
-    //                 effect.status = (statusEffect)EditorGUILayout.EnumPopup(effect.status);
-    //                 effect.effectDuration = EditorGUILayout.IntField(effect.effectDuration);
-    //                 break;
-    //             }
-    //             case effectType.damage:
-    //             case effectType.heal:
-    //             {
-    //                 // If effect is damage or heal
-    //                 effect.hpValue = EditorGUILayout.FloatField(effect.hpValue); //"HP Value", 
-    //                 break;
-    //             }
-    //         }
-    //     }
-    // }

@@ -14,8 +14,8 @@ public class CreatureObject : ScriptableObject
     // Stats
     [SerializeField] private float maxHealth;
     [SerializeField] private float baseDamage;
-    [SerializeField] private float defense;
-    [SerializeField] private float speed;
+    [SerializeField] private float baseDefense;
+    [SerializeField] private float baseSpeed;
 
     // Art
     [SerializeField] private Sprite sprite;
@@ -41,9 +41,9 @@ public class CreatureObject : ScriptableObject
 
     public float BaseDamage(){return baseDamage;}
 
-    public float Defense(){return defense;}
+    public float BaseDefense(){return baseDefense;}
 
-    public float Speed(){return speed;}
+    public float BaseSpeed(){return baseSpeed;}
 
     public Sprite Sprite(){return sprite;}
 
