@@ -34,6 +34,7 @@ public class Action
         damage,
         heal,
         status
+        // Add special??? for something where it gets a special function???
     }
     // All possible status effects
     public enum statusEffectType{
@@ -66,10 +67,12 @@ public class Action
         // Effect values
         public effectType type;
 
-        public statusEffect status;            // only used if type == status
+        // Status Effect struct w/ default values
+        public statusEffect status = new statusEffect{statusType = statusEffectType.none,
+                                                    modifierValue = 0, modifierMult = 1, effectDuration = 1};            // only used if type == status
 
-        // Health or damage number (+ for heal, - for damage)
-        public float hpValue;                 // 0 if type == status
+        // Health or damage number (+ for heal; % mod * damage for damage)
+        public float hpValue = 0;                 // 0 if type == status
     }
     // EffectGroup class
     [System.Serializable]

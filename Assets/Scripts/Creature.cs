@@ -96,13 +96,19 @@ public class Creature : MonoBehaviour, ITargetable
             List<Action.Effect> effectsOnTargets = currentAction.actionEffectGroups[i].groupEffects;
 
             foreach( Action.Effect effect in effectsOnTargets ){
-                // If status effect, assign status to the effected targets
+                // If status effect, assign status to the affected targets
                 if( effect.type == Action.effectType.status ){
                     foreach( Creature target in targets ){
                         target.setStatusEffect(effect.status);
                     }
                 }
-                // If damage/heal, adjust hp of effected targets
+                // If damage, adjust hp of affected targets
+                else if(effect.type == Action.effectType.damage){
+                    foreach( Creature target in targets ){
+                        target.updateCurrentHealth(effect.hpValue * currentDamage);
+                    }
+                }
+                // If heal, adjust hp of affected targets
                 else{       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
                     foreach( Creature target in targets ){
                         target.updateCurrentHealth(effect.hpValue);
@@ -210,15 +216,18 @@ public class Creature : MonoBehaviour, ITargetable
 
     public void killCreature()
     {
-        // setIdle();
+        setIdle();
 
         // Play death animation / sound effects
 
         // Destroy this object
-        // -> action resolution in other script must check that a creature still exists before performing the action
+        // -> action resolution in other script must check that a creature still exists or not in graveyard or whatever
+        // before performing the action
         Destroy(gameObject);
 
         // Or put it in the graveyard or whatever we're gonna do with dead creatures
+        // gameObject.GetComponentInParent<Graveyard>().deadCreatures.Add(this);
+        // remove it from the playing field or whatever idk
     }
     
     public ITargetable.TargetType getTargetType()

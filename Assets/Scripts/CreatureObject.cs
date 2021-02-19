@@ -13,7 +13,7 @@ public class CreatureObject : ScriptableObject
 
     // Stats
     [SerializeField] private float maxHealth;
-    [SerializeField] private float baseDamage;
+    [SerializeField] private float baseDamage;          // - value; * a % modifier from attack actions
     [SerializeField] private float baseDefense;
     [SerializeField] private float baseSpeed;
 
