@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Creature : MonoBehaviour
+public class Creature : MonoBehaviour, ITargetable
 {
     // Creature class takes in a CreatureObject creature that feeds all the creature info to this generic class
     public CreatureObject creature;
@@ -19,6 +19,7 @@ public class Creature : MonoBehaviour
 
     [HideInInspector] public Action currentAction;
     [HideInInspector] public List<List<Creature>> currentTargets;
+    [HideInInspector] public bool enableTargeting;
 
     // Current status effects
     [HideInInspector] public Dictionary<Action.statusEffect, int> activeEffects;
@@ -218,5 +219,25 @@ public class Creature : MonoBehaviour
         Destroy(gameObject);
 
         // Or put it in the graveyard or whatever we're gonna do with dead creatures
+    }
+    
+    public ITargetable.TargetType getTargetType()
+    {
+        return ITargetable.TargetType.creature;
+    }
+
+    public List<ITargetable> getTargets()
+    {
+        List<ITargetable> temp = new List<ITargetable>();
+        temp.Add(this);
+        return temp;
+    }
+
+    void OnMouseDown()
+    {
+        if(!enableTargeting)
+            return;
+        
+        GameManager.Instance.targetWasClicked(this);
     }
 }

@@ -18,8 +18,8 @@ public class CreatureObject : ScriptableObject
     [SerializeField] private float baseSpeed;
 
     // Art
-    [SerializeField] private Sprite sprite;
-    [SerializeField] private Sprite heightMap;
+    [SerializeField] private Texture2D texture;
+    [SerializeField] private Texture2D heightMap;
 
     // Sound Effects
     // ??? onSummon;
@@ -45,7 +45,7 @@ public class CreatureObject : ScriptableObject
 
     public float BaseSpeed(){return baseSpeed;}
 
-    public Sprite Sprite(){return sprite;}
+    public Texture2D Texture(){return texture;}
 
     public List<Action> Actions(){return actions;}
 }

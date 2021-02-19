@@ -18,6 +18,6 @@ MonoBehaviour:
   baseDamage: 5
   defense: 10
   speed: 75
-  sprite: {fileID: 21300000, guid: 06f1490df3daa284eaa344f5284d45db, type: 3}
-  heightMap: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  texture: {fileID: 2800000, guid: e6e1bc8fa6fe0cf45b73ba5cb7b9d3de, type: 3}
+  heightMap: {fileID: 0}
   actions: []

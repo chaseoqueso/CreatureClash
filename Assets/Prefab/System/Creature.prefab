@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3929829046026948440}
   - component: {fileID: 3929829046026948441}
   - component: {fileID: 3929829046026948442}
+  - component: {fileID: 9156477344270902033}
   m_Layer: 0
   m_Name: Creature
   m_TagString: Untagged
@@ -94,3 +95,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee512f5c95299fe4e84a4c6d2ff799a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9156477344270902033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3929829046026948516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cacae165382ddc48b0d18ee95b89a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  creature: {fileID: 0}
+  actions: []
+  currentHealth: 0
+  currentAction:
+    actionName: 
+    description: 
+    actionEffects: []
+  currentTargets: []
+  enableTargeting: 0
