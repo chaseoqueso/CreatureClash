@@ -12,7 +12,8 @@ public class Action
 
         frontSingle,         // Exactly one target (front)
         backSingle,          // Exactly one target (back)
-        anySingle,           // Exactly one target (any)
+        anySingle,           // Exactly one target (any, including player)
+        anyCreature,         // Exactly one target (any, excluding player)
 
         frontRow,            // Can only target front row
         backRow,             // Can only target back row

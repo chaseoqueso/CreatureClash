@@ -9,6 +9,10 @@ public class PlayerObject : ScriptableObject
     public string characterName;
     public string characterClass;
     public Sprite characterSprite;
+    public float baseHealth;
+    public float baseDef;
+    public float baseSpeed;
+    public float baseDamage;
 
     [TextArea(3, 10)]
     public string flavorText;       // For character select menu

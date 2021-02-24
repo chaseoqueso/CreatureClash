@@ -13,12 +13,31 @@ public class RowManager : MonoBehaviour, ITargetable
 
     private List<Creature> creatures;
     private List<Vector3> creaturePositions;
+    private SpriteRenderer[] renderers;
 
     void Awake()
     {
         creatures = new List<Creature>();
         creaturePositions = new List<Vector3>();
         enableTargeting = false;
+        renderers = GetComponentsInChildren<SpriteRenderer>();
+    }
+
+    void Update()
+    {
+        if(enableTargeting) {
+            foreach(SpriteRenderer r in renderers)
+            {
+                r.color = new Color(r.color.r, r.color.g, r.color.b, Mathf.Abs(Mathf.Sin(Time.time * 2f)));
+            }
+        }
+        else
+        {
+            foreach(SpriteRenderer r in renderers)
+            {
+                r.color = new Color(r.color.r, r.color.g, r.color.b, 0);
+            }
+        }
     }
 
     void OnMouseDown()
@@ -53,7 +72,7 @@ public class RowManager : MonoBehaviour, ITargetable
         }
     }
 
-    public Creature summonCreature(CreatureObject creatureType)
+    public Creature summonCreature(CreatureObject creatureType, Player player)
     {
         Vector3 spawnPos = Vector3.Lerp(bottomEndpoint, topEndpoint, 1f/((creaturePositions.Count + 1) * 2f));
 
@@ -67,6 +86,7 @@ public class RowManager : MonoBehaviour, ITargetable
         Creature creatureScript = creature.GetComponent<Creature>();
         creatures.Add(creatureScript);
         creatureScript.creature = creatureType;
+        creatureScript.player = player;
 
 
         StartCoroutine(lerpCreaturePositions(creatureLerpTime));
@@ -85,7 +105,7 @@ public class RowManager : MonoBehaviour, ITargetable
         do {
             for(int i = 0; i < creatures.Count; ++i)
             {
-                creatures[i].transform.position = Vector3.Lerp(startingPositions[i], creaturePositions[i], (Time.time - startTime)/duration);   //Mathf.Sin((Time.time - startTime)/duration) * (Mathf.PI/2f));
+                creatures[i].transform.position = Vector3.Lerp(startingPositions[i], creaturePositions[i], Mathf.Sin((Time.time - startTime)/duration) * (Mathf.PI/2f));
             }
             yield return null;
         }
@@ -103,5 +123,13 @@ public class RowManager : MonoBehaviour, ITargetable
         foreach(Creature c in creatures)
             temp.Add(c);
         return temp;
+    }
+    
+    public void setStatusEffect(Action.statusEffect status)
+    {
+        foreach(Creature c in creatures)
+        {
+            c.setStatusEffect(status);
+        }
     }
 }

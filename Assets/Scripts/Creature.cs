@@ -6,6 +6,7 @@ public class Creature : MonoBehaviour, ITargetable
 {
     // Creature class takes in a CreatureObject creature that feeds all the creature info to this generic class
     public CreatureObject creature;
+    public Player player;
 
     // Saves the action list from the CreatureObject for more convenient access
     private List<Action> actions;
@@ -18,7 +19,7 @@ public class Creature : MonoBehaviour, ITargetable
     [HideInInspector] public float currentDamage;
 
     [HideInInspector] public Action currentAction;
-    [HideInInspector] public List<List<Creature>> currentTargets;
+    [HideInInspector] public List<List<ITargetable>> currentTargets;
     [HideInInspector] public bool enableTargeting;
 
     // Current status effects
@@ -64,7 +65,25 @@ public class Creature : MonoBehaviour, ITargetable
         }
     }
 
-    public void setNextAction(int actionIndex, List<List<Creature>> targets)
+    public void selectTargetsForAction(int actionIndex)
+    {
+        List<List<ITargetable>> targetGroups = new List<List<ITargetable>>();
+
+        void setActionCallback(ITargetable target)
+        {
+            targetGroups.Add(target.getTargets());
+        }
+
+        Action action = actions[actionIndex];
+
+        foreach(Action.EffectGroup group in action.actionEffectGroups) {
+            GameManager.Instance.performAfterTargetSelect(player, group.targetType, group.targetRestriction, setActionCallback);
+        }
+            
+        setNextAction(actionIndex, targetGroups);
+    }
+
+    public void setNextAction(int actionIndex, List<List<ITargetable>> targets)
     {
         if( actionIndex >= actions.Count || actionIndex < 0 ){
             Debug.Log("Invalid Action Index");
@@ -92,25 +111,25 @@ public class Creature : MonoBehaviour, ITargetable
         // (List of target lists will always been in order of effect groups, & always == length)
         for( int i = 0; i < currentTargets.Count; i++ ){
             // For a single effect group, perform the action effects on those targets
-            List<Creature> targets = currentTargets[i];
+            List<ITargetable> targets = currentTargets[i];
             List<Action.Effect> effectsOnTargets = currentAction.actionEffectGroups[i].groupEffects;
 
             foreach( Action.Effect effect in effectsOnTargets ){
                 // If status effect, assign status to the affected targets
                 if( effect.type == Action.effectType.status ){
-                    foreach( Creature target in targets ){
+                    foreach( ITargetable target in targets ){
                         target.setStatusEffect(effect.status);
                     }
                 }
                 // If damage, adjust hp of affected targets
                 else if(effect.type == Action.effectType.damage){
-                    foreach( Creature target in targets ){
+                    foreach( ITargetable target in targets ){
                         target.updateCurrentHealth(effect.hpValue * currentDamage);
                     }
                 }
                 // If heal, adjust hp of affected targets
                 else{       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
-                    foreach( Creature target in targets ){
+                    foreach( ITargetable target in targets ){
                         target.updateCurrentHealth(effect.hpValue);
                     }
                 }

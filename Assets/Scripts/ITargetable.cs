@@ -5,6 +5,7 @@ using UnityEngine;
 public interface ITargetable
 {
     enum TargetType {
+        bothRows,
         row,
         creature,
         player
@@ -13,4 +14,5 @@ public interface ITargetable
     TargetType getTargetType();
     List<ITargetable> getTargets();
     void updateCurrentHealth(float num);
+    void setStatusEffect(Action.statusEffect status);
 }
