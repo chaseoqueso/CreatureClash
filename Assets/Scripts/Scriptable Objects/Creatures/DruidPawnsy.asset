@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   creatureName: Pawnsy
   manaCost: 1
+  flavorText: 
   maxHealth: 20
   baseDamage: 5
-  defense: 10
-  speed: 75
-  texture: {fileID: 2800000, guid: e6e1bc8fa6fe0cf45b73ba5cb7b9d3de, type: 3}
+  baseDefense: 0
+  baseSpeed: 0
+  texture: {fileID: 2800000, guid: 950245096df60374abbae0980a3a8463, type: 3}
   heightMap: {fileID: 0}
   actions: []
