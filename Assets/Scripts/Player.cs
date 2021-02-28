@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, ITargetable
 {
+    public class SummonAction : Action {
+        public CreatureObject creatureType;
+        public RowManager summonRow;
+
+        public SummonAction(CreatureObject co, RowManager rm)
+        {
+            creatureType = co;
+            summonRow = rm;
+        }
+    }
+
     public PlayerObject playerObject;
     public List<CreatureObject> deck;
+    public int playerNumber;
 
     [HideInInspector] public float currentHealth;
     [HideInInspector] public float maxHealth;
@@ -15,13 +27,35 @@ public class Player : MonoBehaviour, ITargetable
 
     [HideInInspector] public int actionPoints;
     [HideInInspector] public bool enableTargeting;
+    [HideInInspector] public List<Action> queuedActions;
+    [HideInInspector] public List<List<List<ITargetable>>> queuedTargets;
     [HideInInspector] public Dictionary<Action.statusEffect, int> activeEffects;
+
+    private Material material;
+    private Collider2D col;
 
     void Start()
     {
         loadDeck();
         enableTargeting = false;
         currentHealth = maxHealth = 100;
+        material = GetComponent<Renderer>().material;
+        col = GetComponent<Collider2D>();
+        queuedActions = new List<Action>();
+        queuedTargets = new List<List<List<ITargetable>>>();
+    }
+
+    void Update()
+    {
+        col.enabled = enableTargeting;
+        if(enableTargeting)
+        {
+            material.SetFloat("outlineIntensity", Mathf.Abs(Mathf.Sin(Time.time * 2f)));
+        }
+        else
+        {
+            material.SetFloat("outlineIntensity", 0);
+        }
     }
 
     void OnMouseDown()
@@ -40,11 +74,68 @@ public class Player : MonoBehaviour, ITargetable
                 Debug.LogError("Target other than row was selected to summon creature.");
                 return;
             }
-            RowManager row = (RowManager) target;
-            row.summonCreature(drawCard(), this);
+            queuedActions.Add(new SummonAction(drawCard(), (RowManager) target));
+            queuedTargets.Add(null);
+            --actionPoints;
         }
 
-        GameManager.Instance.performAfterTargetSelect(this, Action.targets.eitherRow, Action.targetRestrictions.allies, summonInRow);
+        GameManager.Instance.performAfterTargetSelect(this, Action.targets.eitherRow, Action.targetRestrictions.allies, false, summonInRow);
+    }
+
+    public void performQueuedAction(int actionIndex)
+    {
+        if(queuedActions[actionIndex] is SummonAction)
+        {
+            SummonAction s = (SummonAction)queuedActions[actionIndex];
+            s.summonRow.summonCreature(s.creatureType, this);
+        }
+        else
+        {
+            Action currentAction = queuedActions[actionIndex];
+            List<List<ITargetable>> currentTargets = queuedTargets[actionIndex];
+
+            // Check for null values
+            if( currentAction == null ){
+                Debug.Log("Creature is Idle and has no Action to perform.");
+                return;
+            }
+            if( currentTargets == null ){
+                Debug.Log("Creature has no Targets for assigned Action.");
+                return;
+            }
+
+            // Loop through targets & effect groups
+            // (List of target lists will always been in order of effect groups, & always == length)
+            for( int i = 0; i < currentTargets.Count; i++ ){
+                // For a single effect group, perform the action effects on those targets
+                List<ITargetable> targets = currentTargets[i];
+                List<Action.Effect> effectsOnTargets = currentAction.actionEffectGroups[i].groupEffects;
+
+                foreach( Action.Effect effect in effectsOnTargets ){
+                    // If status effect, assign status to the affected targets
+                    if( effect.type == Action.effectType.status ) {
+                        foreach( ITargetable target in targets ) {
+                            if(target != null)
+                                target.setStatusEffect(effect.status);
+                        }
+                    }
+                    // If damage, adjust hp of affected targets
+                    else if(effect.type == Action.effectType.damage){
+                        foreach( ITargetable target in targets ){
+                            if(target != null)
+                                target.updateCurrentHealth(-effect.hpValue * currentDamage);
+                        }
+                    }
+                    // If heal, adjust hp of affected targets
+                    else{       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
+                        foreach( ITargetable target in targets ){
+                            if(target != null)
+                                target.updateCurrentHealth(effect.hpValue);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public void loadDeck()

@@ -2082,8 +2082,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85cfed5cfc4b674fbc4c2b88c7ffa26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topEndpoint: {x: 1.5, y: 0.5, z: 1.5}
-  bottomEndpoint: {x: 2, y: 0.5, z: -2.5}
+  topEndpoint: {x: 1.5, y: 0.5, z: 2}
+  bottomEndpoint: {x: 2, y: 0.5, z: -3}
   creaturePrefab: {fileID: 3929829046026948516, guid: 70a0753ec5bbdb541b9c2e96bd177f76, type: 3}
   enableTargeting: 0
 --- !u!1 &1282904130
@@ -3089,8 +3089,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85cfed5cfc4b674fbc4c2b88c7ffa26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topEndpoint: {x: 2.5, y: 0.5, z: 1.75}
-  bottomEndpoint: {x: 3.5, y: 0.5, z: -2.75}
+  topEndpoint: {x: 2.5, y: 0.5, z: 2}
+  bottomEndpoint: {x: 3.5, y: 0.5, z: -3}
   creaturePrefab: {fileID: 3929829046026948516, guid: 70a0753ec5bbdb541b9c2e96bd177f76, type: 3}
   enableTargeting: 0
 --- !u!1 &1839525907
@@ -3594,8 +3594,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85cfed5cfc4b674fbc4c2b88c7ffa26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topEndpoint: {x: -2.5, y: 0.5, z: 1.75}
-  bottomEndpoint: {x: -3.5, y: 0.5, z: -2.75}
+  topEndpoint: {x: -2.5, y: 0.5, z: 2}
+  bottomEndpoint: {x: -3.5, y: 0.5, z: -3}
   creaturePrefab: {fileID: 3929829046026948516, guid: 70a0753ec5bbdb541b9c2e96bd177f76, type: 3}
   enableTargeting: 0
 --- !u!65 &2098797206

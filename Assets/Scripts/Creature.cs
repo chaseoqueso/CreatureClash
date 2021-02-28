@@ -21,10 +21,14 @@ public class Creature : MonoBehaviour, ITargetable
     [HideInInspector] public Action currentAction;
     [HideInInspector] public List<List<ITargetable>> currentTargets;
     [HideInInspector] public bool enableTargeting;
+    [HideInInspector] public bool justSummoned;
+    [HideInInspector] public bool isDead;
 
     // Current status effects
     [HideInInspector] public Dictionary<Action.statusEffect, int> activeEffects;
 
+    private Material material;
+    private Collider2D col;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +46,26 @@ public class Creature : MonoBehaviour, ITargetable
 
         // set action stuff to null
         setIdle();
+
+        col = GetComponent<Collider2D>();
+        material = GetComponent<Renderer>().material;
+        material.mainTexture = creature.Texture();
+        transform.localScale = new Vector3(creature.Texture().width/material.GetFloat("pixelsPerUnit"), creature.Texture().height/material.GetFloat("pixelsPerUnit"), 1);
+        justSummoned = true;
+    }
+
+    void Update()
+    {
+        col.enabled = enableTargeting;
+        transform.position = new Vector3(transform.position.x, transform.localScale.y/2 * Mathf.Cos(Mathf.Deg2Rad * transform.eulerAngles.x), transform.position.z);
+        if(enableTargeting)
+        {
+            material.SetFloat("outlineIntensity", Mathf.Abs(Mathf.Sin(Time.time * 2f)));
+        }
+        else
+        {
+            material.SetFloat("outlineIntensity", 0);
+        }
     }
 
     // Returns a list of all Actions this creature can do
@@ -52,8 +76,11 @@ public class Creature : MonoBehaviour, ITargetable
 
     public void updateCurrentHealth(float num)
     {
+        if(isDead)
+            return;
         // num + if healing, - if damage
         currentHealth += num;
+        Debug.Log(currentHealth);
         // If creature's health goes above max health, drop it back to max
         if(currentHealth > currentMaxHP){
             currentHealth = currentMaxHP;
@@ -77,7 +104,7 @@ public class Creature : MonoBehaviour, ITargetable
         Action action = actions[actionIndex];
 
         foreach(Action.EffectGroup group in action.actionEffectGroups) {
-            GameManager.Instance.performAfterTargetSelect(player, group.targetType, group.targetRestriction, setActionCallback);
+            GameManager.Instance.performAfterTargetSelect(player, group.targetType, group.targetRestriction, group.blockedByFrontline, setActionCallback);
         }
             
         setNextAction(actionIndex, targetGroups);
@@ -116,21 +143,24 @@ public class Creature : MonoBehaviour, ITargetable
 
             foreach( Action.Effect effect in effectsOnTargets ){
                 // If status effect, assign status to the affected targets
-                if( effect.type == Action.effectType.status ){
-                    foreach( ITargetable target in targets ){
-                        target.setStatusEffect(effect.status);
+                if( effect.type == Action.effectType.status ) {
+                    foreach( ITargetable target in targets ) {
+                        if(target != null)
+                            target.setStatusEffect(effect.status);
                     }
                 }
                 // If damage, adjust hp of affected targets
                 else if(effect.type == Action.effectType.damage){
                     foreach( ITargetable target in targets ){
-                        target.updateCurrentHealth(effect.hpValue * currentDamage);
+                        if(target != null)
+                            target.updateCurrentHealth(-effect.hpValue * currentDamage);
                     }
                 }
                 // If heal, adjust hp of affected targets
                 else{       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
                     foreach( ITargetable target in targets ){
-                        target.updateCurrentHealth(effect.hpValue);
+                        if(target != null)
+                            target.updateCurrentHealth(effect.hpValue);
                     }
                 }
             }
@@ -236,6 +266,7 @@ public class Creature : MonoBehaviour, ITargetable
     public void killCreature()
     {
         setIdle();
+        isDead = true;
 
         // Play death animation / sound effects
 
@@ -263,6 +294,7 @@ public class Creature : MonoBehaviour, ITargetable
 
     void OnMouseDown()
     {
+        Debug.Log(enableTargeting);
         if(!enableTargeting)
             return;
         

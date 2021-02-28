@@ -15,10 +15,15 @@ MonoBehaviour:
   characterName: Chrysanthemum
   characterClass: Druid
   characterSprite: {fileID: 0}
+  baseHealth: 0
+  baseDef: 0
+  baseSpeed: 0
+  baseDamage: 0
   flavorText: Druid flavor text
   creatureDeck:
   - creatureType: {fileID: 11400000, guid: e58f4d046af814a478f9118256391a92, type: 2}
-    quantity: 3
+    quantity: 15
+  actions: []
   characterPortrait: {fileID: 0}
   challengeDialogue: []
   winDialogue: []

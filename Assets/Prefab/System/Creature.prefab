@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3929829046026948441}
   - component: {fileID: 3929829046026948442}
   - component: {fileID: 9156477344270902033}
+  - component: {fileID: 3126220014238256357}
   m_Layer: 0
   m_Name: Creature
   m_TagString: Untagged
@@ -108,11 +109,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creature: {fileID: 0}
-  actions: []
+  player: {fileID: 0}
   currentHealth: 0
+  currentMaxHP: 0
+  currentDef: 0
+  currentSpeed: 0
+  currentDamage: 0
   currentAction:
     actionName: 
     description: 
-    actionEffects: []
-  currentTargets: []
+    actionEffectGroups: []
   enableTargeting: 0
+  justSummoned: 0
+--- !u!61 &3126220014238256357
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3929829046026948516}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class RowManager : MonoBehaviour, ITargetable
 {
-    private const float creatureLerpTime = 0.5f;
+    private const float creatureLerpTime = 0.4f;
 
     public Vector3 topEndpoint;
     public Vector3 bottomEndpoint;
     public GameObject creaturePrefab;
     public bool enableTargeting;
 
-    private List<Creature> creatures;
+    public List<Creature> creatures;
     private List<Vector3> creaturePositions;
     private SpriteRenderer[] renderers;
 
@@ -68,7 +68,15 @@ public class RowManager : MonoBehaviour, ITargetable
     {
         foreach(Creature c in creatures)
         {
-            c.enableTargeting = c.currentAction == null;
+            c.enableTargeting = c.currentAction == null && !c.justSummoned;
+        }
+    }
+
+    public void removeSummoningSickness()
+    {
+        foreach(Creature c in creatures)
+        {
+            c.justSummoned = false;
         }
     }
 
@@ -79,7 +87,7 @@ public class RowManager : MonoBehaviour, ITargetable
         creaturePositions.Add(spawnPos);
         for(int i = 1; i < creaturePositions.Count; ++i)
         {
-            creaturePositions[i-1] = Vector3.Lerp(bottomEndpoint, topEndpoint, (2f*i + 1)/((creaturePositions.Count) * 2f));
+            creaturePositions[creaturePositions.Count-i-1] = Vector3.Lerp(bottomEndpoint, topEndpoint, (2f*i + 1)/((creaturePositions.Count) * 2f));
         }
 
         GameObject creature = Instantiate(creaturePrefab, spawnPos, Quaternion.identity, transform);
@@ -105,7 +113,8 @@ public class RowManager : MonoBehaviour, ITargetable
         do {
             for(int i = 0; i < creatures.Count; ++i)
             {
-                creatures[i].transform.position = Vector3.Lerp(startingPositions[i], creaturePositions[i], Mathf.Sin((Time.time - startTime)/duration) * (Mathf.PI/2f));
+                Vector3 targetPos = Vector3.Lerp(startingPositions[i], creaturePositions[i], Mathf.Sin((Time.time - startTime)/duration) * (Mathf.PI/2f));
+                creatures[i].transform.position = new Vector3(targetPos.x, creatures[i].transform.position.y, targetPos.z);
             }
             yield return null;
         }

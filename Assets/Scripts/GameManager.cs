@@ -20,6 +20,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public class CreatureComparer : Comparer<Creature> {
+        public override int Compare(Creature c1, Creature c2)
+        {
+            return (int)Mathf.Sign(c1.currentSpeed - c2.currentSpeed);
+        }
+    }
+
     public enum Turn {
         player1,
         player2,
@@ -111,6 +118,8 @@ public class GameManager : MonoBehaviour
         currentTurn = Turn.player1;
         player1.enableTargeting = true;
         player2.enableTargeting = false;
+        player1.playerNumber = 1;
+        player2.playerNumber = 2;
         updateUI();
     }
 
@@ -120,15 +129,15 @@ public class GameManager : MonoBehaviour
         {
             case Turn.player1:
                 currentTurn = Turn.player2; 
-                player1.enableTargeting = false;
-                player2.enableTargeting = true;
+                resetTargeting();
+                
                 Debug.Log("Player 1 turn end, player 2 turn start");
                 break;
 
             case Turn.player2:
                 currentTurn = Turn.resolveAttacks; 
-                player1.enableTargeting = false;
-                player2.enableTargeting = false;
+                resetTargeting();
+
                 Debug.Log("Player 2 turn end, resolve attacks start");
                 StartCoroutine(resolveAttacks());
                 break;
@@ -138,15 +147,19 @@ public class GameManager : MonoBehaviour
                 player1.actionPoints = player2.actionPoints = turnCount + 2;
 
                 currentTurn = Turn.player1; 
-                player1.enableTargeting = true;
-                player2.enableTargeting = false;
+                p1Front.removeSummoningSickness();
+                p1Back.removeSummoningSickness();
+                p2Front.removeSummoningSickness();
+                p2Back.removeSummoningSickness();
+                resetTargeting();
+
                 Debug.Log("Resolve attacks end, player 1 turn start");
                 break;
         }
         updateUI();
     }
 
-    public void performAfterTargetSelect(Player player, Action.targets targetType, Action.targetRestrictions restrictions, targetCallback callback)
+    public void performAfterTargetSelect(Player player, Action.targets targetType, Action.targetRestrictions restrictions, bool blockedByFrontline, targetCallback callback)
     {
         if(player == null)
         {
@@ -156,7 +169,7 @@ public class GameManager : MonoBehaviour
 
         int playerNumber = player == player1 ? 1 : 2;
         disableTargeting();
-        enableTargetingOnTargets(playerNumber, targetType, restrictions);
+        enableTargetingOnTargets(playerNumber, targetType, restrictions, blockedByFrontline);
 
         StartCoroutine(waitForTargetSelect(callback));
     }
@@ -227,6 +240,7 @@ public class GameManager : MonoBehaviour
                 {
                     b.interactable = false;
                 }
+
                 turnText.text = "Current Turn: Player 1";
                 break;
             case Turn.player2:
@@ -238,6 +252,7 @@ public class GameManager : MonoBehaviour
                 {
                     b.interactable = true;
                 }
+
                 turnText.text = "Current Turn: Player 2";
                 break;
             case Turn.resolveAttacks:
@@ -256,11 +271,46 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator resolveAttacks()
     {
-        yield return new WaitForSeconds(1f);
+        List<Creature> actionOrder = new List<Creature>();
+        actionOrder.AddRange(p1Front.creatures);
+        actionOrder.AddRange(p1Back.creatures);
+        actionOrder.AddRange(p2Front.creatures);
+        actionOrder.AddRange(p2Back.creatures);
+
+        Comparer<Creature> comparer = new CreatureComparer();
+        actionOrder.Sort(comparer);
+
+        for(int i = 0; i < actionOrder.Count; ++i)
+        {
+            if(actionOrder[i] != null && actionOrder[i].currentAction != null)
+            {
+                actionOrder[i].performNextAction();
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+
+        for(int i = 0; i < Mathf.Max(player1.queuedActions.Count, player2.queuedActions.Count); ++i)
+        {
+            if(i < player1.queuedActions.Count) {
+                player1.performQueuedAction(i);
+                yield return new WaitForSeconds(0.5f);
+            }
+
+            if(i < player2.queuedActions.Count) {
+                player2.performQueuedAction(i);
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+
+        player1.queuedActions.Clear();
+        player1.queuedTargets.Clear();
+        player2.queuedActions.Clear();
+        player2.queuedTargets.Clear();
+
         progressTurn();
     }
 
-    private void enableTargetingOnTargets(int playerNumber, Action.targets targetType, Action.targetRestrictions restrictions)
+    private void enableTargetingOnTargets(int playerNumber, Action.targets targetType, Action.targetRestrictions restrictions, bool blockedByFrontline)
     {
         switch (targetType) {
             case Action.targets.anySingle:
@@ -269,15 +319,19 @@ public class GameManager : MonoBehaviour
                 {
                     if(playerNumber == 1)
                     {
-                        player1.enableTargeting = true;
                         p1Front.enableCreatureTargeting(true);
-                        p1Back.enableCreatureTargeting(true);
+                        if(!(blockedByFrontline && p1Front.creatures.Count > 0)){
+                            p1Back.enableCreatureTargeting(true);
+                            player1.enableTargeting = true;
+                        }
                     }
                     else
                     {
-                        player2.enableTargeting = true;
                         p2Front.enableCreatureTargeting(true);
-                        p2Back.enableCreatureTargeting(true);
+                        if(!(blockedByFrontline && p2Front.creatures.Count > 0)) {
+                            p2Back.enableCreatureTargeting(true);
+                            player2.enableTargeting = true;
+                        }
                     }
                 }
 
@@ -285,15 +339,19 @@ public class GameManager : MonoBehaviour
                 {
                     if(playerNumber == 1)
                     {
-                        player2.enableTargeting = true;
                         p2Front.enableCreatureTargeting(true);
-                        p2Back.enableCreatureTargeting(true);
+                        if(!(blockedByFrontline && p2Front.creatures.Count > 0)){
+                            p2Back.enableCreatureTargeting(true);
+                            player2.enableTargeting = true;
+                        }
                     }
                     else
                     {
-                        player1.enableTargeting = true;
                         p1Front.enableCreatureTargeting(true);
-                        p1Back.enableCreatureTargeting(true);
+                        if(!(blockedByFrontline && p1Front.creatures.Count > 0)){
+                            p1Back.enableCreatureTargeting(true);
+                            player1.enableTargeting = true;
+                        }
                     }
                 }
                 break;
@@ -305,12 +363,14 @@ public class GameManager : MonoBehaviour
                     if(playerNumber == 1)
                     {
                         p1Front.enableCreatureTargeting(true);
-                        p1Back.enableCreatureTargeting(true);
+                        if(!(blockedByFrontline && p1Front.creatures.Count > 0))
+                            p1Back.enableCreatureTargeting(true);
                     }
                     else
                     {
                         p2Front.enableCreatureTargeting(true);
-                        p2Back.enableCreatureTargeting(true);
+                        if(!(blockedByFrontline && p2Front.creatures.Count > 0))
+                            p2Back.enableCreatureTargeting(true);
                     }
                 }
 
@@ -319,12 +379,14 @@ public class GameManager : MonoBehaviour
                     if(playerNumber == 1)
                     {
                         p2Front.enableCreatureTargeting(true);
-                        p2Back.enableCreatureTargeting(true);
+                        if(!(blockedByFrontline && p2Front.creatures.Count > 0))
+                            p2Back.enableCreatureTargeting(true);
                     }
                     else
                     {
                         p1Front.enableCreatureTargeting(true);
-                        p1Back.enableCreatureTargeting(true);
+                        if(!(blockedByFrontline && p1Front.creatures.Count > 0))
+                            p1Back.enableCreatureTargeting(true);
                     }
                 }
                 break;
@@ -527,6 +589,28 @@ public class GameManager : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public ITargetable getParentTarget(ITargetable target)
+    {
+        if(target.getTargetType() != ITargetable.TargetType.creature)
+            return target;
+
+        Creature creature = (Creature)target;
+        
+        if(p1Front.creatures.Contains(creature))
+            return p1Front;
+        
+        if(p1Back.creatures.Contains(creature))
+            return p1Back;
+        
+        if(p2Front.creatures.Contains(creature))
+            return p2Front;
+        
+        if(p2Back.creatures.Contains(creature))
+            return p2Back;
+
+        return null;
     }
 
     public void resetTargeting()

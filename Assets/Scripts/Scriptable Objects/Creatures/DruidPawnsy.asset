@@ -15,10 +15,21 @@ MonoBehaviour:
   creatureName: Pawnsy
   manaCost: 1
   flavorText: 
-  maxHealth: 20
+  maxHealth: 10
   baseDamage: 5
   baseDefense: 0
   baseSpeed: 0
   texture: {fileID: 2800000, guid: 950245096df60374abbae0980a3a8463, type: 3}
   heightMap: {fileID: 0}
-  actions: []
+  actions:
+  - actionName: Stick Whack
+    description: Deal 5 damage to any target.
+    actionEffectGroups:
+    - groupName: Whack
+      targetType: 3
+      targetRestriction: 0
+      blockedByFrontline: 1
+      groupEffects:
+      - effectName: Damage
+        type: 0
+        hpValue: 1

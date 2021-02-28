@@ -84,6 +84,7 @@ public class Action
         // Effect Group target
         public targets targetType;
         public targetRestrictions targetRestriction;
+        public bool blockedByFrontline;
 
         // Effects
         public List<Effect> groupEffects;
