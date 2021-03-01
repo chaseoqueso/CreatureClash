@@ -216,7 +216,7 @@ public class GameManager : MonoBehaviour
         } else {
             switch(target.getTargetType()) {
                 case ITargetable.TargetType.player:
-                    ((Player)target).summonCreature();
+                    ((Player)target).summonCreature(0);
                     break;
 
                 case ITargetable.TargetType.creature:
@@ -224,6 +224,29 @@ public class GameManager : MonoBehaviour
                     break;
             }
             Debug.Log("Object Clicked: " + target);
+        }
+    }
+
+    public Player getPlayerFromRow(RowManager row)
+    {
+        if(row == null)
+            return null;
+
+        if(row == p1Front || row == p1Back)
+            return player1;
+        
+        return player2;
+    }
+
+    public ITargetable selectRandomTargetInFrontline(Player player)
+    {
+        if(player == player1)
+        {
+            return p1Front.getRandomCreature();
+        }
+        else
+        {
+            return p2Front.getRandomCreature();
         }
     }
 
@@ -320,18 +343,14 @@ public class GameManager : MonoBehaviour
                     if(playerNumber == 1)
                     {
                         p1Front.enableCreatureTargeting(true);
-                        if(!(blockedByFrontline && p1Front.creatures.Count > 0)){
-                            p1Back.enableCreatureTargeting(true);
-                            player1.enableTargeting = true;
-                        }
+                        p1Back.enableCreatureTargeting(true);
+                        player1.enableTargeting = true;
                     }
                     else
                     {
                         p2Front.enableCreatureTargeting(true);
-                        if(!(blockedByFrontline && p2Front.creatures.Count > 0)) {
-                            p2Back.enableCreatureTargeting(true);
-                            player2.enableTargeting = true;
-                        }
+                        p2Back.enableCreatureTargeting(true);
+                        player2.enableTargeting = true;
                     }
                 }
 
@@ -340,18 +359,14 @@ public class GameManager : MonoBehaviour
                     if(playerNumber == 1)
                     {
                         p2Front.enableCreatureTargeting(true);
-                        if(!(blockedByFrontline && p2Front.creatures.Count > 0)){
-                            p2Back.enableCreatureTargeting(true);
-                            player2.enableTargeting = true;
-                        }
+                        p2Back.enableCreatureTargeting(true);
+                        player2.enableTargeting = true;
                     }
                     else
                     {
                         p1Front.enableCreatureTargeting(true);
-                        if(!(blockedByFrontline && p1Front.creatures.Count > 0)){
-                            p1Back.enableCreatureTargeting(true);
-                            player1.enableTargeting = true;
-                        }
+                        p1Back.enableCreatureTargeting(true);
+                        player1.enableTargeting = true;
                     }
                 }
                 break;
@@ -363,14 +378,12 @@ public class GameManager : MonoBehaviour
                     if(playerNumber == 1)
                     {
                         p1Front.enableCreatureTargeting(true);
-                        if(!(blockedByFrontline && p1Front.creatures.Count > 0))
-                            p1Back.enableCreatureTargeting(true);
+                        p1Back.enableCreatureTargeting(true);
                     }
                     else
                     {
                         p2Front.enableCreatureTargeting(true);
-                        if(!(blockedByFrontline && p2Front.creatures.Count > 0))
-                            p2Back.enableCreatureTargeting(true);
+                        p2Back.enableCreatureTargeting(true);
                     }
                 }
 
@@ -379,14 +392,12 @@ public class GameManager : MonoBehaviour
                     if(playerNumber == 1)
                     {
                         p2Front.enableCreatureTargeting(true);
-                        if(!(blockedByFrontline && p2Front.creatures.Count > 0))
-                            p2Back.enableCreatureTargeting(true);
+                        p2Back.enableCreatureTargeting(true);
                     }
                     else
                     {
                         p1Front.enableCreatureTargeting(true);
-                        if(!(blockedByFrontline && p1Front.creatures.Count > 0))
-                            p1Back.enableCreatureTargeting(true);
+                        p1Back.enableCreatureTargeting(true);
                     }
                 }
                 break;

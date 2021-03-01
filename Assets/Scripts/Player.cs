@@ -5,12 +5,12 @@ using UnityEngine;
 public class Player : MonoBehaviour, ITargetable
 {
     public class SummonAction : Action {
-        public CreatureObject creatureType;
+        public int creatureIndex;
         public RowManager summonRow;
 
-        public SummonAction(CreatureObject co, RowManager rm)
+        public SummonAction(int index, RowManager rm)
         {
-            creatureType = co;
+            creatureIndex = index;
             summonRow = rm;
         }
     }
@@ -27,6 +27,7 @@ public class Player : MonoBehaviour, ITargetable
 
     [HideInInspector] public int actionPoints;
     [HideInInspector] public bool enableTargeting;
+    [HideInInspector] public List<CreatureObject> cardsInHand;
     [HideInInspector] public List<Action> queuedActions;
     [HideInInspector] public List<List<List<ITargetable>>> queuedTargets;
     [HideInInspector] public Dictionary<Action.statusEffect, int> activeEffects;
@@ -43,6 +44,12 @@ public class Player : MonoBehaviour, ITargetable
         col = GetComponent<Collider2D>();
         queuedActions = new List<Action>();
         queuedTargets = new List<List<List<ITargetable>>>();
+
+        cardsInHand = new List<CreatureObject>();
+        for(int i = 0; i < 4; ++i)
+        {
+            cardsInHand.Add(drawCard());
+        }
     }
 
     void Update()
@@ -66,7 +73,18 @@ public class Player : MonoBehaviour, ITargetable
         GameManager.Instance.targetWasClicked(this);
     }
 
-    public void summonCreature()
+    public void drawCardsUntilFull()
+    {
+        while(cardsInHand.Count < 4)
+        {
+            if(deck.Count == 0)
+                break;
+
+            cardsInHand.Add(drawCard());
+        }
+    }
+
+    public void summonCreature(int index)
     {
         void summonInRow(ITargetable target) {
             if(target.getTargetType() != ITargetable.TargetType.row)
@@ -74,7 +92,8 @@ public class Player : MonoBehaviour, ITargetable
                 Debug.LogError("Target other than row was selected to summon creature.");
                 return;
             }
-            queuedActions.Add(new SummonAction(drawCard(), (RowManager) target));
+
+            queuedActions.Add(new SummonAction(index, (RowManager) target));
             queuedTargets.Add(null);
             --actionPoints;
         }
@@ -87,7 +106,8 @@ public class Player : MonoBehaviour, ITargetable
         if(queuedActions[actionIndex] is SummonAction)
         {
             SummonAction s = (SummonAction)queuedActions[actionIndex];
-            s.summonRow.summonCreature(s.creatureType, this);
+            s.summonRow.summonCreature(cardsInHand[s.creatureIndex], this);
+            cardsInHand.RemoveAt(s.creatureIndex);
         }
         else
         {
