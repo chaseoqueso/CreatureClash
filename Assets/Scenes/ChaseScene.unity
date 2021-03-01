@@ -420,6 +420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerObject: {fileID: 11400000, guid: 757e5e9a96a1c2f4cb076bc099e230d5, type: 2}
   deck: []
+  playerNumber: 0
   currentHealth: 0
   maxHealth: 0
   currentDef: 0
@@ -427,6 +428,7 @@ MonoBehaviour:
   currentDamage: 0
   actionPoints: 0
   enableTargeting: 0
+  queuedActions: []
 --- !u!61 &120616598
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2086,6 +2088,7 @@ MonoBehaviour:
   bottomEndpoint: {x: 2, y: 0.5, z: -3}
   creaturePrefab: {fileID: 3929829046026948516, guid: 70a0753ec5bbdb541b9c2e96bd177f76, type: 3}
   enableTargeting: 0
+  creatures: []
 --- !u!1 &1282904130
 GameObject:
   m_ObjectHideFlags: 0
@@ -2733,6 +2736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerObject: {fileID: 11400000, guid: 757e5e9a96a1c2f4cb076bc099e230d5, type: 2}
   deck: []
+  playerNumber: 0
   currentHealth: 0
   maxHealth: 0
   currentDef: 0
@@ -2740,6 +2744,7 @@ MonoBehaviour:
   currentDamage: 0
   actionPoints: 0
   enableTargeting: 0
+  queuedActions: []
 --- !u!114 &1706673215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3093,6 +3098,7 @@ MonoBehaviour:
   bottomEndpoint: {x: 3.5, y: 0.5, z: -3}
   creaturePrefab: {fileID: 3929829046026948516, guid: 70a0753ec5bbdb541b9c2e96bd177f76, type: 3}
   enableTargeting: 0
+  creatures: []
 --- !u!1 &1839525907
 GameObject:
   m_ObjectHideFlags: 0
@@ -3142,6 +3148,7 @@ MonoBehaviour:
   bottomEndpoint: {x: -2, y: 0.5, z: -3}
   creaturePrefab: {fileID: 3929829046026948516, guid: 70a0753ec5bbdb541b9c2e96bd177f76, type: 3}
   enableTargeting: 0
+  creatures: []
 --- !u!65 &1839525910
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3598,6 +3605,7 @@ MonoBehaviour:
   bottomEndpoint: {x: -3.5, y: 0.5, z: -3}
   creaturePrefab: {fileID: 3929829046026948516, guid: 70a0753ec5bbdb541b9c2e96bd177f76, type: 3}
   enableTargeting: 0
+  creatures: []
 --- !u!65 &2098797206
 BoxCollider:
   m_ObjectHideFlags: 0
