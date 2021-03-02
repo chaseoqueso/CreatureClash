@@ -8,6 +8,9 @@ public class CreaturePanel : MonoBehaviour
 {
     public Player player;
     public int index;
+    public int currentMana;
+
+    public int creatureCostValue;
 
     // UI data
     public TMP_Text creatureName;
@@ -29,14 +32,19 @@ public class CreaturePanel : MonoBehaviour
         creatureDescription.text = creature.FlavorText();
 
         //creatureIMG.mainTexture = creature.Texture();
-        
-        creatureCOST.text = creature.ManaCost() + "";
+
+        creatureCostValue = creature.ManaCost();        
+        creatureCOST.text = creatureCostValue + "";
 
         // Set stats
         creatureHP.text = creature.MaxHealth() + "";
         creatureDMG.text = creature.BaseDamage() + "";
         creatureDEF.text = creature.BaseDefense() + "";
         creatureSPD.text = creature.BaseSpeed() + "";
+
+        if( creatureCostValue > currentMana ){
+            setInteractable(false);
+        }
     }
 
     public void setInteractable(bool setActive)

@@ -12,6 +12,7 @@ public class SpellbookMenu : MonoBehaviour
     public GameObject creaturePanelPrefab;
 
     public TMP_Text currentMana;
+    public int manaValue;
 
 
     private Player currentPlayer;
@@ -45,6 +46,7 @@ public class SpellbookMenu : MonoBehaviour
                 panel.setUIValues(creature);
                 panel.player = currentPlayer;
                 panel.index = i;
+                panel.currentMana = manaValue;
 
                 // If already used, set the button to not interactable
                 if( indexes.Contains(i) ){
@@ -88,7 +90,8 @@ public class SpellbookMenu : MonoBehaviour
     {
         // Set values
         currentPlayer = player;
-        currentMana.text = currentPlayer.actionPoints + "";
+        manaValue = currentPlayer.actionPoints;
+        currentMana.text = manaValue + "";
         assignCreatureValues(creatureUsedIndexes);
         assignSpellValues();
 
