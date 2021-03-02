@@ -11,17 +11,18 @@ public class Action
         none,                // No targets for this ability type
 
         frontSingle,         // Exactly one target (front)
-        backSingle,          // Exactly one target (back)
+        backSingle,          // Exactly one target (back, including player)
+        backCreature,        // Exactly one target (back, excluding player)
         anySingle,           // Exactly one target (any, including player)
         anyCreature,         // Exactly one target (any, excluding player)
+        self,                // Can only target self
 
         frontRow,            // Can only target front row
         backRow,             // Can only target back row
         eitherRow,           // Front OR back row can be targeted
         bothRows,            // AOE effecting both rows
         
-        player,              // Can only target player
-        self                 // Can only target self
+        player               // Can only target player
     }
     // Enemies vs allies target restriction
     public enum targetRestrictions{

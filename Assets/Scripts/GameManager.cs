@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
     public RowManager p2Back;
     public GameObject player1UI;
     public GameObject player2UI;
+    public SpellbookMenu spellBook;
     public Text turnText;
     public Turn currentTurn {get; private set;}
     public int turnCount;
@@ -151,6 +152,8 @@ public class GameManager : MonoBehaviour
                 p1Back.removeSummoningSickness();
                 p2Front.removeSummoningSickness();
                 p2Back.removeSummoningSickness();
+                player1.drawCardsUntilFull();
+                player2.drawCardsUntilFull();
                 resetTargeting();
 
                 Debug.Log("Resolve attacks end, player 1 turn start");
@@ -216,6 +219,7 @@ public class GameManager : MonoBehaviour
         } else {
             switch(target.getTargetType()) {
                 case ITargetable.TargetType.player:
+                    //spellBook.openSpellbook((Player)target);
                     ((Player)target).summonCreature(0);
                     break;
 
@@ -225,6 +229,16 @@ public class GameManager : MonoBehaviour
             }
             Debug.Log("Object Clicked: " + target);
         }
+    }
+
+    public bool creatureIsInFrontRow(Creature creature)
+    {
+        return (creature.row == p1Front || creature.row == p2Front);
+    }
+
+    public bool rowIsFrontRow(RowManager row)
+    {
+        return (row == p1Front || row == p2Front);
     }
 
     public Player getPlayerFromRow(RowManager row)
@@ -248,6 +262,17 @@ public class GameManager : MonoBehaviour
         {
             return p2Front.getRandomCreature();
         }
+    }
+
+    public RowManager selectFrontRowFromBackRow(RowManager row)
+    {
+        if(row == p1Back)
+            return p1Front;
+        
+        if(row == p2Back)
+            return p2Front;
+        
+        return null;
     }
 
     public void updateUI()
@@ -429,7 +454,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
                 
-            case Action.targets.backSingle:
+            case Action.targets.backCreature:
 
                 if(restrictions == Action.targetRestrictions.allies || restrictions == Action.targetRestrictions.none)
                 {
@@ -452,6 +477,37 @@ public class GameManager : MonoBehaviour
                     else
                     {
                         p1Back.enableCreatureTargeting(true);
+                    }
+                }
+                break;
+                
+            case Action.targets.backSingle:
+
+                if(restrictions == Action.targetRestrictions.allies || restrictions == Action.targetRestrictions.none)
+                {
+                    if(playerNumber == 1)
+                    {
+                        p1Back.enableCreatureTargeting(true);
+                        player1.enableTargeting = true;
+                    }
+                    else
+                    {
+                        p2Back.enableCreatureTargeting(true);
+                        player2.enableTargeting = true;
+                    }
+                }
+
+                if(restrictions == Action.targetRestrictions.enemies || restrictions == Action.targetRestrictions.none)
+                {
+                    if(playerNumber == 1)
+                    {
+                        p2Back.enableCreatureTargeting(true);
+                        player2.enableTargeting = true;
+                    }
+                    else
+                    {
+                        p1Back.enableCreatureTargeting(true);
+                        player1.enableTargeting = true;
                     }
                 }
                 break;
