@@ -116,24 +116,25 @@ public class Player : MonoBehaviour, ITargetable
 
     public void performQueuedAction(int actionIndex)
     {
-        if(queuedActions[actionIndex] is SummonAction)
+        Action currentAction = queuedActions[actionIndex];
+
+        // Check for null values
+        if( currentAction == null ){
+            Debug.LogError("Player is Idle and has no Action to perform.");
+            return;
+        }
+
+        if(currentAction is SummonAction)
         {
-            SummonAction s = (SummonAction)queuedActions[actionIndex];
+            SummonAction s = (SummonAction)currentAction;
             s.summonRow.summonCreature(cardsInHand[s.creatureIndex], this);
             cardsInHand.RemoveAt(s.creatureIndex);
         }
         else
         {
-            Action currentAction = queuedActions[actionIndex];
             List<List<ITargetable>> currentTargets = queuedTargets[actionIndex];
-
-            // Check for null values
-            if( currentAction == null ){
-                Debug.Log("Creature is Idle and has no Action to perform.");
-                return;
-            }
             if( currentTargets == null ){
-                Debug.Log("Creature has no Targets for assigned Action.");
+                Debug.LogError("Player has no Targets for assigned Action.");
                 return;
             }
 
