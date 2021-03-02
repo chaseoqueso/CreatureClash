@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class SpellbookMenu : MonoBehaviour
 {
@@ -8,6 +10,8 @@ public class SpellbookMenu : MonoBehaviour
     public GameObject spellbookUI;
 
     public GameObject creaturePanelPrefab;
+
+    public TMP_Text currentMana;
 
 
     private Player currentPlayer;
@@ -84,6 +88,7 @@ public class SpellbookMenu : MonoBehaviour
     {
         // Set values
         currentPlayer = player;
+        currentMana.text = currentPlayer.actionPoints + "";
         assignCreatureValues(creatureUsedIndexes);
         assignSpellValues();
 
