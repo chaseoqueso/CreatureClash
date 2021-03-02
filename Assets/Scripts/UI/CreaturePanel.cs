@@ -6,6 +6,9 @@ using TMPro;
 
 public class CreaturePanel : MonoBehaviour
 {
+    public Player player;
+    public int index;
+
     // UI data
     public TMP_Text creatureName;
     public TMP_Text creatureDescription;
@@ -36,15 +39,24 @@ public class CreaturePanel : MonoBehaviour
         creatureSPD.text = creature.BaseSpeed() + "";
     }
 
-    public void setNonInteractable()
+    public void setInteractable(bool setActive)
     {
-        panelButton.interactable = false;
-        // Set visual
+        panelButton.interactable = setActive;
+
+        if(!setActive){
+            // Set visual if false
+            return;
+        }
+        // Set visual if true
+
     }
 
-    public void setInteractable()
+    public void summonCreature()
     {
-        panelButton.interactable = true;
-        // Set visual
+        // Summons the given creature and disables the button
+        player.summonCreature(index);
+        setInteractable(false);
+
+        GetComponentInParent<SpellbookMenu>().closeSpellbook();
     }
 }

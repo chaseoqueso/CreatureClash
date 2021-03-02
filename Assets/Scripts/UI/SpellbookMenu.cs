@@ -18,30 +18,37 @@ public class SpellbookMenu : MonoBehaviour
     void Start()
     {
         creaturePanels = new List<GameObject>();
-        gameObject.SetActive(false);
+
+        spellbookUI.SetActive(false);
+        spellbookIsActive = false;
     }
 
     private void assignCreatureValues(List<int> indexes)
     {
         // Loop through up to four creature panels and assign values
         if( currentPlayer.cardsInHand.Count != 0 ){
-            float yPos = 305;
+            float yPos = 800;
             int i = 0;
             foreach(CreatureObject creature in currentPlayer.cardsInHand){
                 // Create the creature panel
-                GameObject creaturePanel = Instantiate(creaturePanelPrefab, new Vector3(-447, yPos, 0), Quaternion.identity);
+                GameObject creaturePanel = Instantiate(creaturePanelPrefab, new Vector3(0, 0, 0), Quaternion.identity, transform);
+                creaturePanel.transform.position = new Vector3(500, yPos, 0);
                 creaturePanels.Add(creaturePanel);
 
+                CreaturePanel panel = creaturePanel.GetComponent<CreaturePanel>();
+
                 // Set the UI values in the creature panel
-                creaturePanel.GetComponent<CreaturePanel>().setUIValues(creature);
+                panel.setUIValues(creature);
+                panel.player = currentPlayer;
+                panel.index = i;
 
                 // If already used, set the button to not interactable
                 if( indexes.Contains(i) ){
-                    creaturePanel.GetComponent<CreaturePanel>().setNonInteractable();
+                    panel.setInteractable(false);
                 }
             
                 // Decrease yPos for next creature panel
-                yPos -= 210;
+                yPos -= 200;
                 i++;
             }
             return;
