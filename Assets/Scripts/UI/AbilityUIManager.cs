@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AbilityUIManager : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class AbilityUIManager : MonoBehaviour
     public List<GameObject> abilityUIPanels;
 
     public Creature creature;
+
+    public float abilityUIPanelHeight = 110;
+    public float abilityUIPanelWidth = 370;
 
     void Start()
     {
@@ -25,23 +29,40 @@ public class AbilityUIManager : MonoBehaviour
         setActionUIValues();
     }
 
+    public void closeActionSelectUI()
+    {
+        actionSelectUI.SetActive(false);
+        actionSelectIsActive = false;
+
+        // Delete all panels
+        foreach(GameObject panel in abilityUIPanels){
+            Destroy(panel);
+        }
+        abilityUIPanels.Clear();
+    }
+
     private void setActionUIValues()
     {
         List<Action> actionList = creature.getActionList();
 
         float xPos = creature.transform.position.x;
         float yPos = creature.transform.position.y;
+        // float panelSize = abilityUIPanelHeight;
 
-        foreach(Action a in actionList){
+        for(int i = 0; i < actionList.Count; i++){
             GameObject actionPanel = Instantiate(abilityUIPanelPrefab, new Vector3(0, 0, 0), Quaternion.identity, transform);
             actionPanel.transform.position = new Vector3(xPos, yPos, 0);
             abilityUIPanels.Add(actionPanel);
 
-            actionPanel.GetComponent<AbilityUIPanel>().setUIValues(a);
+            AbilityUIPanel a = actionPanel.GetComponent<AbilityUIPanel>();
+            a.setUIValues(actionList[i]);
+            a.abilityIndex = i;
 
-            yPos += 100;
+            yPos -= 100;
+
+            // actionSelectUI.GetComponent<RectTransform>().sizeDelta = new Vector2(abilityUIPanelWidth, panelSize);
+            // panelSize += abilityUIPanelHeight;
         }
-
         // Could add stuff to check for cooldowns here and keep things disabled if on cooldown
         // and add a number visual for how many rounds left
     }

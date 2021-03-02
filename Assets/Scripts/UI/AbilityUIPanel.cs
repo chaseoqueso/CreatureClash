@@ -7,6 +7,7 @@ using TMPro;
 public class AbilityUIPanel : MonoBehaviour
 {
     public Action ability;
+    public int abilityIndex;
     
     // UI data
     public TMP_Text abilityName;
@@ -38,8 +39,11 @@ public class AbilityUIPanel : MonoBehaviour
 
     public void selectAbility()
     {
-        setInteractable(false);
+        // Select targets and then queue the action for the creature
+        GetComponentInParent<AbilityUIManager>().creature.selectTargetsForAction(abilityIndex);
 
-        // Close the menu?
+        // Close the menu
+        setInteractable(false);
+        GetComponentInParent<AbilityUIManager>().closeActionSelectUI();
     }
 }
