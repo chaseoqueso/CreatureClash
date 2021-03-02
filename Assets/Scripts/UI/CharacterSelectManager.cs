@@ -16,12 +16,6 @@ public class CharacterSelectManager : MonoBehaviour
         readyP2 = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void PlayGame()
     {
         if( readyP1 && readyP2 ){

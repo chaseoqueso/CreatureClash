@@ -8,6 +8,8 @@ public class CharacterSelectMenu : MonoBehaviour
 {
     public CharacterSelectManager charManager;
 
+    public Button readyButton;
+
     // Player UI data
     public TMP_Text playerName;
     public TMP_Text playerClass;
@@ -25,12 +27,6 @@ public class CharacterSelectMenu : MonoBehaviour
 
         // Display first character option
         setUIValues(playerName, playerClass, playerDescription, playerIMG, charManager.characters[charIndex]);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void nextCharacter()
@@ -60,15 +56,21 @@ public class CharacterSelectMenu : MonoBehaviour
     // Called when players select "ready"
     public void readyPlayer()
     {
-        GameManager.Instance.player1.playerObject = charManager.characters[charIndex];
-        // could do some effects to gray out the button and the image
+        setReadyButtonActive(false);
 
         // Set readyP bool to true
         if( playerNum == 1 ){
+            GameManager.Instance.player1Object = charManager.characters[charIndex];
             charManager.readyP1 = true;
             return;
         }
+        GameManager.Instance.player2Object = charManager.characters[charIndex];
         charManager.readyP2 = true;
+    }
+
+    public void setReadyButtonActive(bool setActive)
+    {
+        readyButton.interactable = setActive;
     }
 
     public void setUIValues(TMP_Text characterName, TMP_Text charClass, TMP_Text description, Image img, PlayerObject character)

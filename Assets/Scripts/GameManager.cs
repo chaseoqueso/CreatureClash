@@ -13,9 +13,13 @@ public class GameManager : MonoBehaviour
         }
 
         set {
-            if(instance == null)
+            if(instance == null || value == null)
             {
                 instance = value;
+            }
+            else
+            {
+                Destroy(value);
             }
         }
     }
@@ -92,6 +96,8 @@ public class GameManager : MonoBehaviour
 
     public Player player1;
     public Player player2;
+    public PlayerObject player1Object;
+    public PlayerObject player2Object;
     public RowManager p1Front;
     public RowManager p1Back;
     public RowManager p2Front;
@@ -114,9 +120,23 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void OnDestroy()
+    {
+        Instance = null;
+    }
+
+    public void startGame()
+    {
+        // Get data from the object in the level
+
         turnCount = 1;
         player1.actionPoints = player2.actionPoints = turnCount + 2;
         currentTurn = Turn.player1;
+        player1.playerObject = player1Object;
+        player2.playerObject = player2Object;
         player1.enableTargeting = true;
         player2.enableTargeting = false;
         player1.playerNumber = 1;
