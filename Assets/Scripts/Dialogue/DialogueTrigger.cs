@@ -13,8 +13,9 @@ public class DialogueTrigger : MonoBehaviour
 
     void Start()
     {
-        playerOne = GameManager.Instance.player1;
-        playerTwo = GameManager.Instance.player2;
+        //Jen broke this
+        //playerOne = GameManager.Instance.player1;
+        //playerTwo = GameManager.Instance.player2;
     }
 
     public void triggerDialogue()

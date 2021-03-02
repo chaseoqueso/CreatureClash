@@ -1376,7 +1376,7 @@ GameObject:
   - component: {fileID: 873638314}
   - component: {fileID: 873638313}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: DataManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1391,7 +1391,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 873638312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6469323f8bb4244c842f99ba4f615bc, type: 3}
+  m_Script: {fileID: 11500000, guid: b87e21affd643564e9e970e0668e2816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player1: {fileID: 120616597}
@@ -1404,7 +1404,6 @@ MonoBehaviour:
   player2UI: {fileID: 657667494}
   spellBook: {fileID: 755506786}
   turnText: {fileID: 111957187}
-  turnCount: 0
 --- !u!4 &873638314
 Transform:
   m_ObjectHideFlags: 0
@@ -1502,7 +1501,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 873638313}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: progressTurn
         m_Mode: 1
@@ -2698,7 +2697,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 873638313}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: progressTurn
         m_Mode: 1
