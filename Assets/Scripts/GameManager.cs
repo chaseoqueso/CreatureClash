@@ -219,8 +219,8 @@ public class GameManager : MonoBehaviour
         } else {
             switch(target.getTargetType()) {
                 case ITargetable.TargetType.player:
-                    //spellBook.openSpellbook((Player)target);
-                    ((Player)target).summonCreature(0);
+                    Player p = (Player)target;
+                    spellBook.openSpellbook(p, p.getCurrentSummonIndices());
                     break;
 
                 case ITargetable.TargetType.creature:

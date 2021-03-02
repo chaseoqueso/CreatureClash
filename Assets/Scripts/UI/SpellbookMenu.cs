@@ -18,6 +18,7 @@ public class SpellbookMenu : MonoBehaviour
     void Start()
     {
         creaturePanels = new List<GameObject>();
+        gameObject.SetActive(false);
     }
 
     private void assignCreatureValues(List<int> indexes)

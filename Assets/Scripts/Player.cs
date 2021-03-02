@@ -84,6 +84,19 @@ public class Player : MonoBehaviour, ITargetable
         }
     }
 
+    public List<int> getCurrentSummonIndices()
+    {
+        List<int> ret = new List<int>();
+        foreach(Action a in queuedActions)
+        {
+            if(a is SummonAction)
+            {
+                ret.Add(((SummonAction)a).creatureIndex);
+            }
+        }
+        return ret;
+    }
+
     public void summonCreature(int index)
     {
         void summonInRow(ITargetable target) {
