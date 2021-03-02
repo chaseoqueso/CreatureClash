@@ -80,6 +80,14 @@ public class RowManager : MonoBehaviour, ITargetable
         }
     }
 
+    public Creature getRandomCreature()
+    {
+        if(creatures.Count == 0)
+            return null;
+
+        return creatures[Random.Range(0, creatures.Count)];
+    }
+
     public Creature summonCreature(CreatureObject creatureType, Player player)
     {
         Vector3 spawnPos = Vector3.Lerp(bottomEndpoint, topEndpoint, 1f/((creaturePositions.Count + 1) * 2f));
@@ -95,6 +103,7 @@ public class RowManager : MonoBehaviour, ITargetable
         creatures.Add(creatureScript);
         creatureScript.creature = creatureType;
         creatureScript.player = player;
+        creatureScript.row = this;
 
 
         StartCoroutine(lerpCreaturePositions(creatureLerpTime));
