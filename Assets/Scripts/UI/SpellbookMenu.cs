@@ -9,26 +9,42 @@ public class SpellbookMenu : MonoBehaviour
 
     public GameObject creaturePanelPrefab;
 
+
     private Player currentPlayer;
+    private List<GameObject> creaturePanels;
 
 
 
-    private void assignCreatureValues()
+    void Start()
+    {
+        creaturePanels = new List<GameObject>();
+    }
+
+    private void assignCreatureValues(List<int> indexes)
     {
         // Loop through up to four creature panels and assign values
         if( currentPlayer.cardsInHand.Count != 0 ){
             float yPos = 305;
+            int i = 0;
             foreach(CreatureObject creature in currentPlayer.cardsInHand){
+                // Create the creature panel
                 GameObject creaturePanel = Instantiate(creaturePanelPrefab, new Vector3(-447, yPos, 0), Quaternion.identity);
-                // creaturePanel.
+                creaturePanels.Add(creaturePanel);
 
+                // Set the UI values in the creature panel
+                creaturePanel.GetComponent<CreaturePanel>().setUIValues(creature);
+
+                // If already used, set the button to not interactable
+                if( indexes.Contains(i) ){
+                    creaturePanel.GetComponent<CreaturePanel>().setNonInteractable();
+                }
+            
                 // Decrease yPos for next creature panel
                 yPos -= 210;
+                i++;
             }
-            
             return;
         }
-
         // If no creatures left to summon, display something like an image or something idk
     }
 
@@ -37,9 +53,13 @@ public class SpellbookMenu : MonoBehaviour
 
     }
 
-    public void clearSpellbook()
+    private void clearSpellbook()
     {
-
+        // Delete all creature panels
+        foreach(GameObject panel in creaturePanels){
+            Destroy(panel);
+        }
+        creaturePanels.Clear();
     }
 
     public void closeSpellbook()
@@ -48,15 +68,15 @@ public class SpellbookMenu : MonoBehaviour
         spellbookIsActive = false;
         // Play animation
 
-        // Set values
+        // Set values -> make sure this doesn't have to come before SetActive(false)
         clearSpellbook();
     }
 
-    public void openSpellbook(Player player)
+    public void openSpellbook(Player player, List<int> creatureUsedIndexes)
     {
         // Set values
         currentPlayer = player;
-        assignCreatureValues();
+        assignCreatureValues(creatureUsedIndexes);
         assignSpellValues();
 
         // Play animation

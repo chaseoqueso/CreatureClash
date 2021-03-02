@@ -18,6 +18,8 @@ public class CreaturePanel : MonoBehaviour
 
     public Image creatureIMG;
 
+    public Button panelButton;
+
     public void setUIValues(CreatureObject creature)
     {
         creatureName.text = creature.CreatureName();
@@ -32,5 +34,17 @@ public class CreaturePanel : MonoBehaviour
         creatureDMG.text = creature.BaseDamage() + "";
         creatureDEF.text = creature.BaseDefense() + "";
         creatureSPD.text = creature.BaseSpeed() + "";
+    }
+
+    public void setNonInteractable()
+    {
+        panelButton.interactable = false;
+        // Set visual
+    }
+
+    public void setInteractable()
+    {
+        panelButton.interactable = true;
+        // Set visual
     }
 }

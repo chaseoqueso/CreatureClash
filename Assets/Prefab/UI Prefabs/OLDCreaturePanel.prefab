@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 2413207704037864818}
   - component: {fileID: 2413207704037864816}
   - component: {fileID: 2413207704037864819}
+  - component: {fileID: 12887387742759041}
   m_Layer: 5
-  m_Name: CreaturePanel
+  m_Name: OLDCreaturePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,6 +89,26 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &12887387742759041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2413207704037864821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 457773a77ed0a0a4cb857a96b9cebf1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  creatureName: {fileID: 2413207705690495569}
+  creatureDescription: {fileID: 2413207704496838211}
+  creatureHP: {fileID: 4525289783671371868}
+  creatureDMG: {fileID: 7526143431032716781}
+  creatureSPD: {fileID: 3538029566034227829}
+  creatureDEF: {fileID: 8345037269818546629}
+  creatureCOST: {fileID: 3985753447630794588}
+  creatureIMG: {fileID: 2413207704337387557}
 --- !u!1 &2413207704063890582
 GameObject:
   m_ObjectHideFlags: 0
