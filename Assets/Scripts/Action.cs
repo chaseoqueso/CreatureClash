@@ -49,6 +49,8 @@ public class Action
         healthOverTime,
         defense
     }
+
+    [System.Serializable]
     public struct statusEffect{
         public statusEffectType statusType;
 
@@ -71,10 +73,11 @@ public class Action
 
         // Status Effect struct w/ default values
         public statusEffect status = new statusEffect{statusType = statusEffectType.none,
-                                                    modifierValue = 0, modifierMult = 1, effectDuration = 1};            // only used if type == status
+                                                    modifierValue = 0, modifierMult = 0, effectDuration = 1};            // only used if type == status
 
-        // Health or damage number (+ for heal; % mod * damage for damage)
+        // Health or damage number
         public float hpValue = 0;                 // 0 if type == status
+        public float damageMulti = 1;             // Only used for damage
     }
     // EffectGroup class
     [System.Serializable]

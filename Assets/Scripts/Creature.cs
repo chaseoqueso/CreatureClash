@@ -80,7 +80,7 @@ public class Creature : MonoBehaviour, ITargetable
         if(isDead)
             return;
         // num + if healing, - if damage
-        currentHealth += num;
+        currentHealth += num * Mathf.Clamp01(1 - (currentDef/100f));
         Debug.Log(currentHealth);
         // If creature's health goes above max health, drop it back to max
         if(currentHealth > currentMaxHP){
@@ -242,7 +242,7 @@ public class Creature : MonoBehaviour, ITargetable
                 else if(effect.type == Action.effectType.damage){
                     foreach( ITargetable target in targets ){
                         if(target != null)
-                            target.updateCurrentHealth(-effect.hpValue * currentDamage);
+                            target.updateCurrentHealth(currentDamage * effect.damageMulti - effect.hpValue);
                     }
                 }
                 // If heal, adjust hp of affected targets
@@ -278,7 +278,7 @@ public class Creature : MonoBehaviour, ITargetable
         if( status.statusType != Action.statusEffectType.healthOverTime ){
             return;
         }
-        updateCurrentHealth(status.modifierValue);
+        updateCurrentHealth(status.modifierValue + (currentMaxHP * status.modifierMult));
     }
 
     public void toggleStatusEffect(Action.statusEffect status, bool setActive)

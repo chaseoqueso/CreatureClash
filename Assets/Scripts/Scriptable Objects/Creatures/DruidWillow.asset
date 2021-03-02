@@ -10,26 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8045e0012911d948b453104250524ca, type: 3}
-  m_Name: DruidPawnsy
+  m_Name: DruidWillow
   m_EditorClassIdentifier: 
-  creatureName: Pawnsy
-  manaCost: 1
+  creatureName: Willow, the Forest Guard
+  manaCost: 3
   flavorText: 
-  maxHealth: 10
-  baseDamage: 6
-  baseDefense: 0
-  baseSpeed: 80
-  texture: {fileID: 2800000, guid: 950245096df60374abbae0980a3a8463, type: 3}
+  maxHealth: 25
+  baseDamage: 9
+  baseDefense: 40
+  baseSpeed: 30
+  texture: {fileID: 2800000, guid: 828ca984f40b2e04ca4f46984994bf29, type: 3}
   heightMap: {fileID: 0}
   actions:
-  - actionName: Stick Whack
-    description: Pawnsy bonks target creature or player, dealing 5 damage. <color=#AA0000><i>Blocked
-      by Frontline</i></color>
+  - actionName: Willow's Wisp
+    description: Willow lures target creature in, then attacks for 9 damage.
     actionEffectGroups:
     - groupName: Damage
-      targetType: 4
+      targetType: 5
       targetRestriction: 0
-      blockedByFrontline: 1
+      blockedByFrontline: 0
       groupEffects:
       - effectName: Damage
         type: 0

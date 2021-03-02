@@ -75,6 +75,15 @@ public class Player : MonoBehaviour, ITargetable
 
     public void drawCardsUntilFull()
     {
+        for(int i = 0; i < cardsInHand.Count; ++i)
+        {
+            if(cardsInHand[i] == null)
+            {
+                cardsInHand.RemoveAt(i);
+                --i;
+            }
+        }
+
         while(cardsInHand.Count < 4)
         {
             if(deck.Count == 0)
@@ -105,10 +114,17 @@ public class Player : MonoBehaviour, ITargetable
                 Debug.LogError("Target other than row was selected to summon creature.");
                 return;
             }
+            
+            int manaCost = cardsInHand[index].ManaCost();
+            if(manaCost > actionPoints)
+            {
+                Debug.LogError("Jen didn't do her job.");
+                return;
+            }
 
             queuedActions.Add(new SummonAction(index, (RowManager) target));
             queuedTargets.Add(null);
-            --actionPoints;
+            actionPoints -= manaCost;
         }
 
         GameManager.Instance.performAfterTargetSelect(this, Action.targets.eitherRow, Action.targetRestrictions.allies, false, summonInRow);
@@ -128,7 +144,7 @@ public class Player : MonoBehaviour, ITargetable
         {
             SummonAction s = (SummonAction)currentAction;
             s.summonRow.summonCreature(cardsInHand[s.creatureIndex], this);
-            cardsInHand.RemoveAt(s.creatureIndex);
+            cardsInHand[s.creatureIndex] = null;
         }
         else
         {

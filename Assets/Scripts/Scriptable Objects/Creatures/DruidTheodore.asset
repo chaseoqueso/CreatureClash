@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8045e0012911d948b453104250524ca, type: 3}
-  m_Name: DruidPawnsy
+  m_Name: DruidTheodore
   m_EditorClassIdentifier: 
-  creatureName: Pawnsy
-  manaCost: 1
+  creatureName: Theodore
+  manaCost: 4
   flavorText: 
-  maxHealth: 10
-  baseDamage: 6
-  baseDefense: 0
-  baseSpeed: 80
-  texture: {fileID: 2800000, guid: 950245096df60374abbae0980a3a8463, type: 3}
+  maxHealth: 40
+  baseDamage: 10
+  baseDefense: 20
+  baseSpeed: 50
+  texture: {fileID: 2800000, guid: 828ca984f40b2e04ca4f46984994bf29, type: 3}
   heightMap: {fileID: 0}
   actions:
-  - actionName: Stick Whack
-    description: Pawnsy bonks target creature or player, dealing 5 damage. <color=#AA0000><i>Blocked
-      by Frontline</i></color>
+  - actionName: Maul
+    description: Theodore claws target creature or player, dealing 10 damage and
+      then dealing 2 bleeding damage for 3 turns. <color=#AA0000><i>Blocked by Frontline</i></color>
     actionEffectGroups:
     - groupName: Damage
       targetType: 4
@@ -38,5 +38,14 @@ MonoBehaviour:
           modifierValue: 0
           modifierMult: 1
           effectDuration: 1
+        hpValue: 0
+        damageMulti: 1
+      - effectName: Bleed
+        type: 2
+        status:
+          statusType: 4
+          modifierValue: -2
+          modifierMult: 0
+          effectDuration: 3
         hpValue: 0
         damageMulti: 1
