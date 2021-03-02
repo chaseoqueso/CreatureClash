@@ -100,6 +100,8 @@ public class Action
     // Action description
     [TextArea(3, 10)]
     public string description;
+    // Action icon
+    public Sprite actionIcon;
     
     // All effects of the action
     public List<EffectGroup> actionEffectGroups;

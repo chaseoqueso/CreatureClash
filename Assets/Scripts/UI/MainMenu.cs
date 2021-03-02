@@ -6,6 +6,7 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
+        // Go to character select screen
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
