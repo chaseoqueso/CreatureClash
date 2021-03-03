@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: Druid
   m_EditorClassIdentifier: 
   characterName: Chrysanthemum
-  characterClass: Druid
+  characterClass: The Druid
   characterSprite: {fileID: 0}
   baseHealth: 0
   baseDef: 0
-  baseSpeed: 0
   baseDamage: 0
   flavorText: Druid flavor text
   creatureDeck:
