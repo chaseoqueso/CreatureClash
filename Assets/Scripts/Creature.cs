@@ -58,7 +58,6 @@ public class Creature : MonoBehaviour, ITargetable
     void Update()
     {
         col.enabled = enableTargeting;
-        transform.position = new Vector3(transform.position.x, transform.localScale.y/2 * Mathf.Cos(Mathf.Deg2Rad * transform.eulerAngles.x), transform.position.z);
         if(enableTargeting)
         {
             material.SetFloat("outlineIntensity", Mathf.Abs(Mathf.Sin(Time.time * 2f)));

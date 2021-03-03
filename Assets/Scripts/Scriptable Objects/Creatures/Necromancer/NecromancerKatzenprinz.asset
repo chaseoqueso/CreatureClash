@@ -23,8 +23,8 @@ MonoBehaviour:
   heightMap: {fileID: 0}
   actions:
   - actionName: Scratch
-    description: Scratches the selected target with his claws to deal 6 damage. <color=#AA0000><i>Blocked
-      by Frontline</i></color>
+    description: Scratches target creature or player with his claws to deal 6 damage.
+      <color=#AA0000><i>Blocked by Frontline</i></color>
     actionIcon: {fileID: 0}
     actionEffectGroups:
     - groupName: Damage Target

@@ -23,9 +23,9 @@ MonoBehaviour:
   heightMap: {fileID: 0}
   actions:
   - actionName: Haunting Bite
-    description: "W\xF6lfingeist bites the target creature, dealing 7 damage. The
-      creature is <color=#7f20c7>Frightened</color>, their speed stat lowered by
-      15 for one round. <color=#AA0000><i>Blocked by Frontline</i></color>"
+    description: "W\xF6lfingeist bites target creature, dealing 7 damage. The creature
+      is <color=#7f20c7>Frightened</color>, and their speed stat is lowered by 15
+      for one round. <color=#AA0000><i>Blocked by Frontline</i></color>"
     actionIcon: {fileID: 0}
     actionEffectGroups:
     - groupName: Damage Target

@@ -19,7 +19,13 @@ MonoBehaviour:
   baseDef: 0
   baseDamage: 10
   flavorText: Necromancer description
-  creatureDeck: []
+  creatureDeck:
+  - creatureType: {fileID: 11400000, guid: 63e2d9d3a35ffd3459cde1479abcabf5, type: 2}
+    quantity: 14
+  - creatureType: {fileID: 11400000, guid: 0dd3746ed35e22b40bdc16260e430303, type: 2}
+    quantity: 10
+  - creatureType: {fileID: 11400000, guid: 04a9ca2570fd735488a4e5a785597d6f, type: 2}
+    quantity: 6
   actions:
   - actionName: Blood Ritual
     description: You take 2 damage to infuse target creature with increased vigor,

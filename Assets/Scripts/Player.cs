@@ -36,14 +36,20 @@ public class Player : MonoBehaviour, ITargetable
 
     void Awake()
     {
-        loadDeck();
         enableTargeting = false;
-        currentHealth = maxHealth = 100;
         material = GetComponent<Renderer>().material;
         col = GetComponent<Collider2D>();
         queuedActions = new List<PlayerAction>();
         queuedTargets = new List<List<List<ITargetable>>>();
         activeEffects = new Dictionary<Action.statusEffect, int>();
+    }
+
+    void Start()
+    {
+        currentHealth = maxHealth = playerObject.baseHealth;
+        material.mainTexture = playerObject.characterSprite;
+
+        loadDeck();
 
         cardsInHand = new List<CreatureObject>();
         for(int i = 0; i < 4; ++i)
@@ -179,14 +185,14 @@ public class Player : MonoBehaviour, ITargetable
                     else if(effect.type == Action.effectType.damage){
                         foreach( ITargetable target in targets ){
                             if(target != null)
-                                target.updateCurrentHealth(-effect.hpValue * currentDamage);
+                                target.updateCurrentHealth(currentDamage * effect.hpMulti + effect.hpValue);
                         }
                     }
                     // If heal, adjust hp of affected targets
-                    else{       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
+                    else {       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
                         foreach( ITargetable target in targets ){
                             if(target != null)
-                                target.updateCurrentHealth(effect.hpValue);
+                                target.updateCurrentHealth(maxHealth * effect.hpMulti + effect.hpValue);
                         }
                     }
                 }

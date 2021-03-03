@@ -23,7 +23,7 @@ MonoBehaviour:
   heightMap: {fileID: 0}
   actions:
   - actionName: Warlord's Rage
-    description: Knoxus attacks the target creature, dealing 10 damage. <color=#AA0000><i>Blocked
+    description: Knoxus attacks target creature, dealing 10 damage. <color=#AA0000><i>Blocked
       by Frontline</i></color>
     actionIcon: {fileID: 0}
     actionEffectGroups:
