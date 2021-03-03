@@ -9,9 +9,9 @@ public class AbilityUIManager : MonoBehaviour
     public GameObject actionSelectUI;
 
     public GameObject abilityUIPanelPrefab;
-    public List<GameObject> abilityUIPanels;
+    [HideInInspector] public List<GameObject> abilityUIPanels;
 
-    public Creature creature;
+    [HideInInspector] public Creature creature;
 
     public float abilityUIPanelHeight = 110;
     public float abilityUIPanelWidth = 370;

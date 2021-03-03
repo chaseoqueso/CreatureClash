@@ -33,6 +33,7 @@ public class DataManager : MonoBehaviour
     public GameObject player1UI;
     public GameObject player2UI;
     public SpellbookMenu spellBook;
+    public AbilityUIManager abilityUI;
     public Text turnText;
 
     void Start()
