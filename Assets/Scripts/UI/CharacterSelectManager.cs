@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class CharacterSelectManager : MonoBehaviour
@@ -20,7 +21,7 @@ public class CharacterSelectManager : MonoBehaviour
     {
         if( readyP1 && readyP2 ){
             // Start game
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene("ChaseScene");
             Debug.Log("Start Game");
         }
     }

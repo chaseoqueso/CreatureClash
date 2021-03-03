@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/UI Scenes/MainMenu.unity
+    guid: 42ec06025d0c25940b374db17c6d870f
+  - enabled: 1
+    path: Assets/Scenes/UI Scenes/CharacterSelectMenu.unity
+    guid: 733112352d2d94f46a796e3b4e35fc47
+  - enabled: 1
+    path: Assets/Scenes/ChaseScene.unity
+    guid: 03149d26af6baac419cab3a08df45c8e
   m_configObjects: {}
