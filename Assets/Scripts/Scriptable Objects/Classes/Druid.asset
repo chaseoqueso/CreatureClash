@@ -15,14 +15,67 @@ MonoBehaviour:
   characterName: Chrysanthemum
   characterClass: The Druid
   characterSprite: {fileID: 0}
-  baseHealth: 0
+  baseHealth: 100
   baseDef: 0
   baseDamage: 0
   flavorText: Druid flavor text
   creatureDeck:
   - creatureType: {fileID: 11400000, guid: e58f4d046af814a478f9118256391a92, type: 2}
     quantity: 15
-  actions: []
+  actions:
+  - actionName: Mend
+    description: Heal target creature for 5 health.
+    actionIcon: {fileID: 0}
+    actionEffectGroups:
+    - groupName: Single Creature
+      targetType: 5
+      targetRestriction: 0
+      blockedByFrontline: 0
+      groupEffects:
+      - effectName: Heal
+        type: 1
+        status:
+          statusType: 0
+          modifierValue: 0
+          modifierMult: 0
+          effectDuration: 0
+        hpValue: 5
+        hpMulti: 0
+    manaCost: 1
+  - actionName: Sweet Breeze
+    description: Summon a soothing breeze in target row, lowering creatures' speed
+      and attack by 10% for the following turn.
+    actionIcon: {fileID: 0}
+    actionEffectGroups:
+    - groupName: Row
+      targetType: 9
+      targetRestriction: 0
+      blockedByFrontline: 0
+      groupEffects:
+      - effectName: Speed Reduction
+        type: 2
+        status:
+          statusType: 1
+          modifierValue: 0
+          modifierMult: 0.9
+          effectDuration: 0
+        hpValue: 0
+        hpMulti: 0
+      - effectName: Attack Reduction
+        type: 2
+        status:
+          statusType: 2
+          modifierValue: 0
+          modifierMult: 0.9
+          effectDuration: 0
+        hpValue: 0
+        hpMulti: 0
+    manaCost: 3
+  - actionName: Nature's Blessing
+    description: 
+    actionIcon: {fileID: 0}
+    actionEffectGroups: []
+    manaCost: 0
   characterPortrait: {fileID: 0}
   challengeDialogue: []
   winDialogue: []

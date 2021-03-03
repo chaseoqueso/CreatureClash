@@ -24,6 +24,7 @@ MonoBehaviour:
   actions:
   - actionName: Willow's Wisp
     description: Willow lures target creature in, then attacks for 9 damage.
+    actionIcon: {fileID: 0}
     actionEffectGroups:
     - groupName: Damage
       targetType: 5
@@ -38,4 +39,4 @@ MonoBehaviour:
           modifierMult: 1
           effectDuration: 1
         hpValue: 0
-        damageMulti: 1
+        hpMulti: -1

@@ -139,10 +139,12 @@ public class GameManager : MonoBehaviour
             currentTurn = Turn.player1;
             data.player1.playerObject = player1Object;
             data.player2.playerObject = player2Object;
-            data.player1.enableTargeting = true;
-            data.player2.enableTargeting = false;
             data.player1.playerNumber = 1;
             data.player2.playerNumber = 2;
+            resetTargeting();
+
+            data.player1UI.GetComponentInChildren<Button>().onClick.AddListener(progressTurn);
+            data.player2UI.GetComponentInChildren<Button>().onClick.AddListener(progressTurn);
             updateUI();
         }
     }
@@ -256,6 +258,7 @@ public class GameManager : MonoBehaviour
                     data.abilityUI.openActionSelectUI((Creature)target);
                     break;
             }
+            disableTargeting();
             Debug.Log("Object Clicked: " + target);
         }
     }

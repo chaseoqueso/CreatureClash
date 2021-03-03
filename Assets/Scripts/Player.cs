@@ -34,7 +34,7 @@ public class Player : MonoBehaviour, ITargetable
     private Material material;
     private Collider2D col;
 
-    void Start()
+    void Awake()
     {
         loadDeck();
         enableTargeting = false;
@@ -43,6 +43,7 @@ public class Player : MonoBehaviour, ITargetable
         col = GetComponent<Collider2D>();
         queuedActions = new List<PlayerAction>();
         queuedTargets = new List<List<List<ITargetable>>>();
+        activeEffects = new Dictionary<Action.statusEffect, int>();
 
         cardsInHand = new List<CreatureObject>();
         for(int i = 0; i < 4; ++i)

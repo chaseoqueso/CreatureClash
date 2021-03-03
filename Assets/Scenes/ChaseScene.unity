@@ -424,7 +424,6 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 0
   currentDef: 0
-  currentSpeed: 0
   currentDamage: 0
   actionPoints: 0
   enableTargeting: 0
@@ -1595,19 +1594,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 939645460}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: progressTurn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &939645460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2791,19 +2778,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1671286550}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: progressTurn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1671286550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2944,7 +2919,6 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 0
   currentDef: 0
-  currentSpeed: 0
   currentDamage: 0
   actionPoints: 0
   enableTargeting: 0
