@@ -30,7 +30,8 @@ public class CreaturePanel : MonoBehaviour
         creatureName.text = creature.CreatureName();
         creatureDescription.text = creature.FlavorText();
 
-        //creatureIMG.mainTexture = creature.Texture();
+        Texture2D t = creature.Texture();
+        creatureIMG.sprite = Sprite.Create(t, new Rect(0,0,t.width, t.height), new Vector2(0.5f, 0.5f));
 
         creatureCostValue = creature.ManaCost();        
         creatureCOST.text = creatureCostValue + "";

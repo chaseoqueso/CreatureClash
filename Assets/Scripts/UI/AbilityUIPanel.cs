@@ -21,6 +21,11 @@ public class AbilityUIPanel : MonoBehaviour
     {
         ability = a;
 
+        // if the icons are textures instead of sprites for some reason (but they can prob just be sprites)
+        // this was how we did it for creatures
+        // Texture2D t = creature.Texture();
+        // creatureIMG.sprite = Sprite.Create(t, new Rect(0,0,t.width, t.height), new Vector2(0.5f, 0.5f));
+
         abilityName.text = ability.actionName;
         abilityDescription.text = ability.description;
         abilityIcon.sprite = ability.actionIcon;

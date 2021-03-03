@@ -160,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   index: 0
+  creatureCostValue: 0
   creatureName: {fileID: 573607001229976032}
   creatureDescription: {fileID: 573607001984861261}
   creatureHP: {fileID: 573607000478598405}

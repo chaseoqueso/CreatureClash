@@ -80,4 +80,9 @@ public class CharacterSelectMenu : MonoBehaviour
         description.text = character.flavorText;
         img.sprite = character.characterPortrait;
     }
+
+    // if the portraits are textures instead of sprites
+    // this was how we did it for creatures (would also do this for dialogue)
+    // Texture2D t = creature.Texture();
+    // creatureIMG.sprite = Sprite.Create(t, new Rect(0,0,t.width, t.height), new Vector2(0.5f, 0.5f));
 }
