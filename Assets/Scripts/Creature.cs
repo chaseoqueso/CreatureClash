@@ -344,8 +344,13 @@ public class Creature : MonoBehaviour, ITargetable
     // Updates the duration values for active effects & performs health over time effects
     public void updateStatusEffects()
     {
-        // Loop through all active effects and decrease duration by 1
+        List<Action.statusEffect> effects = new List<Action.statusEffect>();
         foreach( Action.statusEffect effect in activeEffects.Keys ){
+            effects.Add(effect);
+        }
+        
+        // Loop through all active effects and decrease duration by 1
+        foreach( Action.statusEffect effect in effects ){
             activeEffects[effect] = activeEffects[effect] - 1;
 
             // If health over time, perform the effect
