@@ -99,7 +99,14 @@ public class Creature : MonoBehaviour, ITargetable
 
         void setActionCallback(ITargetable target)
         {
+            if(target == null)
+            {
+
+            }
+            else
+            {
             targetGroups.Add(target.getTargets());
+            }
         }
 
         Action action = actions[actionIndex];
@@ -242,14 +249,14 @@ public class Creature : MonoBehaviour, ITargetable
                 else if(effect.type == Action.effectType.damage){
                     foreach( ITargetable target in targets ){
                         if(target != null)
-                            target.updateCurrentHealth(currentDamage * effect.hpMulti - effect.hpValue);
+                            target.updateCurrentHealth(currentDamage * effect.hpMulti + effect.hpValue);
                     }
                 }
                 // If heal, adjust hp of affected targets
                 else{       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
                     foreach( ITargetable target in targets ){
                         if(target != null)
-                            target.updateCurrentHealth(currentMaxHP * effect.hpMulti - effect.hpValue);
+                            target.updateCurrentHealth(currentMaxHP * effect.hpMulti + effect.hpValue);
                     }
                 }
             }
@@ -345,12 +352,18 @@ public class Creature : MonoBehaviour, ITargetable
             // If health over time, perform the effect
             if( effect.statusType == Action.statusEffectType.healthOverTime ){
                 performHealthOverTimeEffect(effect);
+                
+                if(activeEffects[effect] <= 0) {
+                    activeEffects.Remove(effect);
+                }
             }
-
-            // If the duration is 0, the status will be removed at the end of the current turn
-            if(activeEffects[effect] < 0){
-                toggleStatusEffect(effect, false);
-                activeEffects.Remove(effect);
+            else
+            {
+                // If the duration is 0, the status will be removed at the end of the current turn
+                if(activeEffects[effect] < 0){
+                    toggleStatusEffect(effect, false);
+                    activeEffects.Remove(effect);
+                }
             }
         }
     }

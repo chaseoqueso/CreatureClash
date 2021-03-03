@@ -201,6 +201,11 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        if(targetType == Action.targets.self || restrictions == Action.targetRestrictions.self) {
+            callback(null);
+            return;
+        }
+
         int playerNumber = player == data.player1 ? 1 : 2;
         disableTargeting();
         enableTargetingOnTargets(playerNumber, targetType, restrictions, blockedByFrontline);
