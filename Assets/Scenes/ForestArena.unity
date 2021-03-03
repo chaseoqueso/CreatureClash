@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff22415aa24768f47a18c53adbdfe9b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 11400000, guid: 757e5e9a96a1c2f4cb076bc099e230d5, type: 2}
+  playerObject: {fileID: 0}
   deck: []
   playerNumber: 0
   currentHealth: 0
@@ -2587,7 +2587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff22415aa24768f47a18c53adbdfe9b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 11400000, guid: 757e5e9a96a1c2f4cb076bc099e230d5, type: 2}
+  playerObject: {fileID: 0}
   deck: []
   playerNumber: 0
   currentHealth: 0

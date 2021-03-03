@@ -46,6 +46,7 @@ public class Player : MonoBehaviour, ITargetable
 
     void Start()
     {
+        Debug.Log(playerObject);
         currentHealth = maxHealth = playerObject.baseHealth;
         material.mainTexture = playerObject.characterSprite;
 

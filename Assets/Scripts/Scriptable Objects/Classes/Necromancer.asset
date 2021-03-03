@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Vladimir
   characterClass: The Necromancer
-  characterSprite: {fileID: 21300000, guid: 0e6563b402164f0419394ab05e2e43fd, type: 3}
+  characterSprite: {fileID: 2800000, guid: 0e6563b402164f0419394ab05e2e43fd, type: 3}
   baseHealth: 100
   baseDef: 0
   baseDamage: 10
