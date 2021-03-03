@@ -80,6 +80,8 @@ public class SpellbookMenu : MonoBehaviour
 
         // Set values -> make sure this doesn't have to come before SetActive(false)
         clearSpellbook();
+
+        GameManager.Instance.resetTargeting();
     }
 
     public void openSpellbook(Player player, List<int> creatureUsedIndexes)
