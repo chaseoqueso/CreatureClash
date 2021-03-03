@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class AbilityUIManager : MonoBehaviour
 {
-    public static bool actionSelectIsActive = false;
     public GameObject actionSelectUI;
 
     public GameObject abilityUIPanelPrefab;
@@ -24,7 +23,6 @@ public class AbilityUIManager : MonoBehaviour
     public void openActionSelectUI(Creature c)
     {
         actionSelectUI.SetActive(true);
-        actionSelectIsActive = true;
         creature = c;
         setActionUIValues();
     }
@@ -32,7 +30,6 @@ public class AbilityUIManager : MonoBehaviour
     public void closeActionSelectUI()
     {
         actionSelectUI.SetActive(false);
-        actionSelectIsActive = false;
 
         // Delete all panels
         foreach(GameObject panel in abilityUIPanels){

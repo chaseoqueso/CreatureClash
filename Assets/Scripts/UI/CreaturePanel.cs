@@ -8,7 +8,6 @@ public class CreaturePanel : MonoBehaviour
 {
     public Player player;
     public int index;
-    public int currentMana;
 
     public int creatureCostValue;
 
@@ -42,9 +41,9 @@ public class CreaturePanel : MonoBehaviour
         creatureDEF.text = creature.BaseDefense() + "";
         creatureSPD.text = creature.BaseSpeed() + "";
 
-        // if( creatureCostValue > currentMana ){
-        //     setInteractable(false);
-        // }
+        if( creatureCostValue > player.actionPoints ){
+            setInteractable(false);
+        }
     }
 
     public void setInteractable(bool setActive)

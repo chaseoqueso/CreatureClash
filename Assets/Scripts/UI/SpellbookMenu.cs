@@ -6,13 +6,12 @@ using TMPro;
 
 public class SpellbookMenu : MonoBehaviour
 {
-    public static bool spellbookIsActive = false;
     public GameObject spellbookUI;
 
     public GameObject creaturePanelPrefab;
 
     public TMP_Text currentMana;
-    public int manaValue;
+    [HideInInspector] public int manaValue;
 
 
     private Player currentPlayer;
@@ -25,7 +24,6 @@ public class SpellbookMenu : MonoBehaviour
         creaturePanels = new List<GameObject>();
 
         spellbookUI.SetActive(false);
-        spellbookIsActive = false;
     }
 
     private void assignCreatureValues(List<int> indexes)
@@ -43,10 +41,9 @@ public class SpellbookMenu : MonoBehaviour
                 CreaturePanel panel = creaturePanel.GetComponent<CreaturePanel>();
 
                 // Set the UI values in the creature panel
-                panel.setUIValues(creature);
                 panel.player = currentPlayer;
                 panel.index = i;
-                panel.currentMana = manaValue;
+                panel.setUIValues(creature);
 
                 // If already used, set the button to not interactable
                 if( indexes.Contains(i) ){
@@ -79,7 +76,6 @@ public class SpellbookMenu : MonoBehaviour
     public void closeSpellbook()
     {
         spellbookUI.SetActive(false);
-        spellbookIsActive = false;
         // Play animation
 
         // Set values -> make sure this doesn't have to come before SetActive(false)
@@ -97,6 +93,5 @@ public class SpellbookMenu : MonoBehaviour
 
         // Play animation
         spellbookUI.SetActive(true);
-        spellbookIsActive = true;
     }
 }
