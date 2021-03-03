@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
 
     public void startGame(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name == "ChaseScene") {
+        if(scene.name == "ForestScene") {
             data = DataManager.Instance;
 
             turnCount = 1;
