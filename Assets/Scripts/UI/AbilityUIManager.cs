@@ -45,8 +45,8 @@ public class AbilityUIManager : MonoBehaviour
     {
         List<Action> actionList = creature.getActionList();
 
-        float xPos = creature.transform.position.x;
-        float yPos = creature.transform.position.y;
+        float xPos = 500; // creature.transform.position.x;
+        float yPos = 800; // creature.transform.position.y;
         // float panelSize = abilityUIPanelHeight;
 
         for(int i = 0; i < actionList.Count; i++){
