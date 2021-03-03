@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -120,6 +121,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += startGame;
     }
 
     void OnDestroy()
@@ -127,20 +129,22 @@ public class GameManager : MonoBehaviour
         Instance = null;
     }
 
-    public void startGame()
+    public void startGame(Scene scene, LoadSceneMode mode)
     {
-        data = DataManager.Instance;
+        if(scene.name == "ChaseScene") {
+            data = DataManager.Instance;
 
-        turnCount = 1;
-        data.player1.actionPoints = data.player2.actionPoints = turnCount + 2;
-        currentTurn = Turn.player1;
-        data.player1.playerObject = player1Object;
-        data.player2.playerObject = player2Object;
-        data.player1.enableTargeting = true;
-        data.player2.enableTargeting = false;
-        data.player1.playerNumber = 1;
-        data.player2.playerNumber = 2;
-        updateUI();
+            turnCount = 1;
+            data.player1.actionPoints = data.player2.actionPoints = turnCount + 2;
+            currentTurn = Turn.player1;
+            data.player1.playerObject = player1Object;
+            data.player2.playerObject = player2Object;
+            data.player1.enableTargeting = true;
+            data.player2.enableTargeting = false;
+            data.player1.playerNumber = 1;
+            data.player2.playerNumber = 2;
+            updateUI();
+        }
     }
 
     public void progressTurn()

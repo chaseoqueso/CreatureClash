@@ -36,7 +36,7 @@ public class DataManager : MonoBehaviour
     public AbilityUIManager abilityUI;
     public Text turnText;
 
-    void Start()
+    void Awake()
     {
         DataManager.Instance = this;
     }
