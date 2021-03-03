@@ -73,7 +73,7 @@ public class Action
 
         // Status Effect struct w/ default values
         public statusEffect status = new statusEffect{statusType = statusEffectType.none,
-                                                    modifierValue = 0, modifierMult = 0, effectDuration = 1};            // only used if type == status
+                                                    modifierValue = 0, modifierMult = 1, effectDuration = 1};            // only used if type == status
 
         // Health or damage number
         public float hpValue = 0;                   // 0 if type == status

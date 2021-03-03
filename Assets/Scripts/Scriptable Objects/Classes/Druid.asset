@@ -21,7 +21,11 @@ MonoBehaviour:
   flavorText: Druid flavor text
   creatureDeck:
   - creatureType: {fileID: 11400000, guid: e58f4d046af814a478f9118256391a92, type: 2}
-    quantity: 15
+    quantity: 14
+  - creatureType: {fileID: 11400000, guid: 746b46311ca0914459760f131bbccaa0, type: 2}
+    quantity: 10
+  - creatureType: {fileID: 11400000, guid: c38eae27401d3664caa2af8d5f765812, type: 2}
+    quantity: 6
   actions:
   - actionName: Mend
     description: Heal target creature for 5 health.
@@ -72,9 +76,43 @@ MonoBehaviour:
         hpMulti: 0
     manaCost: 3
   - actionName: Nature's Blessing
-    description: 
+    description: Strengthen all allied creatures with raw primordial power, increasing
+      health and maximum health by 10%, increasing attack by 20%, and reducing speed
+      by 40% for 1 turn.
     actionIcon: {fileID: 0}
-    actionEffectGroups: []
+    actionEffectGroups:
+    - groupName: Allied Creatures
+      targetType: 10
+      targetRestriction: 2
+      blockedByFrontline: 0
+      groupEffects:
+      - effectName: Health Up
+        type: 2
+        status:
+          statusType: 3
+          modifierValue: 0
+          modifierMult: 1.1
+          effectDuration: 0
+        hpValue: 0
+        hpMulti: 0
+      - effectName: 
+        type: 2
+        status:
+          statusType: 0
+          modifierValue: 0
+          modifierMult: 0
+          effectDuration: 0
+        hpValue: 0
+        hpMulti: 0
+      - effectName: 
+        type: 2
+        status:
+          statusType: 0
+          modifierValue: 0
+          modifierMult: 0
+          effectDuration: 0
+        hpValue: 0
+        hpMulti: 0
     manaCost: 0
   characterPortrait: {fileID: 0}
   challengeDialogue: []

@@ -300,7 +300,9 @@ public class Creature : MonoBehaviour, ITargetable
                 currentDamage = currentDamage * status.modifierMult + status.modifierValue;
             }
             else if( status.statusType == Action.statusEffectType.maxHealth ){
-                currentMaxHP = currentMaxHP * status.modifierMult + status.modifierValue;
+                float newMaxHP = currentMaxHP * status.modifierMult + status.modifierValue;
+                currentHealth += newMaxHP - currentMaxHP;
+                currentMaxHP = newMaxHP;
                 if( currentHealth > currentMaxHP ){
                     currentHealth = currentMaxHP;
                 }
@@ -324,6 +326,7 @@ public class Creature : MonoBehaviour, ITargetable
             currentDamage = creature.BaseDamage();
         }
         else if( status.statusType == Action.statusEffectType.maxHealth ){
+            currentHealth += creature.MaxHealth() - currentMaxHP;
             currentMaxHP = creature.MaxHealth();
             if( currentHealth > currentMaxHP ){
                 currentHealth = currentMaxHP;
