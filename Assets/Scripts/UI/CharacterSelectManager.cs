@@ -19,6 +19,7 @@ public class CharacterSelectManager : MonoBehaviour
 
     public void PlayGame()
     {
+        //Destroy(gameObject);
         if( readyP1 && readyP2 ){
             // Start game
             SceneManager.LoadScene("ForestArena");
@@ -28,7 +29,7 @@ public class CharacterSelectManager : MonoBehaviour
 
     public void LoadMenu()
     {
-        //SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu");
         Debug.Log("Loading menu...");
     }
 }
