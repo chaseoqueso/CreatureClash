@@ -11,7 +11,6 @@ public class PlayerObject : ScriptableObject
     public Sprite characterSprite;
     public float baseHealth;
     public float baseDef;
-    public float baseSpeed;
     public float baseDamage;
 
     [TextArea(3, 10)]
@@ -28,7 +27,7 @@ public class PlayerObject : ScriptableObject
     public List<creatureAmount> creatureDeck;
 
     // Actions (spells & stuff) that the player character can do (besides summoning)
-    [SerializeField] private List<Action> actions;
+    [SerializeField] private List<PlayerAction> actions;
 
 
     // Character portrait image (for dialogue)

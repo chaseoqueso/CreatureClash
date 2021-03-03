@@ -51,11 +51,11 @@ public class Action
     }
 
     [System.Serializable]
-    public struct statusEffect{
+    public class statusEffect{
         public statusEffectType statusType;
 
-        public float modifierValue;         // flat mod; 0 if no mod
-        public float modifierMult;          // % mod; 1 if no mult mod
+        public float modifierValue = 0;         // flat mod; 0 if no mod
+        public float modifierMult = 1;          // % mod; 1 if no mult mod
 
         // Status effect duration (in # of turns)
         public int effectDuration;
@@ -76,8 +76,8 @@ public class Action
                                                     modifierValue = 0, modifierMult = 0, effectDuration = 1};            // only used if type == status
 
         // Health or damage number
-        public float hpValue = 0;                 // 0 if type == status
-        public float damageMulti = 1;             // Only used for damage
+        public float hpValue = 0;                   // 0 if type == status
+        public float hpMulti = 1;                   // 0 for no heal, 1 for no damage
     }
     // EffectGroup class
     [System.Serializable]

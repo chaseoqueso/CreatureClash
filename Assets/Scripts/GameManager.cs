@@ -90,6 +90,14 @@ public class GameManager : MonoBehaviour
                 GameManager.Instance.data.p2Back.setStatusEffect(effect);
             }
         }
+
+        public void updateStatusEffects()
+        {
+            GameManager.instance.data.p1Front.updateStatusEffects();
+            GameManager.instance.data.p1Back.updateStatusEffects();
+            GameManager.instance.data.p2Front.updateStatusEffects();
+            GameManager.instance.data.p2Back.updateStatusEffects();
+        }
     }
 
     public delegate void targetCallback(ITargetable target);
@@ -165,6 +173,12 @@ public class GameManager : MonoBehaviour
                 data.p2Back.removeSummoningSickness();
                 data.player1.drawCardsUntilFull();
                 data.player2.drawCardsUntilFull();
+                data.player1.updateStatusEffects();
+                data.player2.updateStatusEffects();
+                data.p1Front.updateStatusEffects();
+                data.p1Back.updateStatusEffects();
+                data.p2Front.updateStatusEffects();
+                data.p2Back.updateStatusEffects();
                 resetTargeting();
 
                 Debug.Log("Resolve attacks end, player 1 turn start");
@@ -235,7 +249,7 @@ public class GameManager : MonoBehaviour
                     break;
 
                 case ITargetable.TargetType.creature:
-                    ((Creature)target).selectTargetsForAction(0);
+                    data.abilityUI.openActionSelectUI((Creature)target);
                     break;
             }
             Debug.Log("Object Clicked: " + target);

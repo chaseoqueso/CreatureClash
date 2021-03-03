@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, ITargetable
 {
-    public class SummonAction : Action {
+    public class SummonAction : PlayerAction {
         public int creatureIndex;
         public RowManager summonRow;
 
@@ -22,13 +22,12 @@ public class Player : MonoBehaviour, ITargetable
     [HideInInspector] public float currentHealth;
     [HideInInspector] public float maxHealth;
     [HideInInspector] public float currentDef;
-    [HideInInspector] public float currentSpeed;
     [HideInInspector] public float currentDamage;
 
     [HideInInspector] public int actionPoints;
     [HideInInspector] public bool enableTargeting;
     [HideInInspector] public List<CreatureObject> cardsInHand;
-    [HideInInspector] public List<Action> queuedActions;
+    [HideInInspector] public List<PlayerAction> queuedActions;
     [HideInInspector] public List<List<List<ITargetable>>> queuedTargets;
     [HideInInspector] public Dictionary<Action.statusEffect, int> activeEffects;
 
@@ -42,7 +41,7 @@ public class Player : MonoBehaviour, ITargetable
         currentHealth = maxHealth = 100;
         material = GetComponent<Renderer>().material;
         col = GetComponent<Collider2D>();
-        queuedActions = new List<Action>();
+        queuedActions = new List<PlayerAction>();
         queuedTargets = new List<List<List<ITargetable>>>();
 
         cardsInHand = new List<CreatureObject>();
@@ -106,6 +105,19 @@ public class Player : MonoBehaviour, ITargetable
         return ret;
     }
 
+    public void queueAction(PlayerAction action, List<List<ITargetable>> targets)
+    {
+        if(action.manaCost > actionPoints)
+        {
+            Debug.LogError("Jen didn't do her job.");
+            return;
+        }
+
+        queuedActions.Add(action);
+        queuedTargets.Add(null);
+        actionPoints -= action.manaCost;
+    }
+
     public void summonCreature(int index)
     {
         void summonInRow(ITargetable target) {
@@ -115,16 +127,9 @@ public class Player : MonoBehaviour, ITargetable
                 return;
             }
             
-            int manaCost = cardsInHand[index].ManaCost();
-            if(manaCost > actionPoints)
-            {
-                Debug.LogError("Jen didn't do her job.");
-                return;
-            }
-
-            queuedActions.Add(new SummonAction(index, (RowManager) target));
-            queuedTargets.Add(null);
-            actionPoints -= manaCost;
+            SummonAction summon = new SummonAction(index, (RowManager) target);
+            summon.manaCost = cardsInHand[index].ManaCost();
+            queueAction(summon, null);
         }
 
         GameManager.Instance.performAfterTargetSelect(this, Action.targets.eitherRow, Action.targetRestrictions.allies, false, summonInRow);
@@ -259,10 +264,8 @@ public class Player : MonoBehaviour, ITargetable
             if(activeEffects.ContainsKey(status)){
                 return;
             }
+
             // Set affected status value
-            if( status.statusType == Action.statusEffectType.speed ){
-                currentSpeed = currentSpeed * status.modifierMult + status.modifierValue;
-            }
             else if( status.statusType == Action.statusEffectType.defense ){
                 currentDef = currentDef * status.modifierMult + status.modifierValue;
             }
@@ -284,10 +287,7 @@ public class Player : MonoBehaviour, ITargetable
             return;
         }
         // Return affected status value to base
-        if( status.statusType == Action.statusEffectType.speed ){
-            currentSpeed = playerObject.baseSpeed;
-        }
-        else if( status.statusType == Action.statusEffectType.defense ){
+        if( status.statusType == Action.statusEffectType.defense ){
             currentDef = playerObject.baseDef;
         }
         else if( status.statusType == Action.statusEffectType.damage ){

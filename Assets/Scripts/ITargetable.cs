@@ -15,4 +15,5 @@ public interface ITargetable
     List<ITargetable> getTargets();
     void updateCurrentHealth(float num);
     void setStatusEffect(Action.statusEffect status);
+    void updateStatusEffects();
 }

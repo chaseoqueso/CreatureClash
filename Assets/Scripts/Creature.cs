@@ -242,14 +242,14 @@ public class Creature : MonoBehaviour, ITargetable
                 else if(effect.type == Action.effectType.damage){
                     foreach( ITargetable target in targets ){
                         if(target != null)
-                            target.updateCurrentHealth(currentDamage * effect.damageMulti - effect.hpValue);
+                            target.updateCurrentHealth(currentDamage * effect.hpMulti - effect.hpValue);
                     }
                 }
                 // If heal, adjust hp of affected targets
                 else{       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
                     foreach( ITargetable target in targets ){
                         if(target != null)
-                            target.updateCurrentHealth(effect.hpValue);
+                            target.updateCurrentHealth(currentMaxHP * effect.hpMulti - effect.hpValue);
                     }
                 }
             }
@@ -344,8 +344,8 @@ public class Creature : MonoBehaviour, ITargetable
                 performHealthOverTimeEffect(effect);
             }
 
-            // If the duration is 0, remove the effect
-            if(activeEffects[effect] <= 0){
+            // If the duration is 0, the status will be removed at the end of the current turn
+            if(activeEffects[effect] < 0){
                 toggleStatusEffect(effect, false);
                 activeEffects.Remove(effect);
             }

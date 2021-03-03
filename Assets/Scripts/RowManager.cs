@@ -150,4 +150,12 @@ public class RowManager : MonoBehaviour, ITargetable
             c.setStatusEffect(status);
         }
     }
+
+    public void updateStatusEffects()
+    {
+        foreach(Creature c in creatures)
+        {
+            c.updateStatusEffects();
+        }
+    }
 }
