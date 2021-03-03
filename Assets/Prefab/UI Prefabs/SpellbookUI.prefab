@@ -332,7 +332,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1406638472713912841}
         m_TargetAssemblyTypeName: SpellbookMenu, Assembly-CSharp
-        m_MethodName: closeSpellbook
+        m_MethodName: backButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

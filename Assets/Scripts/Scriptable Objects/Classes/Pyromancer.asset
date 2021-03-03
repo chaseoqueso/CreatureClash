@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Ash
   characterClass: The Pyromancer
-  characterSprite: {fileID: 0}
+  characterSprite: {fileID: 2800000, guid: aa69eab8e62b3da48a3756c571cafaea, type: 3}
   baseHealth: 0
   baseDef: 0
   baseDamage: 0
-  flavorText: 
+  flavorText: DON'T PICK THIS CLASS it breaks things right now :)
   creatureDeck: []
   actions: []
   characterPortrait: {fileID: 0}

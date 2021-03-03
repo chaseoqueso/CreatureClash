@@ -18,7 +18,12 @@ MonoBehaviour:
   baseHealth: 100
   baseDef: 0
   baseDamage: 10
-  flavorText: Druid flavor text
+  flavorText: 'Pick this class! It''s not broken (as far as we know)
+
+
+    UPDATE:
+    don''t use Theodore''s ability, it breaks things. Besides that, this class is
+    fine!'
   creatureDeck:
   - creatureType: {fileID: 11400000, guid: e58f4d046af814a478f9118256391a92, type: 2}
     quantity: 14

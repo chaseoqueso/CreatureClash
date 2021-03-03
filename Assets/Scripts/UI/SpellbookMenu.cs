@@ -80,7 +80,14 @@ public class SpellbookMenu : MonoBehaviour
 
         // Set values -> make sure this doesn't have to come before SetActive(false)
         clearSpellbook();
+    }
 
+    public void backButton()
+    {
+        spellbookUI.SetActive(false);
+        //Play animation
+
+        clearSpellbook();
         GameManager.Instance.resetTargeting();
     }
 

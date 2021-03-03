@@ -18,7 +18,7 @@ MonoBehaviour:
   baseHealth: 100
   baseDef: 0
   baseDamage: 10
-  flavorText: Necromancer description
+  flavorText: DON'T PICK THIS CLASS it breaks things right now :)
   creatureDeck:
   - creatureType: {fileID: 11400000, guid: 63e2d9d3a35ffd3459cde1479abcabf5, type: 2}
     quantity: 14
