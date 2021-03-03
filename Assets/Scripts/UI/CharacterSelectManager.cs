@@ -21,7 +21,7 @@ public class CharacterSelectManager : MonoBehaviour
     {
         if( readyP1 && readyP2 ){
             // Start game
-            SceneManager.LoadScene("ChaseScene");
+            SceneManager.LoadScene("ForestArena");
             Debug.Log("Start Game");
         }
     }

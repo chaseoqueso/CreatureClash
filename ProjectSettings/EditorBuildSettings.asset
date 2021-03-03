@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/UI Scenes/CharacterSelectMenu.unity
     guid: 733112352d2d94f46a796e3b4e35fc47
   - enabled: 1
-    path: Assets/Scenes/ChaseScene.unity
-    guid: 03149d26af6baac419cab3a08df45c8e
+    path: Assets/Scenes/ForestArena.unity
+    guid: a9df7ada5eb1ba74b859a60838d74250
   m_configObjects: {}
