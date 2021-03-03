@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Vladimir
   characterClass: The Necromancer
-  characterSprite: {fileID: 2800000, guid: 0e6563b402164f0419394ab05e2e43fd, type: 3}
+  characterSprite: {fileID: 2800000, guid: f16e981fd0b6cf54eb22c5152c856ed6, type: 3}
   baseHealth: 100
   baseDef: 0
   baseDamage: 10
-  flavorText: DON'T PICK THIS CLASS it breaks things right now :)
+  flavorText: Necromancer description
   creatureDeck:
   - creatureType: {fileID: 11400000, guid: 63e2d9d3a35ffd3459cde1479abcabf5, type: 2}
     quantity: 14

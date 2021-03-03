@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PyromancerFox
   m_EditorClassIdentifier: 
   creatureName: Fire Fox
-  manaCost: 5
+  manaCost: 3
   flavorText: Fire Fox description
   maxHealth: 16
   baseDamage: 8
