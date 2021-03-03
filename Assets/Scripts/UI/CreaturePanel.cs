@@ -42,9 +42,9 @@ public class CreaturePanel : MonoBehaviour
         creatureDEF.text = creature.BaseDefense() + "";
         creatureSPD.text = creature.BaseSpeed() + "";
 
-        if( creatureCostValue > currentMana ){
-            setInteractable(false);
-        }
+        // if( creatureCostValue > currentMana ){
+        //     setInteractable(false);
+        // }
     }
 
     public void setInteractable(bool setActive)
