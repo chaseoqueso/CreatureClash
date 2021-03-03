@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8045e0012911d948b453104250524ca, type: 3}
+  m_Name: PyromancerPhoenix
+  m_EditorClassIdentifier: 
+  creatureName: Phoenix
+  manaCost: 3
+  flavorText: Phoenix description
+  maxHealth: 35
+  baseDamage: 10
+  baseDefense: 50
+  baseSpeed: 70
+  texture: {fileID: 2800000, guid: 5b26f4957af58664ab3979e4d798fd3b, type: 3}
+  heightMap: {fileID: 0}
+  actions:
+  - actionName: Ember's Fury
+    description: Phoenix unleashes a fire storm upon a targetted row, dealing 5 damage.
+      That row is <color=#AA0000>Burned</color> for the next two rounds, dealing
+      2 damage each round.
+    actionIcon: {fileID: 0}
+    actionEffectGroups:
+    - groupName: DMG Target
+      targetType: 9
+      targetRestriction: 0
+      blockedByFrontline: 0
+      groupEffects:
+      - effectName: DMG
+        type: 0
+        status:
+          statusType: 0
+          modifierValue: 0
+          modifierMult: 0
+          effectDuration: 0
+        hpValue: 5
+        hpMulti: -1
+      - effectName: Burn Effect
+        type: 2
+        status:
+          statusType: 4
+          modifierValue: -2
+          modifierMult: 0
+          effectDuration: 2
+        hpValue: 0
+        hpMulti: 0

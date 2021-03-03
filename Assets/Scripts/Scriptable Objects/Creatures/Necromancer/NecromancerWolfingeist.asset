@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8045e0012911d948b453104250524ca, type: 3}
+  m_Name: NecromancerWolfingeist
+  m_EditorClassIdentifier: 
+  creatureName: "W\xF6lfingeist"
+  manaCost: 3
+  flavorText: "W\xF6lfingeist description"
+  maxHealth: 18
+  baseDamage: 7
+  baseDefense: 20
+  baseSpeed: 40
+  texture: {fileID: 2800000, guid: bbe7a2c504ca2af4487a020c980d7866, type: 3}
+  heightMap: {fileID: 0}
+  actions:
+  - actionName: Haunting Bite
+    description: "W\xF6lfingeist bites the target creature, dealing 7 damage. The
+      creature is <color=#7f20c7>Frightened</color>, their speed stat lowered by
+      15 for one round. <color=#AA0000><i>Blocked by Frontline</i></color>"
+    actionIcon: {fileID: 0}
+    actionEffectGroups:
+    - groupName: Damage Target
+      targetType: 4
+      targetRestriction: 0
+      blockedByFrontline: 1
+      groupEffects:
+      - effectName: Damage
+        type: 0
+        status:
+          statusType: 0
+          modifierValue: 0
+          modifierMult: 0
+          effectDuration: 0
+        hpValue: 0
+        hpMulti: -1
+      - effectName: Frightened
+        type: 2
+        status:
+          statusType: 1
+          modifierValue: -15
+          modifierMult: 1
+          effectDuration: 1
+        hpValue: 0
+        hpMulti: -1

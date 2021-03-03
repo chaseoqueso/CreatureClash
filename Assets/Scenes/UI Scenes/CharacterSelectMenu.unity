@@ -3282,6 +3282,7 @@ MonoBehaviour:
   characters:
   - {fileID: 11400000, guid: 757e5e9a96a1c2f4cb076bc099e230d5, type: 2}
   - {fileID: 11400000, guid: 55117710624f95d45be0d3584ea35792, type: 2}
+  - {fileID: 11400000, guid: 00c2071512349084789a82b6dd0bfede, type: 2}
   readyP1: 0
   readyP2: 0
 --- !u!1 &1847611830
@@ -4189,18 +4190,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6469323f8bb4244c842f99ba4f615bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 0}
-  player2: {fileID: 0}
+  data: {fileID: 0}
   player1Object: {fileID: 0}
   player2Object: {fileID: 0}
-  p1Front: {fileID: 0}
-  p1Back: {fileID: 0}
-  p2Front: {fileID: 0}
-  p2Back: {fileID: 0}
-  player1UI: {fileID: 0}
-  player2UI: {fileID: 0}
-  spellBook: {fileID: 0}
-  turnText: {fileID: 0}
   turnCount: 0
 --- !u!4 &1991859056
 Transform:
