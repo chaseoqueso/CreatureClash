@@ -100,11 +100,13 @@ public class Creature : MonoBehaviour, ITargetable
         {
             if(target == null)
             {
-
+                List<ITargetable> list = new List<ITargetable>();
+                list.Add(this);
+                targetGroups.Add(list);
             }
             else
             {
-            targetGroups.Add(target.getTargets());
+                targetGroups.Add(target.getTargets());
             }
         }
 
@@ -153,85 +155,92 @@ public class Creature : MonoBehaviour, ITargetable
             {
                 foreach(ITargetable target in currentTargets[i])
                 {
-                    ITargetable newTarget;
-                    switch(target.getTargetType())
+                    if(GameManager.Instance.hasCreatureInFrontRow(target))
                     {
-                        case ITargetable.TargetType.player:
+                        ITargetable newTarget;
+                        switch(target.getTargetType())
+                        {
+                            case ITargetable.TargetType.player:
 
-                            newTarget = GameManager.Instance.selectRandomTargetInFrontline((Player)target);
+                                newTarget = GameManager.Instance.selectRandomTargetInFrontline((Player)target);
 
-                            if(newTarget != null) //if there's a creature in the frontline
-                            {
-                                if(currentEffectGroup.targetType != Action.targets.anySingle) //but the attack can't target the frontline
+                                if(newTarget != null) //if there's a creature in the frontline
                                 {
-                                    targets.Add(null); //the attack misses
+                                    if(currentEffectGroup.targetType != Action.targets.anySingle) //but the attack can't target the frontline
+                                    {
+                                        targets.Add(null); //the attack misses
+                                    }
+                                    else //if the attack can target the frontline, we change from the intended target to the frontline target
+                                    {
+                                        targets.Add(newTarget);
+                                    }
                                 }
-                                else //if the attack can target the frontline, we change from the intended target to the frontline target
+                                else
                                 {
-                                    targets.Add(newTarget);
+                                    targets.Add(target);
                                 }
-                            }
-                            else
-                            {
-                                targets.Add(target);
-                            }
-                            break;
+                                break;
 
-                        case ITargetable.TargetType.creature:
+                            case ITargetable.TargetType.creature:
 
-                            if(GameManager.Instance.creatureIsInFrontRow((Creature)target)) { //If the target is already in the frontline we're chillin
+                                if(GameManager.Instance.creatureIsInFrontRow((Creature)target)) { //If the target is already in the frontline we're chillin
+                                    targets.Add(target);
+                                    break;
+                                }
+
+                                newTarget = GameManager.Instance.selectRandomTargetInFrontline(((Creature)target).player);
+
+                                if(newTarget != null) //if there's a creature in the frontline
+                                {
+                                    if(currentEffectGroup.targetType == Action.targets.backCreature || currentEffectGroup.targetType == Action.targets.backSingle) //but the attack can't target the frontline
+                                    {
+                                        targets.Add(null); //the attack misses
+                                    }
+                                    else //if the attack can target the frontline, we change from the intended target to the frontline target
+                                    {
+                                        targets.Add(newTarget);
+                                    }
+                                }
+                                else
+                                {
+                                    targets.Add(target);
+                                }
+                                break;
+
+                            case ITargetable.TargetType.row:
+
+                                if(GameManager.Instance.rowIsFrontRow((RowManager)target)) { //If the target is already in the frontline we're chillin
+                                    targets.Add(target);
+                                    break;
+                                }
+
+                                newTarget = GameManager.Instance.selectFrontRowFromBackRow(((RowManager)target));
+
+                                if(newTarget != null) //if our row is in fact the back row (which it should be)
+                                {
+                                    if(currentEffectGroup.targetType == Action.targets.backRow) //but the attack can't target the frontline
+                                    {
+                                        targets.Add(null); //the attack misses
+                                    }
+                                    else //if the attack can target the frontline, we change from the intended target to the frontline target
+                                    {
+                                        targets.Add(newTarget);
+                                    }
+                                }
+                                else
+                                {
+                                    targets.Add(target);
+                                }
+                                break;
+
+                            default:
                                 targets.Add(target);
                                 break;
-                            }
-
-                            newTarget = GameManager.Instance.selectRandomTargetInFrontline(((Creature)target).player);
-
-                            if(newTarget != null) //if there's a creature in the frontline
-                            {
-                                if(currentEffectGroup.targetType == Action.targets.backCreature || currentEffectGroup.targetType == Action.targets.backSingle) //but the attack can't target the frontline
-                                {
-                                    targets.Add(null); //the attack misses
-                                }
-                                else //if the attack can target the frontline, we change from the intended target to the frontline target
-                                {
-                                    targets.Add(newTarget);
-                                }
-                            }
-                            else
-                            {
-                                targets.Add(target);
-                            }
-                            break;
-
-                        case ITargetable.TargetType.row:
-
-                            if(GameManager.Instance.rowIsFrontRow((RowManager)target)) { //If the target is already in the frontline we're chillin
-                                targets.Add(target);
-                                break;
-                            }
-
-                            newTarget = GameManager.Instance.selectFrontRowFromBackRow(((RowManager)target));
-
-                            if(newTarget != null) //if our row is in fact the back row (which it should be)
-                            {
-                                if(currentEffectGroup.targetType == Action.targets.backRow) //but the attack can't target the frontline
-                                {
-                                    targets.Add(null); //the attack misses
-                                }
-                                else //if the attack can target the frontline, we change from the intended target to the frontline target
-                                {
-                                    targets.Add(newTarget);
-                                }
-                            }
-                            else
-                            {
-                                targets.Add(target);
-                            }
-                            break;
-
-                        default:
-                            targets.Add(target);
-                            break;
+                        }
+                    }
+                    else
+                    {
+                        targets.Add(target);
                     }
                 }
             }
@@ -251,11 +260,11 @@ public class Creature : MonoBehaviour, ITargetable
                             target.updateCurrentHealth(currentDamage * effect.hpMulti + effect.hpValue);
                     }
                 }
-                // If heal, adjust hp of affected targets
+                // If heal, adjust hp of affected targets NOTE: THIS WILL BREAK IF ANYTHING TRIES TO HEAL A PLAYER
                 else{       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
-                    foreach( ITargetable target in targets ){
+                    foreach( Creature target in targets ){
                         if(target != null)
-                            target.updateCurrentHealth(currentMaxHP * effect.hpMulti + effect.hpValue);
+                            target.updateCurrentHealth(target.currentMaxHP * effect.hpMulti + effect.hpValue);
                     }
                 }
             }

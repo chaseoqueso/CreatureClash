@@ -122,8 +122,35 @@ public class Player : MonoBehaviour, ITargetable
         }
 
         queuedActions.Add(action);
-        queuedTargets.Add(null);
+        queuedTargets.Add(targets);
         actionPoints -= action.manaCost;
+    }
+
+    public void queueSpell(int index)
+    {
+        List<List<ITargetable>> targetGroups = new List<List<ITargetable>>();
+
+        void setActionCallback(ITargetable target)
+        {
+            if(target == null)
+            {
+                List<ITargetable> list = new List<ITargetable>();
+                list.Add(this);
+                targetGroups.Add(list);
+            }
+            else
+            {
+                targetGroups.Add(target.getTargets());
+            }
+        }
+
+        PlayerAction action = playerObject.actions[index];
+
+        foreach(Action.EffectGroup group in action.actionEffectGroups) {
+            GameManager.Instance.performAfterTargetSelect(this, group.targetType, group.targetRestriction, group.blockedByFrontline, setActionCallback);
+        }
+            
+        queueAction(action, targetGroups);
     }
 
     public void summonCreature(int index)

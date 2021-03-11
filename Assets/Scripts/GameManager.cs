@@ -312,6 +312,38 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
+    public bool hasCreatureInFrontRow(ITargetable target)
+    {
+        switch(target.getTargetType())
+        {
+            case ITargetable.TargetType.player:
+                Player p = (Player)target;
+                if(p == data.player1 && data.p1Front.creatures.Count > 0)
+                    return true;
+                if(p == data.player2 && data.p2Front.creatures.Count > 0)
+                    return true;
+                return false;
+                
+            case ITargetable.TargetType.row:
+                RowManager r = (RowManager)target;
+                if((r == data.p1Back || r == data.p1Front) && data.p1Front.creatures.Count > 0)
+                    return true;
+                if((r == data.p2Back || r == data.p2Front) && data.p2Front.creatures.Count > 0)
+                    return true;
+                return false;
+                
+            case ITargetable.TargetType.creature:
+                Creature c = (Creature)target;
+                if(c.player == data.player1 && data.p1Front.creatures.Count > 0)
+                    return true;
+                if(c.player == data.player2 && data.p2Front.creatures.Count > 0)
+                    return true;
+                return false;
+                
+            default: return false;
+        }
+    }
+
     public void updateUI()
     {
         switch(currentTurn)
