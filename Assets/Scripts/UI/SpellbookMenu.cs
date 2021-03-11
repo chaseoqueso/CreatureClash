@@ -97,6 +97,12 @@ public class SpellbookMenu : MonoBehaviour
             Destroy(panel);
         }
         creaturePanels.Clear();
+
+        // Delete all spell panels
+        foreach(GameObject panel in spellPanels){
+            Destroy(panel);
+        }
+        spellPanels.Clear();
     }
 
     public void closeSpellbook()
