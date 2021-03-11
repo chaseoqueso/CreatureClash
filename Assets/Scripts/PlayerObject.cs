@@ -27,7 +27,7 @@ public class PlayerObject : ScriptableObject
     public List<creatureAmount> creatureDeck;
 
     // Actions (spells & stuff) that the player character can do (besides summoning)
-    [SerializeField] private List<PlayerAction> actions;
+    [SerializeField] public List<PlayerAction> actions;
 
 
     // Character portrait image (for dialogue)

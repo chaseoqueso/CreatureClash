@@ -2152,6 +2152,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpellbookUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1406638472713912841, guid: 7880b9c2fa967524f809c4ba7b6921aa, type: 3}
+      propertyPath: spellPanelPrefab
+      value: 
+      objectReference: {fileID: 573606999981153515, guid: 44c65bed363951640bfed0c60275494c, type: 3}
     - target: {fileID: 1406638472713912844, guid: 7880b9c2fa967524f809c4ba7b6921aa, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

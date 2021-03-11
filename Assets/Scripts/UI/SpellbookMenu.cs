@@ -9,19 +9,23 @@ public class SpellbookMenu : MonoBehaviour
     public GameObject spellbookUI;
 
     public GameObject creaturePanelPrefab;
+    public GameObject spellPanelPrefab;
 
     public TMP_Text currentMana;
     [HideInInspector] public int manaValue;
 
-
     private Player currentPlayer;
     private List<GameObject> creaturePanels;
+    private List<GameObject> spellPanels;
 
+    public float yPosValue = 800;
+    public float yPosValueDecrease = 200;
 
 
     void Start()
     {
         creaturePanels = new List<GameObject>();
+        spellPanels = new List<GameObject>();
 
         spellbookUI.SetActive(false);
     }
@@ -30,7 +34,7 @@ public class SpellbookMenu : MonoBehaviour
     {
         // Loop through up to four creature panels and assign values
         if( currentPlayer.cardsInHand.Count != 0 ){
-            float yPos = 800;
+            float yPos = yPosValue;
             int i = 0;
             foreach(CreatureObject creature in currentPlayer.cardsInHand){
                 // Create the creature panel
@@ -51,7 +55,7 @@ public class SpellbookMenu : MonoBehaviour
                 }
             
                 // Decrease yPos for next creature panel
-                yPos -= 200;
+                yPos -= yPosValueDecrease;
                 i++;
             }
             return;
@@ -61,7 +65,29 @@ public class SpellbookMenu : MonoBehaviour
 
     private void assignSpellValues()
     {
+        List<PlayerAction> actions = currentPlayer.playerObject.actions;
+        float yPos = yPosValue;
 
+        // Loop through all of this player's spells and display the spell data
+        for(int i = 0; i < actions.Count; i++){
+            // Get current spell
+            PlayerAction a = actions[i];
+
+            // Create the panel
+            GameObject spellPanel = Instantiate(spellPanelPrefab, new Vector3(0, 0, 0), Quaternion.identity, transform);
+            spellPanel.transform.position = new Vector3(1410, yPos, 0);
+            spellPanels.Add(spellPanel);
+
+            SpellPanel panel = spellPanel.GetComponent<SpellPanel>();
+
+            // Set the UI values in the panel
+            panel.player = currentPlayer;
+            panel.index = i;
+            panel.setUIValues(a);
+        
+            // Decrease yPos for next panel
+            yPos -= yPosValueDecrease;
+        }
     }
 
     private void clearSpellbook()
