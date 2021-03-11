@@ -66,20 +66,24 @@ public class RowManager : MonoBehaviour, ITargetable
         return creatures.Count > 0;
     }
 
-    public void resetCreatureTargeting()
+    //returns true if the row has at least 1 creature
+    public bool resetCreatureTargeting()
     {
         foreach(Creature c in creatures)
         {
             c.enableTargeting = c.currentAction == null && !c.justSummoned;
         }
+        return creatures.Count > 0;
     }
 
-    public void removeSummoningSickness()
+    //returns true if the row has at least 1 creature
+    public bool removeSummoningSickness()
     {
         foreach(Creature c in creatures)
         {
             c.justSummoned = false;
         }
+        return creatures.Count > 0;
     }
 
     public Creature getRandomCreature()

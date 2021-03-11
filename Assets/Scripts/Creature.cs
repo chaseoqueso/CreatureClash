@@ -57,7 +57,6 @@ public class Creature : MonoBehaviour, ITargetable
 
     void Update()
     {
-        col.enabled = enableTargeting;
         if(enableTargeting)
         {
             material.SetFloat("outlineIntensity", Mathf.Abs(Mathf.Sin(Time.time * 2f)));
@@ -408,12 +407,22 @@ public class Creature : MonoBehaviour, ITargetable
         return temp;
     }
 
-    void OnMouseDown()
+    void OnMouseOver()
     {
-        Debug.Log(enableTargeting);
-        if(!enableTargeting)
-            return;
-        
-        GameManager.Instance.targetWasClicked(this);
+        if(enableTargeting && Input.GetMouseButtonDown(0)) 
+        {
+            GameManager.Instance.targetWasClicked(this);
+        }
+        else if(Input.GetMouseButtonDown(1))
+        {
+            clearActions();
+        }
+    }
+
+    public void clearActions()
+    {
+        currentAction = null;
+        currentTargets.Clear();
+        GameManager.Instance.resetTargeting();
     }
 }

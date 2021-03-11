@@ -61,7 +61,6 @@ public class Player : MonoBehaviour, ITargetable
 
     void Update()
     {
-        col.enabled = enableTargeting;
         if(enableTargeting)
         {
             material.SetFloat("outlineIntensity", Mathf.Abs(Mathf.Sin(Time.time * 2f)));
@@ -72,12 +71,24 @@ public class Player : MonoBehaviour, ITargetable
         }
     }
 
-    void OnMouseDown()
+    void OnMouseOver()
     {
-        if(!enableTargeting)
-            return;
+        if(enableTargeting && Input.GetMouseButtonDown(0)) 
+        {
+            GameManager.Instance.targetWasClicked(this);
+        }
+        else if(Input.GetMouseButtonDown(1))
+        {
+            clearActions();
+        }
+    }
 
-        GameManager.Instance.targetWasClicked(this);
+    public void clearActions()
+    {
+        queuedActions.Clear();
+        queuedTargets.Clear();
+        actionPoints = GameManager.Instance.turnCount + 2;
+        GameManager.Instance.resetTargeting();
     }
 
     public void drawCardsUntilFull()

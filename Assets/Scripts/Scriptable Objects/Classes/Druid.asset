@@ -92,28 +92,28 @@ MonoBehaviour:
           statusType: 3
           modifierValue: 0
           modifierMult: 1.1
-          effectDuration: 0
+          effectDuration: 1
         hpValue: 0
         hpMulti: 0
-      - effectName: 
+      - effectName: Attack Up
         type: 2
         status:
-          statusType: 0
+          statusType: 2
           modifierValue: 0
-          modifierMult: 0
-          effectDuration: 0
+          modifierMult: 1.2
+          effectDuration: 1
         hpValue: 0
         hpMulti: 0
-      - effectName: 
+      - effectName: Speed Down
         type: 2
         status:
-          statusType: 0
+          statusType: 1
           modifierValue: 0
-          modifierMult: 0
-          effectDuration: 0
+          modifierMult: 0.6
+          effectDuration: 1
         hpValue: 0
         hpMulti: 0
-    manaCost: 0
+    manaCost: 4
   characterPortrait: {fileID: 0}
   challengeDialogue: []
   winDialogue: []

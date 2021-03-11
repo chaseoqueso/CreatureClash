@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        bothRowsTargeting = false;
     }
 
     void Start()
@@ -792,6 +793,7 @@ public class GameManager : MonoBehaviour
         data.p1Back.enableTargeting = false;
         data.p2Front.enableTargeting = false;
         data.p2Back.enableTargeting = false;
+        bothRowsTargeting = false;
 
         if(currentTurn == Turn.player1) {
             data.player1.enableTargeting = data.player1.actionPoints > 0;
