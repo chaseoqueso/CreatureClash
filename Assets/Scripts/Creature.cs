@@ -100,9 +100,7 @@ public class Creature : MonoBehaviour, ITargetable
         {
             if(target == null)
             {
-                List<ITargetable> list = new List<ITargetable>();
-                list.Add(this);
-                targetGroups.Add(list);
+                targetGroups.Add(this.getTargets());
             }
             else
             {

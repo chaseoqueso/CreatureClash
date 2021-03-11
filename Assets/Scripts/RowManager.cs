@@ -56,12 +56,14 @@ public class RowManager : MonoBehaviour, ITargetable
         }
     }
 
-    public void enableCreatureTargeting(bool enable)
+    //returns true if the row has at least 1 creature
+    public bool enableCreatureTargeting(bool enable)
     {
         foreach(Creature c in creatures)
         {
             c.enableTargeting = enable;
         }
+        return creatures.Count > 0;
     }
 
     public void resetCreatureTargeting()

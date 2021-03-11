@@ -193,6 +193,7 @@ public class GameManager : MonoBehaviour
         updateUI();
     }
 
+    //Returns true if there are targets to select, false otherwise
     public void performAfterTargetSelect(Player player, Action.targets targetType, Action.targetRestrictions restrictions, bool blockedByFrontline, targetCallback callback)
     {
         if(player == null)
@@ -208,9 +209,17 @@ public class GameManager : MonoBehaviour
 
         int playerNumber = player == data.player1 ? 1 : 2;
         disableTargeting();
-        enableTargetingOnTargets(playerNumber, targetType, restrictions, blockedByFrontline);
 
-        StartCoroutine(waitForTargetSelect(callback));
+        bool canTarget = enableTargetingOnTargets(playerNumber, targetType, restrictions, blockedByFrontline);
+
+        if(canTarget)
+        {
+            StartCoroutine(waitForTargetSelect(callback));
+        }
+        else
+        {
+            //Do something if there are no valid targets?
+        }
     }
 
     private IEnumerator waitForTargetSelect(targetCallback callback)
@@ -427,10 +436,13 @@ public class GameManager : MonoBehaviour
         progressTurn();
     }
 
-    private void enableTargetingOnTargets(int playerNumber, Action.targets targetType, Action.targetRestrictions restrictions, bool blockedByFrontline)
+    public bool enableTargetingOnTargets(int playerNumber, Action.targets targetType, Action.targetRestrictions restrictions, bool blockedByFrontline)
     {
+        bool validTargetExists = false; //Regardless of the targetType/targetRestrictions combination, we will return true if there is at least 1 target available
+
         switch (targetType) {
             case Action.targets.anySingle:
+                validTargetExists = true; //Player can always target a player
 
                 if(restrictions == Action.targetRestrictions.allies || restrictions == Action.targetRestrictions.none)
                 {
@@ -466,37 +478,43 @@ public class GameManager : MonoBehaviour
                 break;
                 
             case Action.targets.anyCreature:
-
                 if(restrictions == Action.targetRestrictions.allies || restrictions == Action.targetRestrictions.none)
                 {
+                    bool flag;
                     if(playerNumber == 1)
                     {
-                        data.p1Front.enableCreatureTargeting(true);
-                        data.p1Back.enableCreatureTargeting(true);
+                        flag = data.p1Front.enableCreatureTargeting(true)
+                            || data.p1Back.enableCreatureTargeting(true);
                     }
                     else
                     {
-                        data.p2Front.enableCreatureTargeting(true);
-                        data.p2Back.enableCreatureTargeting(true);
+                        flag = data.p2Front.enableCreatureTargeting(true)
+                            || data.p2Back.enableCreatureTargeting(true);
                     }
+
+                    if(flag) validTargetExists = true;
                 }
 
                 if(restrictions == Action.targetRestrictions.enemies || restrictions == Action.targetRestrictions.none)
                 {
+                    bool flag;
                     if(playerNumber == 1)
                     {
-                        data.p2Front.enableCreatureTargeting(true);
-                        data.p2Back.enableCreatureTargeting(true);
+                        flag = data.p2Front.enableCreatureTargeting(true)
+                            || data.p2Back.enableCreatureTargeting(true);
                     }
                     else
                     {
-                        data.p1Front.enableCreatureTargeting(true);
-                        data.p1Back.enableCreatureTargeting(true);
+                        flag = data.p1Front.enableCreatureTargeting(true)
+                            || data.p1Back.enableCreatureTargeting(true);
                     }
+
+                    if(flag) validTargetExists = true;
                 }
                 break;
 
             case Action.targets.backRow:
+                validTargetExists = true; //Player can always target a row, even if no creatures are in it
 
                 if(restrictions == Action.targetRestrictions.allies || restrictions == Action.targetRestrictions.none)
                 {
@@ -527,30 +545,37 @@ public class GameManager : MonoBehaviour
 
                 if(restrictions == Action.targetRestrictions.allies || restrictions == Action.targetRestrictions.none)
                 {
+                    bool flag;
                     if(playerNumber == 1)
                     {
-                        data.p1Back.enableCreatureTargeting(true);
+                        flag = data.p1Back.enableCreatureTargeting(true);
                     }
                     else
                     {
-                        data.p2Back.enableCreatureTargeting(true);
+                        flag = data.p2Back.enableCreatureTargeting(true);
                     }
+
+                    if(flag) validTargetExists = true;
                 }
 
                 if(restrictions == Action.targetRestrictions.enemies || restrictions == Action.targetRestrictions.none)
                 {
+                    bool flag;
                     if(playerNumber == 1)
                     {
-                        data.p2Back.enableCreatureTargeting(true);
+                        flag = data.p2Back.enableCreatureTargeting(true);
                     }
                     else
                     {
-                        data.p1Back.enableCreatureTargeting(true);
+                        flag = data.p1Back.enableCreatureTargeting(true);
                     }
+
+                    if(flag) validTargetExists = true;
                 }
                 break;
                 
             case Action.targets.backSingle:
+                validTargetExists = true; //Player can always target a player
 
                 if(restrictions == Action.targetRestrictions.allies || restrictions == Action.targetRestrictions.none)
                 {
@@ -582,6 +607,7 @@ public class GameManager : MonoBehaviour
                 break;
                 
             case Action.targets.bothRows:
+                validTargetExists = true; //Player can always target a row, even if no creatures are in it
 
                 bothRowsTargeting = true;
                 if(restrictions == Action.targetRestrictions.allies || restrictions == Action.targetRestrictions.none)
@@ -614,6 +640,7 @@ public class GameManager : MonoBehaviour
                 break;
                 
             case Action.targets.eitherRow:
+                validTargetExists = true; //Player can always target a row, even if no creatures are in it
 
                 if(restrictions == Action.targetRestrictions.allies || restrictions == Action.targetRestrictions.none)
                 {
@@ -645,6 +672,7 @@ public class GameManager : MonoBehaviour
                 break;
                 
             case Action.targets.frontRow:
+                validTargetExists = true; //Player can always target a row, even if no creatures are in it
 
                 if(restrictions == Action.targetRestrictions.allies || restrictions == Action.targetRestrictions.none)
                 {
@@ -675,30 +703,37 @@ public class GameManager : MonoBehaviour
 
                 if(restrictions == Action.targetRestrictions.allies || restrictions == Action.targetRestrictions.none)
                 {
+                    bool flag;
                     if(playerNumber == 1)
                     {
-                        data.p1Front.enableCreatureTargeting(true);
+                        flag = data.p1Front.enableCreatureTargeting(true);
                     }
                     else
                     {
-                        data.p2Front.enableCreatureTargeting(true);
+                        flag = data.p2Front.enableCreatureTargeting(true);
                     }
+
+                    if(flag) validTargetExists = true;
                 }
 
                 if(restrictions == Action.targetRestrictions.enemies || restrictions == Action.targetRestrictions.none)
                 {
+                    bool flag;
                     if(playerNumber == 1)
                     {
-                        data.p2Front.enableCreatureTargeting(true);
+                        flag = data.p2Front.enableCreatureTargeting(true);
                     }
                     else
                     {
-                        data.p1Front.enableCreatureTargeting(true);
+                        flag = data.p1Front.enableCreatureTargeting(true);
                     }
+                    
+                    if(flag) validTargetExists = true;
                 }
                 break;
                 
             case Action.targets.player:
+                validTargetExists = true; //Player can always target a player
 
                 if(restrictions == Action.targetRestrictions.allies || restrictions == Action.targetRestrictions.none)
                 {
@@ -725,6 +760,8 @@ public class GameManager : MonoBehaviour
                 }
                 break;
         }
+
+        return validTargetExists;
     }
 
     public ITargetable getParentTarget(ITargetable target)
