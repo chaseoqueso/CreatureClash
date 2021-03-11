@@ -62,7 +62,7 @@ public class SpellPanel : MonoBehaviour
     public void castSpell()
     {
         // Select targets and then queue the action
-        // player.queueSpell(index);
+        player.queueSpell(index);
 
         GetComponentInParent<SpellbookMenu>().closeSpellbook();
     }
