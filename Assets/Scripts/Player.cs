@@ -49,6 +49,7 @@ public class Player : MonoBehaviour, ITargetable
         Debug.Log(playerObject);
         currentHealth = maxHealth = playerObject.baseHealth;
         material.mainTexture = playerObject.characterSprite;
+        transform.localScale = new Vector3(playerObject.characterSprite.width/material.GetFloat("pixelsPerUnit"), playerObject.characterSprite.height/material.GetFloat("pixelsPerUnit"), 1);
 
         loadDeck();
 
@@ -349,19 +350,30 @@ public class Player : MonoBehaviour, ITargetable
     // Updates the duration values for active effects & performs health over time effects
     public void updateStatusEffects()
     {
-        // Loop through all active effects and decrease duration by 1
+        List<Action.statusEffect> effects = new List<Action.statusEffect>();
         foreach( Action.statusEffect effect in activeEffects.Keys ){
+            effects.Add(effect);
+        }
+        
+        // Loop through all active effects and decrease duration by 1
+        foreach( Action.statusEffect effect in effects ){
             activeEffects[effect] = activeEffects[effect] - 1;
 
             // If health over time, perform the effect
             if( effect.statusType == Action.statusEffectType.healthOverTime ){
                 performHealthOverTimeEffect(effect);
+                
+                if(activeEffects[effect] <= 0) {
+                    activeEffects.Remove(effect);
+                }
             }
-
-            // If the duration is 0, remove the effect
-            if(activeEffects[effect] <= 0){
-                toggleStatusEffect(effect, false);
-                activeEffects.Remove(effect);
+            else
+            {
+                // If the duration is 0, the status will be removed at the end of the current turn
+                if(activeEffects[effect] < 0){
+                    toggleStatusEffect(effect, false);
+                    activeEffects.Remove(effect);
+                }
             }
         }
     }

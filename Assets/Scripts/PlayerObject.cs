@@ -31,7 +31,7 @@ public class PlayerObject : ScriptableObject
 
 
     // Character portrait image (for dialogue)
-    public Sprite characterPortrait;
+    public Texture2D characterPortrait;
 
     // Dialogue
     // ========

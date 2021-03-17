@@ -12,14 +12,14 @@ public class DialogueManager : MonoBehaviour
 
     private Queue<string> sentences;
     private Queue<string> names;
-    private Queue<Sprite> portraits;
+    private Queue<Texture2D> portraits;
 
     // Start is called before the first frame update
     void Start()
     {
         sentences = new Queue<string>();
         names = new Queue<string>();
-        portraits = new Queue<Sprite>();
+        portraits = new Queue<Texture2D>();
     }
 
     void Update()
@@ -55,7 +55,9 @@ public class DialogueManager : MonoBehaviour
         }
 
         nameText.text = names.Dequeue();
-        characterImage.sprite = portraits.Dequeue();
+        
+        Texture2D t = portraits.Dequeue();
+        characterImage.sprite = Sprite.Create(t, new Rect(0,0,t.width, t.height), new Vector2(0.5f, 0.5f));
         string sentence = sentences.Dequeue();
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));

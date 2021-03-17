@@ -194,6 +194,27 @@ public class GameManager : MonoBehaviour
         updateUI();
     }
 
+    void Update()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(delayFrameForDisableTargeting());
+        }
+    }
+
+    private IEnumerator delayFrameForDisableTargeting()
+    {
+        if(!targeting)
+            yield break;
+        
+        yield return new WaitForEndOfFrame();
+
+        if(currentTarget == null)
+        {
+            targeting = false;
+        }
+    }
+
     //Returns true if there are targets to select, false otherwise
     public void performAfterTargetSelect(Player player, Action.targets targetType, Action.targetRestrictions restrictions, bool blockedByFrontline, targetCallback callback)
     {
@@ -227,18 +248,28 @@ public class GameManager : MonoBehaviour
     {
         targeting = true;
         Debug.Log("Waiting for target select");
+        data.player1UI.SetActive(false);
+        data.player2UI.SetActive(false);
 
         currentTarget = null;
-        while(currentTarget == null)
+        while(currentTarget == null && targeting)
         {
             yield return null;
         }
-        Debug.Log("Target selected: " + currentTarget);
-        
-        callback(currentTarget);
+
+        if(targeting) {
+            Debug.Log("Target selected: " + currentTarget);
+            callback(currentTarget);
+        }
+        else
+        {
+            Debug.Log("Targeting Cancelled");
+        }
 
         resetTargeting();
         targeting = false;
+        data.player1UI.SetActive(true);
+        data.player2UI.SetActive(true);
     }
 
     public void targetWasClicked(ITargetable target)
@@ -437,9 +468,14 @@ public class GameManager : MonoBehaviour
         progressTurn();
     }
 
+    //returns true if there is a valid target for the given targetType and restrictions
     public bool enableTargetingOnTargets(int playerNumber, Action.targets targetType, Action.targetRestrictions restrictions, bool blockedByFrontline)
     {
-        bool validTargetExists = false; //Regardless of the targetType/targetRestrictions combination, we will return true if there is at least 1 target available
+        //If the target is self, return true. Otherwise, we need to check the other cases to see if there's a valid target
+        if(targetType == Action.targets.self || restrictions == Action.targetRestrictions.self)
+            return true;
+
+        bool validTargetExists = false;
 
         switch (targetType) {
             case Action.targets.anySingle:

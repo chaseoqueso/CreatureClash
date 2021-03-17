@@ -79,7 +79,6 @@ public class Creature : MonoBehaviour, ITargetable
             return;
         // num + if healing, - if damage
         currentHealth += num * Mathf.Clamp01(1 - (currentDef/100f));
-        Debug.Log(currentHealth);
         // If creature's health goes above max health, drop it back to max
         if(currentHealth > currentMaxHP){
             currentHealth = currentMaxHP;
@@ -382,6 +381,7 @@ public class Creature : MonoBehaviour, ITargetable
     {
         setIdle();
         isDead = true;
+        row.removeCreature(this);
 
         // Play death animation / sound effects
 

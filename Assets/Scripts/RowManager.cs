@@ -136,6 +136,22 @@ public class RowManager : MonoBehaviour, ITargetable
         while(Time.time < startTime + duration);
     }
 
+    public void removeCreature(Creature c)
+    {
+        int index = creatures.IndexOf(c);
+        creatures.RemoveAt(index);
+        creaturePositions.RemoveAt(index);
+
+        for(int i = 0; i < creaturePositions.Count; ++i)
+        {
+            creaturePositions[creaturePositions.Count-i-1] = Vector3.Lerp(bottomEndpoint, topEndpoint, (2f*i + 1)/((creaturePositions.Count) * 2f));
+        }
+
+        Debug.Log("Number of Creatures Left: " + creatures.Count);
+        
+        StartCoroutine(lerpCreaturePositions(creatureLerpTime));
+    }
+
     public ITargetable.TargetType getTargetType()
     {
         return ITargetable.TargetType.row;
