@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DruidPawnsy
   m_EditorClassIdentifier: 
   creatureName: Pawnsy
-  manaCost: 1
+  manaCost: 2
   flavorText: 
   maxHealth: 10
   baseDamage: 6

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PyromancerPhoenix
   m_EditorClassIdentifier: 
   creatureName: Phoenix
-  manaCost: 5
+  manaCost: 8
   flavorText: Phoenix description
   maxHealth: 35
   baseDamage: 10

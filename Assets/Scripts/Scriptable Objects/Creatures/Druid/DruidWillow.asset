@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DruidWillow
   m_EditorClassIdentifier: 
   creatureName: Willow, the Forest Guard
-  manaCost: 3
+  manaCost: 6
   flavorText: 
   maxHealth: 25
   baseDamage: 9

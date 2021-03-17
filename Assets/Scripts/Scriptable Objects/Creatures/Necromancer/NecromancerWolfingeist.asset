@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NecromancerWolfingeist
   m_EditorClassIdentifier: 
   creatureName: "W\xF6lfingeist"
-  manaCost: 3
+  manaCost: 6
   flavorText: "W\xF6lfingeist description"
   maxHealth: 18
   baseDamage: 7

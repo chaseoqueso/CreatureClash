@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NecromancerKnoxus
   m_EditorClassIdentifier: 
   creatureName: Knoxus, the Undead Warlord
-  manaCost: 4
+  manaCost: 8
   flavorText: Knoxus description
   maxHealth: 38
   baseDamage: 10

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DruidTheodore
   m_EditorClassIdentifier: 
   creatureName: Theodore
-  manaCost: 4
+  manaCost: 8
   flavorText: 
   maxHealth: 40
   baseDamage: 10

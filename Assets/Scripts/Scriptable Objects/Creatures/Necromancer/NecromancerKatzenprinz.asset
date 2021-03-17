@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NecromancerKatzenprinz
   m_EditorClassIdentifier: 
   creatureName: Katzenprinz
-  manaCost: 1
+  manaCost: 2
   flavorText: Katzenprinz description
   maxHealth: 10
   baseDamage: 6

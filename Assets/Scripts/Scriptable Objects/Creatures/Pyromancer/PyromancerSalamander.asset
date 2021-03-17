@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PyromancerSalamander
   m_EditorClassIdentifier: 
   creatureName: Sal
-  manaCost: 1
+  manaCost: 2
   flavorText: Sal flavor text
   maxHealth: 10
   baseDamage: 6
