@@ -4194,6 +4194,7 @@ MonoBehaviour:
   player1Object: {fileID: 0}
   player2Object: {fileID: 0}
   turnCount: 0
+  winScreenPrefab: {fileID: 6741732563181491539, guid: 6a2d0f62c2c3b534db9aede16ef6a869, type: 3}
 --- !u!4 &1991859056
 Transform:
   m_ObjectHideFlags: 0

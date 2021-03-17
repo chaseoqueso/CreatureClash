@@ -108,6 +108,8 @@ public class GameManager : MonoBehaviour
     public PlayerObject player2Object;
     public Turn currentTurn {get; private set;}
     public int turnCount;
+
+    public GameObject winScreenPrefab;
     
     private ITargetable currentTarget;
     private bool targeting;

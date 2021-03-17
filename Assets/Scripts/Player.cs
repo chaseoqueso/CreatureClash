@@ -290,6 +290,10 @@ public class Player : MonoBehaviour, ITargetable
         // If HP drops to 0, this player is killed
         if(currentHealth <= 0){
             //end game
+            GameManager.Instance.StopAllCoroutines();
+            Canvas canvas = DataManager.Instance.UICanvas;
+            GameObject winScreenPanel = Instantiate(GameManager.Instance.winScreenPrefab, new Vector3(canvas.GetComponent<RectTransform>().rect.width/2, canvas.GetComponent<RectTransform>().rect.height/2, 0), Quaternion.identity, canvas.transform);
+            winScreenPanel.GetComponent<WInScreenPanel>().setWinText(playerNumber);
         }
     }
 

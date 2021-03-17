@@ -31,5 +31,6 @@ public class CharacterSelectManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
         Debug.Log("Loading menu...");
+        Destroy(GameManager.Instance.gameObject);
     }
 }

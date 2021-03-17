@@ -1307,6 +1307,7 @@ MonoBehaviour:
   spellBook: {fileID: 1591835944}
   abilityUI: {fileID: 305172660}
   turnText: {fileID: 111957187}
+  UICanvas: {fileID: 1716158698}
 --- !u!4 &873638314
 Transform:
   m_ObjectHideFlags: 0
