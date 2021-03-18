@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Chrysanthemum
   characterClass: The Druid
-  characterSprite: {fileID: 2800000, guid: d54e5d9f4bf5d7646af55f765f8b0c5f, type: 3}
+  characterSprite: {fileID: 2800000, guid: db90ea592dda3984db3a9dc48d8fc6de, type: 3}
   baseHealth: 100
   baseDef: 0
   baseDamage: 10
