@@ -78,7 +78,7 @@ public class CharacterSelectMenu : MonoBehaviour
         characterName.text = character.characterName;
         charClass.text = character.characterClass;
         description.text = character.flavorText;
-        Texture2D t = character.characterSprite;
+        Texture2D t = character.characterPortrait;
         img.sprite = Sprite.Create(t, new Rect(0,0,t.width, t.height), new Vector2(0.5f, 0.5f));
     }
 

@@ -114,7 +114,7 @@ MonoBehaviour:
         hpValue: 0
         hpMulti: 0
     manaCost: 4
-  characterPortrait: {fileID: 0}
+  characterPortrait: {fileID: 2800000, guid: 2a84e175433048e4db81ad0d17534f65, type: 3}
   challengeDialogue: []
   winDialogue: []
   lossDialogue: []
