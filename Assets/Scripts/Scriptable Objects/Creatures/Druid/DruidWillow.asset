@@ -15,7 +15,7 @@ MonoBehaviour:
   creatureName: Willow, the Forest Guard
   manaCost: 6
   flavorText: 
-  maxHealth: 25
+  maxHealth: 20
   baseDamage: 9
   baseDefense: 40
   baseSpeed: 30

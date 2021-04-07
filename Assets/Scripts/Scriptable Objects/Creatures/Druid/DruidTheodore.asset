@@ -23,8 +23,9 @@ MonoBehaviour:
   heightMap: {fileID: 0}
   actions:
   - actionName: Maul
-    description: Theodore claws target creature or player, dealing 10 damage and
-      then dealing 2 bleeding damage for 3 turns. <color=#AA0000><i>Blocked by Frontline</i></color>
+    description: Theodore claws target creature or player, dealing 10 damage. The
+      target also <color=#770000>Bleeds</color> for 2 damage for 3 turns. <color=#AA0000><i>Blocked
+      by Frontline</i></color>
     actionIcon: {fileID: 0}
     actionEffectGroups:
     - groupName: Damage
