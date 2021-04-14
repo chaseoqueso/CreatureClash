@@ -36,7 +36,8 @@ public class Creature : MonoBehaviour, ITargetable
     {
         activeEffects = new Dictionary<Action.statusEffect, int>();
 
-        actions = creature.Actions();
+        actions = new List<Action>(creature.Actions());
+        actions.Insert(0, Action.swapRows);
 
         // on start, set current values to max values
         currentHealth = creature.MaxHealth();
@@ -256,8 +257,12 @@ public class Creature : MonoBehaviour, ITargetable
                             target.updateCurrentHealth(currentDamage * effect.hpMulti + effect.hpValue);
                     }
                 }
+                // If swapRow, swap this creature's row
+                else if(effect.type == Action.effectType.swapRow){
+                    GameManager.Instance.swapCreatureRow(this);
+                }
                 // If heal, adjust hp of affected targets NOTE: THIS WILL BREAK IF ANYTHING TRIES TO HEAL A PLAYER
-                else{       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
+                else if(effect.type == Action.effectType.heal){       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
                     foreach( Creature target in targets ){
                         if(target != null)
                             target.updateCurrentHealth(target.currentMaxHP * effect.hpMulti + effect.hpValue);

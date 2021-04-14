@@ -111,7 +111,6 @@ public class RowManager : MonoBehaviour, ITargetable
         creatureScript.player = player;
         creatureScript.row = this;
 
-
         StartCoroutine(lerpCreaturePositions(creatureLerpTime));
         return creatureScript;
     }
@@ -148,6 +147,20 @@ public class RowManager : MonoBehaviour, ITargetable
         }
 
         Debug.Log("Number of Creatures Left: " + creatures.Count);
+        
+        StartCoroutine(lerpCreaturePositions(creatureLerpTime));
+    }
+
+    public void addCreature(Creature c)
+    {
+        c.row = this;
+        creatures.Add(c);
+        creaturePositions.Add(Vector3.Lerp(bottomEndpoint, topEndpoint, 1f/((creaturePositions.Count + 1) * 2f)));
+
+        for(int i = 1; i < creaturePositions.Count; ++i)
+        {
+            creaturePositions[creaturePositions.Count-i-1] = Vector3.Lerp(bottomEndpoint, topEndpoint, (2f*i + 1)/((creaturePositions.Count) * 2f));
+        }
         
         StartCoroutine(lerpCreaturePositions(creatureLerpTime));
     }

@@ -6,6 +6,8 @@ using UnityEditor;
 [System.Serializable]
 public class Action
 {
+    public static readonly Action swapRows = new SwapAction();
+    
     // Specific targets
     public enum targets{
         none,                // No targets for this ability type
@@ -35,7 +37,8 @@ public class Action
     public enum effectType{
         damage,
         heal,
-        status
+        status,
+        swapRow
         // Add special??? for something where it gets a special function???
     }
     // All possible status effects
@@ -106,4 +109,25 @@ public class Action
     // All effects of the action
     public List<EffectGroup> actionEffectGroups;
     
+    private class SwapAction : Action 
+    {
+        public SwapAction()
+        {
+            actionName = "Swap Rows";
+            description = "The creature moves from its current row to the other row.";
+
+            Effect swap = new Effect();
+            swap.type = effectType.swapRow;
+
+            EffectGroup group = new EffectGroup();
+            group.groupEffects = new List<Effect>();
+            group.groupEffects.Add(swap);
+            group.targetRestriction = targetRestrictions.self;
+            group.targetType = targets.self;
+
+            actionEffectGroups = new List<EffectGroup>();
+            actionEffectGroups.Add(group);
+        }
+    }
+
 }

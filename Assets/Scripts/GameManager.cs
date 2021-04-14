@@ -228,6 +228,8 @@ public class GameManager : MonoBehaviour
 
         if(targetType == Action.targets.self || restrictions == Action.targetRestrictions.self) {
             callback(null);
+            StartCoroutine(resetTargetsAfterFrame());
+            Debug.Log("Target was Self");
             return;
         }
 
@@ -272,6 +274,12 @@ public class GameManager : MonoBehaviour
         targeting = false;
         data.player1UI.SetActive(true);
         data.player2UI.SetActive(true);
+    }
+
+    private IEnumerator resetTargetsAfterFrame()
+    {
+        yield return new WaitForEndOfFrame();
+        resetTargeting();
     }
 
     public void targetWasClicked(ITargetable target)
@@ -468,6 +476,36 @@ public class GameManager : MonoBehaviour
         data.player2.queuedTargets.Clear();
 
         progressTurn();
+    }
+
+    public void swapCreatureRow(Creature creature)
+    {
+        if(creature.player == data.player1)
+        {
+            if(creature.row == data.p1Front)
+            {
+                data.p1Front.removeCreature(creature);
+                data.p1Back.addCreature(creature);
+            }
+            else
+            {
+                data.p1Back.removeCreature(creature);
+                data.p1Front.addCreature(creature);
+            }
+        }
+        else
+        {
+            if(creature.row == data.p2Front)
+            {
+                data.p2Front.removeCreature(creature);
+                data.p2Back.addCreature(creature);
+            }
+            else
+            {
+                data.p2Back.removeCreature(creature);
+                data.p2Front.addCreature(creature);
+            }
+        }
     }
 
     //returns true if there is a valid target for the given targetType and restrictions
