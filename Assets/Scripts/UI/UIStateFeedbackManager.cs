@@ -44,6 +44,9 @@ Add health bars (non-interactable sliders, if possible have it change color as i
 value -> see the tanks tutorial or others)
 
 
+can either create new instances of the panel prefab for each creature OR find a way to access
+it from the Creature class and move it around the screen
+
 Add to Creature.cs:
 
 - call setStatusUI(this) in OnMouseOver()
