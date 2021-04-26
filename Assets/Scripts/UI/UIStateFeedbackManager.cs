@@ -9,20 +9,22 @@ public class UIStateFeedbackManager : MonoBehaviour
     public GameObject statusFeedbackUI;
     public TMP_Text statusText;
 
+    public Creature creature;
+
     void Start()
     {
         setStatusFeedbackUIActive(false);
     }
 
-    public void setStatusUI(Creature hoverCreature)
+    public void setStatusUI()
     {
-        string s = "<b>" + hoverCreature.name + "</b>";
-        s += "\nHP: " + hoverCreature.currentHealth + "/" + hoverCreature.currentMaxHP;
+        string s = "<b>" + creature.name + "</b>";
+        s += "\nHP: " + creature.currentHealth + "/" + creature.currentMaxHP;
         
-        if( hoverCreature.activeEffects.Count != 0 ){
+        if( creature.activeEffects.Count != 0 ){
             s += "\nStatus: ";
 
-            foreach( Action.statusEffect effect in hoverCreature.activeEffects.Keys ){
+            foreach( Action.statusEffect effect in creature.activeEffects.Keys ){
                 s += effect.statusType; // Should probably be an effect NAME which we have to add
                 s += " (" + effect.effectDuration + " rounds)";
             }
@@ -31,7 +33,7 @@ public class UIStateFeedbackManager : MonoBehaviour
         statusText.text = s;
     }
 
-    void setStatusFeedbackUIActive(bool value)
+    public void setStatusFeedbackUIActive(bool value)
     {
         statusFeedbackUI.SetActive(value);
     }
@@ -42,14 +44,5 @@ public class UIStateFeedbackManager : MonoBehaviour
 
 Add health bars (non-interactable sliders, if possible have it change color as it decreases
 value -> see the tanks tutorial or others)
-
-
-can either create new instances of the panel prefab for each creature OR find a way to access
-it from the Creature class and move it around the screen
-
-Add to Creature.cs:
-
-- call setStatusUI(this) in OnMouseOver()
-- add onMouseExit() and have it call setStatusFeedbackUIActive(false);
 
 */

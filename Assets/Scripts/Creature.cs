@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Creature : MonoBehaviour, ITargetable
@@ -8,6 +9,8 @@ public class Creature : MonoBehaviour, ITargetable
     public CreatureObject creature;
     public Player player;
     public RowManager row;
+
+    public Canvas statusUICanvas;
 
     // Saves the action list from the CreatureObject for more convenient access
     private List<Action> actions;
@@ -421,6 +424,29 @@ public class Creature : MonoBehaviour, ITargetable
         else if(Input.GetMouseButtonDown(1))
         {
             clearActions();
+        }
+    }
+
+    void OnMouseEnter()
+    {
+        toggleUIStatus(true);
+    }
+
+    void OnMouseExit()
+    {
+        toggleUIStatus(false);
+    }
+
+    private void toggleUIStatus(bool value)
+    {
+        UIStateFeedbackManager UIManager = statusUICanvas.GetComponent<UIStateFeedbackManager>();
+        
+        if(value){
+            UIManager.setStatusFeedbackUIActive(true);
+            UIManager.setStatusUI();
+        }
+        else{
+            UIManager.setStatusFeedbackUIActive(false);
         }
     }
 
