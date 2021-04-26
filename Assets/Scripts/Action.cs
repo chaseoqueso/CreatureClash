@@ -38,8 +38,8 @@ public class Action
         damage,
         heal,
         status,
-        swapRow
-        // Add special??? for something where it gets a special function???
+        swapRow,
+        special
     }
     // All possible status effects
     public enum statusEffectType{
@@ -81,6 +81,8 @@ public class Action
         // Health or damage number
         public float hpValue = 0;                   // 0 if type == status
         public float hpMulti = 1;                   // 0 for no heal, 1 for no damage
+
+        public SpecialEffectObject optionalSpecialEffect; //Use if effectType == special
     }
     // EffectGroup class
     [System.Serializable]
