@@ -15,10 +15,10 @@ MonoBehaviour:
   creatureName: Theodore
   manaCost: 8
   flavorText: 
-  maxHealth: 40
-  baseDamage: 10
-  baseDefense: 20
-  baseSpeed: 50
+  maxHealth: 50
+  baseDamage: 20
+  baseDefense: 15
+  baseSpeed: 10
   texture: {fileID: 2800000, guid: e52416a1673ad4442bab431f97d1e7d7, type: 3}
   heightMap: {fileID: 0}
   actions:

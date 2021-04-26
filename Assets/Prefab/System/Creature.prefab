@@ -110,6 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   creature: {fileID: 0}
   player: {fileID: 0}
+  row: {fileID: 0}
   currentHealth: 0
   currentMaxHP: 0
   currentDef: 0
@@ -118,9 +119,11 @@ MonoBehaviour:
   currentAction:
     actionName: 
     description: 
+    actionIcon: {fileID: 0}
     actionEffectGroups: []
   enableTargeting: 0
   justSummoned: 0
+  isDead: 0
 --- !u!61 &3126220014238256357
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: PyromancerFox
   m_EditorClassIdentifier: 
   creatureName: Fire Fox
-  manaCost: 6
+  manaCost: 4
   flavorText: Fire Fox description
-  maxHealth: 16
-  baseDamage: 8
+  maxHealth: 15
+  baseDamage: 15
   baseDefense: 0
-  baseSpeed: 60
+  baseSpeed: 70
   texture: {fileID: 2800000, guid: 5b26f4957af58664ab3979e4d798fd3b, type: 3}
   heightMap: {fileID: 0}
   actions:

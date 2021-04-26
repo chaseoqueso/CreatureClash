@@ -17,8 +17,8 @@ MonoBehaviour:
   flavorText: 
   maxHealth: 10
   baseDamage: 6
-  baseDefense: 0
-  baseSpeed: 80
+  baseDefense: 10
+  baseSpeed: 60
   texture: {fileID: 2800000, guid: 950245096df60374abbae0980a3a8463, type: 3}
   heightMap: {fileID: 0}
   actions:
