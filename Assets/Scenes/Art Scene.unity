@@ -361,6 +361,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 492a7fb66b76c2c4fbacf57af9b67d61, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e1586721513ad0847b0ff50f323aa325, type: 2}
     - target: {fileID: 919132149155446097, guid: 492a7fb66b76c2c4fbacf57af9b67d61, type: 3}
       propertyPath: m_Name
       value: WoodenBox
@@ -418,6 +422,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e44a3d34bf8804a49a553748e605b931, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 21c34c6f8534cdd4fbd2f5639eef15be, type: 2}
     - target: {fileID: 919132149155446097, guid: e44a3d34bf8804a49a553748e605b931, type: 3}
       propertyPath: m_Name
       value: Barrel
@@ -601,6 +609,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e44a3d34bf8804a49a553748e605b931, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 21c34c6f8534cdd4fbd2f5639eef15be, type: 2}
     - target: {fileID: 919132149155446097, guid: e44a3d34bf8804a49a553748e605b931, type: 3}
       propertyPath: m_Name
       value: Barrel (3)
@@ -658,6 +670,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e44a3d34bf8804a49a553748e605b931, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 21c34c6f8534cdd4fbd2f5639eef15be, type: 2}
     - target: {fileID: 919132149155446097, guid: e44a3d34bf8804a49a553748e605b931, type: 3}
       propertyPath: m_Name
       value: Barrel (1)
@@ -784,6 +800,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 5.516
       objectReference: {fileID: 0}
+    - target: {fileID: -6143437339240328938, guid: f81ccffd55ea4664ab88e6d68809171d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ded26c383665e364196eebfd4dd4a411, type: 2}
+    - target: {fileID: -803405088876591012, guid: f81ccffd55ea4664ab88e6d68809171d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7487b69432fa6bd4f9967f010a0c559b, type: 2}
     - target: {fileID: 919132149155446097, guid: f81ccffd55ea4664ab88e6d68809171d, type: 3}
       propertyPath: m_Name
       value: Wagon
@@ -1373,6 +1397,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 492a7fb66b76c2c4fbacf57af9b67d61, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e1586721513ad0847b0ff50f323aa325, type: 2}
     - target: {fileID: 919132149155446097, guid: 492a7fb66b76c2c4fbacf57af9b67d61, type: 3}
       propertyPath: m_Name
       value: WoodenBox (1)
@@ -1430,6 +1458,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e44a3d34bf8804a49a553748e605b931, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 21c34c6f8534cdd4fbd2f5639eef15be, type: 2}
     - target: {fileID: 919132149155446097, guid: e44a3d34bf8804a49a553748e605b931, type: 3}
       propertyPath: m_Name
       value: Barrel (2)
@@ -1654,6 +1686,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9123181218211710368, guid: 6ce91202c8f667248ac8db3b6b941ad6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 73b9f9c9fbb675c4aba3f19c3118262b, type: 2}
     - target: {fileID: -8679921383154817045, guid: 6ce91202c8f667248ac8db3b6b941ad6, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1710,10 +1746,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8270796572254877678, guid: 6ce91202c8f667248ac8db3b6b941ad6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 73b9f9c9fbb675c4aba3f19c3118262b, type: 2}
+    - target: {fileID: -5142122781890788979, guid: 6ce91202c8f667248ac8db3b6b941ad6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 73b9f9c9fbb675c4aba3f19c3118262b, type: 2}
+    - target: {fileID: -5141730676129837020, guid: 6ce91202c8f667248ac8db3b6b941ad6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 73b9f9c9fbb675c4aba3f19c3118262b, type: 2}
+    - target: {fileID: -4519447184210074170, guid: 6ce91202c8f667248ac8db3b6b941ad6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 73b9f9c9fbb675c4aba3f19c3118262b, type: 2}
+    - target: {fileID: -2357423999795999603, guid: 6ce91202c8f667248ac8db3b6b941ad6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 73b9f9c9fbb675c4aba3f19c3118262b, type: 2}
+    - target: {fileID: -1182331779935321092, guid: 6ce91202c8f667248ac8db3b6b941ad6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 73b9f9c9fbb675c4aba3f19c3118262b, type: 2}
     - target: {fileID: 919132149155446097, guid: 6ce91202c8f667248ac8db3b6b941ad6, type: 3}
       propertyPath: m_Name
       value: Port
       objectReference: {fileID: 0}
+    - target: {fileID: 8805674685151928863, guid: 6ce91202c8f667248ac8db3b6b941ad6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 73b9f9c9fbb675c4aba3f19c3118262b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ce91202c8f667248ac8db3b6b941ad6, type: 3}
 --- !u!1001 &1801597661
@@ -1836,6 +1900,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 492a7fb66b76c2c4fbacf57af9b67d61, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e1586721513ad0847b0ff50f323aa325, type: 2}
     - target: {fileID: 919132149155446097, guid: 492a7fb66b76c2c4fbacf57af9b67d61, type: 3}
       propertyPath: m_Name
       value: WoodenBox (2)
