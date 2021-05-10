@@ -18,7 +18,7 @@ public class UIStateFeedbackManager : MonoBehaviour
 
     public void setStatusUI()
     {
-        string s = "<b>" + creature.name + "</b>";
+        string s = "<b>" + creature.creature.CreatureName() + "</b>";
         s += "\nHP: " + creature.currentHealth + "/" + creature.currentMaxHP;
         
         if( creature.activeEffects.Count != 0 ){

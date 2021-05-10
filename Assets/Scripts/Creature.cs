@@ -460,12 +460,10 @@ public class Creature : MonoBehaviour, ITargetable
     {
         UIStateFeedbackManager UIManager = statusUICanvas.GetComponent<UIStateFeedbackManager>();
         
-        if(value){
-            UIManager.setStatusFeedbackUIActive(true);
+        UIManager.setStatusFeedbackUIActive(value);
+
+        if(value){    
             UIManager.setStatusUI();
-        }
-        else{
-            UIManager.setStatusFeedbackUIActive(false);
         }
     }
 

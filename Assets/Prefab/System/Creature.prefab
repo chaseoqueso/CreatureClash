@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6344227696773492595}
   - component: {fileID: 2336521608088272537}
   - component: {fileID: 4342650568933961623}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: UIStatusCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 3929829046026948442}
   - component: {fileID: 9156477344270902033}
   - component: {fileID: 3126220014238256357}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Creature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 1885493361113661467}
   - component: {fileID: 8321656580418032182}
   - component: {fileID: 3210586063832915921}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StatusText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 1303292244347325681}
   - component: {fileID: 3318981333716385340}
   - component: {fileID: 1706860735991039307}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.11500001}
+  m_AnchoredPosition: {x: 0, y: -0.114990234}
   m_SizeDelta: {x: 0, y: -0.23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3318981333716385340
