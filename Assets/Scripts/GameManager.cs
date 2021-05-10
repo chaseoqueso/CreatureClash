@@ -64,18 +64,20 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        public void updateCurrentHealth(float num)
+        public float updateCurrentHealth(float num)
         {
+            float total = 0;
             if(isPlayer1)
             {
-                GameManager.Instance.data.p1Front.updateCurrentHealth(num);
-                GameManager.Instance.data.p1Back.updateCurrentHealth(num);
+                total += GameManager.Instance.data.p1Front.updateCurrentHealth(num);
+                total += GameManager.Instance.data.p1Back.updateCurrentHealth(num);
             }
             else
             {
-                GameManager.Instance.data.p2Front.updateCurrentHealth(num);
-                GameManager.Instance.data.p2Back.updateCurrentHealth(num);
+                total += GameManager.Instance.data.p2Front.updateCurrentHealth(num);
+                total += GameManager.Instance.data.p2Back.updateCurrentHealth(num);
             }
+            return total;
         }
 
         public void setStatusEffect(Action.statusEffect effect)

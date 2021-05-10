@@ -13,7 +13,7 @@ public interface ITargetable
 
     TargetType getTargetType();
     List<ITargetable> getTargets();
-    void updateCurrentHealth(float num);
+    float updateCurrentHealth(float num);
     void setStatusEffect(Action.statusEffect status);
     void updateStatusEffects();
 }

@@ -77,21 +77,36 @@ public class Creature : MonoBehaviour, ITargetable
         return actions;
     }
 
-    public void updateCurrentHealth(float num)
+    public float updateCurrentHealth(float num)
     {
         if(isDead)
-            return;
+            return 0;
+
+        if(num < 0) //If taking damage, reduce by the creature's defense
+        {
+            num *= Mathf.Clamp01(1 - (currentDef/100f));
+        }
+
         // num + if healing, - if damage
-        currentHealth += num * Mathf.Clamp01(1 - (currentDef/100f));
+        currentHealth += num;
+
+        float excess = 0;
+
         // If creature's health goes above max health, drop it back to max
         if(currentHealth > currentMaxHP){
+            excess = currentHealth - currentMaxHP;
             currentHealth = currentMaxHP;
         }
+
         // If HP drops to 0, this creature is killed
         if(currentHealth <= 0){
+            excess = currentHealth;
             currentHealth = 0;
             killCreature();
         }
+        
+        //return the actual amount of damage/healing applied to the creature
+        return num - excess;
     }
 
     public void selectTargetsForAction(int actionIndex)
@@ -270,6 +285,10 @@ public class Creature : MonoBehaviour, ITargetable
                         if(target != null)
                             target.updateCurrentHealth(target.currentMaxHP * effect.hpMulti + effect.hpValue);
                     }
+                }
+                // If special, call the special effect with the correct parameters
+                else if(effect.type == Action.effectType.special){       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
+                    effect.optionalSpecialEffect.performStatusEffect(this, targets);
                 }
             }
         }

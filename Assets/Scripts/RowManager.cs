@@ -48,12 +48,14 @@ public class RowManager : MonoBehaviour, ITargetable
         GameManager.Instance.targetWasClicked(this);
     }
 
-    public void updateCurrentHealth(float num)
+    public float updateCurrentHealth(float num)
     {
+        float total = 0;
         foreach(Creature c in creatures)
         {
-            c.updateCurrentHealth(num);
+            total += c.updateCurrentHealth(num);
         }
+        return total;
     }
 
     //returns true if the row has at least 1 creature

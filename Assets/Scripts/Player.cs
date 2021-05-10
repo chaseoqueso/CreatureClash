@@ -227,11 +227,15 @@ public class Player : MonoBehaviour, ITargetable
                         }
                     }
                     // If heal, adjust hp of affected targets
-                    else {       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
+                    else if(effect.type == Action.effectType.heal){       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
                         foreach( ITargetable target in targets ){
                             if(target != null)
                                 target.updateCurrentHealth(maxHealth * effect.hpMulti + effect.hpValue);
                         }
+                    }
+                    // If special, call the special effect with the correct parameters
+                    else if(effect.type == Action.effectType.special){       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
+                        effect.optionalSpecialEffect.performStatusEffect(this, targets);
                     }
                 }
             }
@@ -280,21 +284,37 @@ public class Player : MonoBehaviour, ITargetable
         return temp;
     }
 
-    public void updateCurrentHealth(float num)
+    public float updateCurrentHealth(float num)
     {
+        if(num < 0) //If taking damage, reduce by the creature's defense
+        {
+            num *= Mathf.Clamp01(1 - (currentDef/100f));
+        }
+
+        // num + if healing, - if damage
         currentHealth += num;
-        // If player's health goes above max health, drop it back to max
+
+        float excess = 0;
+
+        // If creature's health goes above max health, drop it back to max
         if(currentHealth > maxHealth){
+            excess = currentHealth - maxHealth;
             currentHealth = maxHealth;
         }
-        // If HP drops to 0, this player is killed
+
+        // If HP drops to 0, this creature is killed
         if(currentHealth <= 0){
-            //end game
+            excess = currentHealth;
+            currentHealth = 0;
+            
             GameManager.Instance.StopAllCoroutines();
             Canvas canvas = DataManager.Instance.UICanvas;
             GameObject winScreenPanel = Instantiate(GameManager.Instance.winScreenPrefab, new Vector3(canvas.GetComponent<RectTransform>().rect.width/2, canvas.GetComponent<RectTransform>().rect.height/2, 0), Quaternion.identity, canvas.transform);
             winScreenPanel.GetComponent<WInScreenPanel>().setWinText(playerNumber);
         }
+        
+        //return the actual amount of damage/healing applied to the creature
+        return num - excess;
     }
 
     public void setStatusEffect(Action.statusEffect status)
