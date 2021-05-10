@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6990cd070f7642b4e85278c3354d0d94, type: 3}
   m_Name: KnoxusLifesteal
   m_EditorClassIdentifier: 
-  damageMulti: 0
-  lifestealPercent: 0
+  damageMulti: -1
+  lifestealPercent: 0.2

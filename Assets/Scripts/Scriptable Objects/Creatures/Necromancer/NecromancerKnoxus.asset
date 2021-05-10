@@ -32,12 +32,13 @@ MonoBehaviour:
       targetRestriction: 0
       blockedByFrontline: 1
       groupEffects:
-      - effectName: Damage
-        type: 0
+      - effectName: Lifesteal
+        type: 4
         status:
           statusType: 0
           modifierValue: 0
           modifierMult: 0
           effectDuration: 0
         hpValue: 0
-        hpMulti: -1
+        hpMulti: 0
+        optionalSpecialEffect: {fileID: 11400000, guid: f3fe538cb030a294cb23e400bd899150, type: 2}
