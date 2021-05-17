@@ -96,10 +96,30 @@ public class GameManager : MonoBehaviour
 
         public void updateStatusEffects()
         {
-            GameManager.instance.data.p1Front.updateStatusEffects();
-            GameManager.instance.data.p1Back.updateStatusEffects();
-            GameManager.instance.data.p2Front.updateStatusEffects();
-            GameManager.instance.data.p2Back.updateStatusEffects();
+            if(isPlayer1) 
+            {
+                GameManager.instance.data.p1Front.updateStatusEffects();
+                GameManager.instance.data.p1Back.updateStatusEffects();
+            } 
+            else 
+            {
+                GameManager.instance.data.p2Front.updateStatusEffects();
+                GameManager.instance.data.p2Back.updateStatusEffects();
+            }
+        }
+
+        public void playAnimationClip(AnimationClip clip)
+        {
+            if(isPlayer1) 
+            {
+                GameManager.instance.data.p1Front.playAnimationClip(clip);
+                GameManager.instance.data.p1Back.playAnimationClip(clip);
+            } 
+            else 
+            {
+                GameManager.instance.data.p2Front.playAnimationClip(clip);
+                GameManager.instance.data.p2Back.playAnimationClip(clip);
+            }
         }
     }
 
@@ -452,10 +472,23 @@ public class GameManager : MonoBehaviour
 
         for(int i = 0; i < actionOrder.Count; ++i)
         {
-            if(actionOrder[i] != null && actionOrder[i].currentAction != null)
+            Creature currentCreature = actionOrder[i];
+            if(currentCreature != null && currentCreature.currentAction != null)
             {
-                actionOrder[i].performNextAction();
-                yield return new WaitForSeconds(0.5f);
+                Action currentAction = currentCreature.currentAction;
+                if(currentAction.attackAnim == null)
+                {
+                    currentCreature.performNextAction();
+                    yield return new WaitForSeconds(1f);
+                }
+                else
+                {
+                    currentCreature.playAnimationClip(currentAction.attackAnim);
+                    yield return new WaitForSeconds(currentAction.attackAnim.length * currentAction.attackContactTime);
+                    List<ITargetable> targets = currentCreature.performNextAction();
+                    yield return new WaitForSeconds(currentAction.hitAnim.length);
+                }
+                yield return new WaitForEndOfFrame();
             }
         }
 
@@ -463,12 +496,12 @@ public class GameManager : MonoBehaviour
         {
             if(i < data.player1.queuedActions.Count) {
                 data.player1.performQueuedAction(i);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(1f);
             }
 
             if(i < data.player2.queuedActions.Count) {
                 data.player2.performQueuedAction(i);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(1f);
             }
         }
 

@@ -16,4 +16,5 @@ public interface ITargetable
     float updateCurrentHealth(float num);
     void setStatusEffect(Action.statusEffect status);
     void updateStatusEffects();
+    void playAnimationClip(AnimationClip clip);
 }

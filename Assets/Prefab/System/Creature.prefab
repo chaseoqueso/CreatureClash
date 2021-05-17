@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 3929829046026948442}
   - component: {fileID: 9156477344270902033}
   - component: {fileID: 3126220014238256357}
+  - component: {fileID: 4313128127367446013}
   m_Layer: 3
   m_Name: Creature
   m_TagString: Untagged
@@ -238,6 +239,9 @@ MonoBehaviour:
     actionName: 
     description: 
     actionIcon: {fileID: 0}
+    attackAnim: {fileID: 0}
+    attackContactTime: 0
+    hitAnim: {fileID: 0}
     actionEffectGroups: []
   enableTargeting: 0
   justSummoned: 0
@@ -268,6 +272,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!111 &4313128127367446013
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3929829046026948516}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 0}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &5926680824653446164
 GameObject:
   m_ObjectHideFlags: 0

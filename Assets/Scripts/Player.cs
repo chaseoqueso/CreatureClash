@@ -33,6 +33,7 @@ public class Player : MonoBehaviour, ITargetable
 
     private Material material;
     private Collider2D col;
+    private Animation anim;
 
     void Awake()
     {
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour, ITargetable
         queuedActions = new List<PlayerAction>();
         queuedTargets = new List<List<List<ITargetable>>>();
         activeEffects = new Dictionary<Action.statusEffect, int>();
+        anim = GetComponentInChildren<Animation>();
     }
 
     void Start()
@@ -408,5 +410,10 @@ public class Player : MonoBehaviour, ITargetable
             return;
         }
         updateCurrentHealth(status.modifierValue);
+    }
+
+    public void playAnimationClip(AnimationClip clip)
+    {
+        
     }
 }

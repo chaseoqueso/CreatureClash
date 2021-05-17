@@ -195,4 +195,12 @@ public class RowManager : MonoBehaviour, ITargetable
             c.updateStatusEffects();
         }
     }
+
+    public void playAnimationClip(AnimationClip clip)
+    {
+        foreach(Creature c in creatures)
+        {
+            c.playAnimationClip(clip);
+        }
+    }
 }

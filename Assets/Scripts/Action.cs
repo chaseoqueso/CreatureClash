@@ -107,6 +107,12 @@ public class Action
     public string description;
     // Action icon
     public Sprite actionIcon;
+    //Animation for when a creature performs this action
+    public AnimationClip attackAnim;
+    //The normalized [0.0-1.0] time during the attack animation that the attack hits the target
+    public float attackContactTime;
+    //Animation for when a creature gets hit by this action
+    public AnimationClip hitAnim;
     
     // All effects of the action
     public List<EffectGroup> actionEffectGroups;

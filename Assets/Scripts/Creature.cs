@@ -33,6 +33,7 @@ public class Creature : MonoBehaviour, ITargetable
 
     private Material material;
     private Collider2D col;
+    private Animation anim;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +55,7 @@ public class Creature : MonoBehaviour, ITargetable
 
         col = GetComponent<Collider2D>();
         material = GetComponent<Renderer>().material;
+        anim = GetComponent<Animation>();
         material.mainTexture = creature.Texture();
         transform.localScale = new Vector3(creature.Texture().width/material.GetFloat("pixelsPerUnit"), creature.Texture().height/material.GetFloat("pixelsPerUnit"), 1);
         justSummoned = true;
@@ -146,23 +148,24 @@ public class Creature : MonoBehaviour, ITargetable
         currentAction = actions[actionIndex];
     }
 
-    public void performNextAction()
+    public List<ITargetable> performNextAction()
     {
         // Check for null values
         if( currentAction == null ){
             Debug.Log("Creature is Idle and has no Action to perform.");
-            return;
+            return null;
         }
         if( currentTargets == null ){
             Debug.Log("Creature has no Targets for assigned Action.");
-            return;
+            return null;
         }
+
+        // For a single effect group, perform the action effects on those targets
+        List<ITargetable> targets = new List<ITargetable>();
 
         // Loop through targets & effect groups
         // (List of target lists will always been in order of effect groups, & always == length)
-        for( int i = 0; i < currentTargets.Count; i++ ){
-            // For a single effect group, perform the action effects on those targets
-            List<ITargetable> targets = new List<ITargetable>();
+        for( int i = 0; i < currentTargets.Count; i++ ) {
             Action.EffectGroup currentEffectGroup = currentAction.actionEffectGroups[i];
             List<Action.Effect> effectsOnTargets = currentEffectGroup.groupEffects;
 
@@ -264,15 +267,19 @@ public class Creature : MonoBehaviour, ITargetable
                 // If status effect, assign status to the affected targets
                 if( effect.type == Action.effectType.status ) {
                     foreach( ITargetable target in targets ) {
-                        if(target != null)
+                        if(target != null) {
                             target.setStatusEffect(effect.status);
+                            target.playAnimationClip(currentAction.hitAnim);
+                        }
                     }
                 }
                 // If damage, adjust hp of affected targets
                 else if(effect.type == Action.effectType.damage){
                     foreach( ITargetable target in targets ){
-                        if(target != null)
+                        if(target != null) {
                             target.updateCurrentHealth(currentDamage * effect.hpMulti + effect.hpValue);
+                            target.playAnimationClip(currentAction.hitAnim);
+                        }
                     }
                 }
                 // If swapRow, swap this creature's row
@@ -282,19 +289,28 @@ public class Creature : MonoBehaviour, ITargetable
                 // If heal, adjust hp of affected targets NOTE: THIS WILL BREAK IF ANYTHING TRIES TO HEAL A PLAYER
                 else if(effect.type == Action.effectType.heal){       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
                     foreach( Creature target in targets ){
-                        if(target != null)
+                        if(target != null) {
                             target.updateCurrentHealth(target.currentMaxHP * effect.hpMulti + effect.hpValue);
+                            target.playAnimationClip(currentAction.hitAnim);
+                        }
                     }
                 }
                 // If special, call the special effect with the correct parameters
                 else if(effect.type == Action.effectType.special){       // ( effect.type == Action.effectType.damage || effect.type == Action.effectType.heal ){
                     effect.optionalSpecialEffect.performStatusEffect(this, targets);
+                    foreach( Creature target in targets ){
+                        if(target != null) {
+                            target.playAnimationClip(currentAction.hitAnim);
+                        }
+                    }
                 }
             }
         }
 
         // Set idle after performing the current action
         setIdle();
+
+        return targets;
     }
 
     public void setIdle()
@@ -472,5 +488,11 @@ public class Creature : MonoBehaviour, ITargetable
         currentAction = null;
         currentTargets.Clear();
         GameManager.Instance.resetTargeting();
+    }
+
+    public void playAnimationClip(AnimationClip clip)
+    {
+        anim.clip = clip;
+        anim.Play();
     }
 }
