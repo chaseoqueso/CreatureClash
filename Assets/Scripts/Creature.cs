@@ -100,6 +100,9 @@ public class Creature : MonoBehaviour, ITargetable
             currentHealth = currentMaxHP;
         }
 
+        // update health bar
+        statusUICanvas.GetComponent<UIStateFeedbackManager>().updateCurrentHealthBar();
+
         // If HP drops to 0, this creature is killed
         if(currentHealth <= 0){
             excess = currentHealth;
@@ -360,6 +363,9 @@ public class Creature : MonoBehaviour, ITargetable
                 if( currentHealth > currentMaxHP ){
                     currentHealth = currentMaxHP;
                 }
+                // update health bar
+                statusUICanvas.GetComponent<UIStateFeedbackManager>().updateCurrentHealthBar();
+                statusUICanvas.GetComponent<UIStateFeedbackManager>().updateMaxHealthBar();
             }
             return;
         }
@@ -385,6 +391,9 @@ public class Creature : MonoBehaviour, ITargetable
             if( currentHealth > currentMaxHP ){
                 currentHealth = currentMaxHP;
             }
+            // update health bar
+            statusUICanvas.GetComponent<UIStateFeedbackManager>().updateCurrentHealthBar();
+            statusUICanvas.GetComponent<UIStateFeedbackManager>().updateMaxHealthBar();
         }
     }
 
