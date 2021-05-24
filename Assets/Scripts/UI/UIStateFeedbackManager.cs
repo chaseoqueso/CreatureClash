@@ -12,14 +12,16 @@ public class UIStateFeedbackManager : MonoBehaviour
     // public GameObject healthBar;
     public Slider slider;
     public Gradient healthGradient;
+    public Image fill;
 
     public Creature creature;
 
     void Start()
     {
         // Set starting health values
-        setMaxHealthBar();
-        setCurrentHealthBar();
+        slider.maxValue = creature.currentMaxHP;
+        slider.value = creature.currentHealth;
+        fill.color = healthGradient.Evaluate(1f);
 
         // Status UI (on hover)
         if(creature.player.playerNumber == 2){
@@ -28,14 +30,20 @@ public class UIStateFeedbackManager : MonoBehaviour
         setStatusFeedbackUIActive(false);
     }
 
-    public void setCurrentHealthBar()
+    public void updateMaxHealthBar()
     {
-        slider.value = creature.currentHealth;
+        // set new max value
+        slider.maxValue = creature.currentMaxHP;
+        // update hp bar
+        fill.color = healthGradient.Evaluate(slider.normalizedValue);
     }
 
-    public void setMaxHealthBar()
+    public void updateCurrentHealthBar()
     {
-        slider.maxValue = creature.currentMaxHP;
+        // set new current value
+        slider.value = creature.currentHealth;
+        // update hp bar
+        fill.color = healthGradient.Evaluate(slider.normalizedValue);
     }
 
     public void setStatusUI()

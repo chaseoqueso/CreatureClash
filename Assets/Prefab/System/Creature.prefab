@@ -146,6 +146,7 @@ MonoBehaviour:
     m_Mode: 1
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
+  fill: {fileID: 8159119808584247892}
   creature: {fileID: 9156477344270902033}
 --- !u!1 &1582865129521559272
 GameObject:
