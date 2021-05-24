@@ -31,6 +31,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats: []
-    m_Colors: []
+    m_Floats:
+    - Vector1_aa162f5b20394753bdc47bc8287714c4: 2
+    - Vector_RippleDensity: 30
+    - Vector_RippleSlimness: 3
+    - Vector_RippleSpeed: 0.5
+    - Vector_WaveSpeed: 0.1
+    m_Colors:
+    - Color_BaseColor: {r: 0.020247417, g: 0.050016683, b: 0.8156863, a: 0}
+    - Color_RippleColor: {r: 0.12322002, g: 0.47834986, b: 0.6698113, a: 0}
+    - Color_Wave: {r: 0.253115, g: 0.3979234, b: 0.6792453, a: 0}
   m_BuildTextureStacks: []
