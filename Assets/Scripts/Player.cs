@@ -6,11 +6,13 @@ public class Player : MonoBehaviour, ITargetable
 {
     public class SummonAction : PlayerAction {
         public int creatureIndex;
+        public CreatureObject creatureObject;
         public RowManager summonRow;
 
-        public SummonAction(int index, RowManager rm)
+        public SummonAction(int index, CreatureObject creature, RowManager rm)
         {
             creatureIndex = index;
+            creatureObject = creature;
             summonRow = rm;
         }
     }
@@ -80,10 +82,12 @@ public class Player : MonoBehaviour, ITargetable
         {
             GameManager.Instance.targetWasClicked(this);
         }
+        /*
         else if(Input.GetMouseButtonDown(1))
         {
             clearActions();
         }
+        */
     }
 
     public void clearActions()
@@ -121,7 +125,10 @@ public class Player : MonoBehaviour, ITargetable
         {
             if(a is SummonAction)
             {
-                ret.Add(((SummonAction)a).creatureIndex);
+                int index = ( (SummonAction)a ).creatureIndex;
+
+                if(index >= 0)
+                    ret.Add(index);
             }
         }
         return ret;
@@ -174,7 +181,7 @@ public class Player : MonoBehaviour, ITargetable
                 return;
             }
             
-            SummonAction summon = new SummonAction(index, (RowManager) target);
+            SummonAction summon = new SummonAction(index, cardsInHand[index], (RowManager) target);
             summon.manaCost = cardsInHand[index].ManaCost();
             queueAction(summon, null);
         }
@@ -195,8 +202,10 @@ public class Player : MonoBehaviour, ITargetable
         if(currentAction is SummonAction)
         {
             SummonAction s = (SummonAction)currentAction;
-            s.summonRow.summonCreature(cardsInHand[s.creatureIndex], this);
-            cardsInHand[s.creatureIndex] = null;
+            s.summonRow.summonCreature(s.creatureObject, this);
+
+            if(s.creatureIndex >= 0)
+                cardsInHand[s.creatureIndex] = null;
         }
         else
         {
@@ -415,5 +424,16 @@ public class Player : MonoBehaviour, ITargetable
     public void playAnimationClip(AnimationClip clip)
     {
         
+    }
+
+    public void removeIndicesFromSummonActions()
+    {
+        foreach(Action a in queuedActions)
+        {
+            if(a is SummonAction)
+            {
+                ( (SummonAction)a ).creatureIndex = -1;
+            }
+        }
     }
 }
