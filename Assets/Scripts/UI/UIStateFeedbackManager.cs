@@ -9,11 +9,33 @@ public class UIStateFeedbackManager : MonoBehaviour
     public GameObject statusFeedbackUI;
     public TMP_Text statusText;
 
+    // public GameObject healthBar;
+    public Slider slider;
+    public Gradient healthGradient;
+
     public Creature creature;
 
     void Start()
     {
+        // Set starting health values
+        setMaxHealthBar();
+        setCurrentHealthBar();
+
+        // Status UI (on hover)
+        if(creature.player.playerNumber == 2){
+            statusText.transform.localScale = new Vector3(-1, 1, 1);
+        }
         setStatusFeedbackUIActive(false);
+    }
+
+    public void setCurrentHealthBar()
+    {
+        slider.value = creature.currentHealth;
+    }
+
+    public void setMaxHealthBar()
+    {
+        slider.maxValue = creature.currentMaxHP;
     }
 
     public void setStatusUI()
