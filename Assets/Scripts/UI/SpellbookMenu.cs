@@ -92,12 +92,21 @@ public class SpellbookMenu : MonoBehaviour
 
     private void clearSpellbook()
     {
+        clearCreatures();
+        clearSpells();
+    }
+
+    private void clearCreatures()
+    {
         // Delete all creature panels
         foreach(GameObject panel in creaturePanels){
             Destroy(panel);
         }
         creaturePanels.Clear();
+    }
 
+    private void clearSpells()
+    {
         // Delete all spell panels
         foreach(GameObject panel in spellPanels){
             Destroy(panel);
@@ -134,5 +143,22 @@ public class SpellbookMenu : MonoBehaviour
 
         // Play animation
         spellbookUI.SetActive(true);
+    }
+
+    public void rerollCreatures()
+    {
+        currentPlayer.removeIndicesFromSummonActions();
+        currentPlayer.cardsInHand.Clear();
+
+        for(int i = 0; i < 4; ++i)
+        {
+            if(currentPlayer.deck.Count == 0)
+                break;
+
+            currentPlayer.cardsInHand.Add(currentPlayer.drawCard());
+        }
+
+        clearCreatures();
+        assignCreatureValues(new List<int>());
     }
 }
