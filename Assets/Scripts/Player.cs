@@ -53,6 +53,7 @@ public class Player : MonoBehaviour, ITargetable
         Debug.Log(playerObject);
         currentHealth = maxHealth = playerObject.baseHealth;
         material.mainTexture = playerObject.characterSprite;
+        material.SetTexture("normalMap", playerObject.characterNormalMap);
         transform.localScale = new Vector3(playerObject.characterSprite.width/material.GetFloat("pixelsPerUnit"), playerObject.characterSprite.height/material.GetFloat("pixelsPerUnit"), 1);
 
         loadDeck();

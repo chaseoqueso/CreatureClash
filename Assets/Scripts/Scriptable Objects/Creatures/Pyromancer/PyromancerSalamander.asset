@@ -26,6 +26,9 @@ MonoBehaviour:
     description: Sal spits a flame at the target, dealing 6 damage. <color=#AA0000><i>Blocked
       by Frontline</i></color>
     actionIcon: {fileID: 0}
+    attackAnim: {fileID: 7400000, guid: 18b55cbeeae6e404da7d5d022a3e7ce0, type: 2}
+    attackContactTime: 0
+    hitAnim: {fileID: 7400000, guid: d65c9c6fb18403f4a9252b802f90f95c, type: 2}
     actionEffectGroups:
     - groupName: Damage Target
       targetType: 4
@@ -41,3 +44,4 @@ MonoBehaviour:
           effectDuration: 0
         hpValue: 0
         hpMulti: -1
+        optionalSpecialEffect: {fileID: 0}

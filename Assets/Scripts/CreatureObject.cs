@@ -19,7 +19,7 @@ public class CreatureObject : ScriptableObject
 
     // Art
     [SerializeField] private Texture2D texture;
-    [SerializeField] private Texture2D heightMap;
+    [SerializeField] private Texture2D normalMap;
 
     // Sound Effects
     // ??? onSummon;
@@ -46,6 +46,8 @@ public class CreatureObject : ScriptableObject
     public float BaseSpeed(){return baseSpeed;}
 
     public Texture2D Texture(){return texture;}
+
+    public Texture2D NormalMap(){return normalMap;}
 
     public List<Action> Actions(){return actions;}
 }

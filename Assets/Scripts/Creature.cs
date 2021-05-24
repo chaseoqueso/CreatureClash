@@ -57,6 +57,7 @@ public class Creature : MonoBehaviour, ITargetable
         material = GetComponent<Renderer>().material;
         anim = GetComponent<Animation>();
         material.mainTexture = creature.Texture();
+        material.SetTexture("normalMap", creature.NormalMap());
         transform.localScale = new Vector3(creature.Texture().width/material.GetFloat("pixelsPerUnit"), creature.Texture().height/material.GetFloat("pixelsPerUnit"), 1);
         justSummoned = true;
     }
@@ -99,6 +100,9 @@ public class Creature : MonoBehaviour, ITargetable
             excess = currentHealth - currentMaxHP;
             currentHealth = currentMaxHP;
         }
+
+        // update health bar
+        statusUICanvas.GetComponent<UIStateFeedbackManager>().updateCurrentHealthBar();
 
         // If HP drops to 0, this creature is killed
         if(currentHealth <= 0){
@@ -360,6 +364,9 @@ public class Creature : MonoBehaviour, ITargetable
                 if( currentHealth > currentMaxHP ){
                     currentHealth = currentMaxHP;
                 }
+                // update health bar
+                statusUICanvas.GetComponent<UIStateFeedbackManager>().updateCurrentHealthBar();
+                statusUICanvas.GetComponent<UIStateFeedbackManager>().updateMaxHealthBar();
             }
             return;
         }
@@ -385,6 +392,9 @@ public class Creature : MonoBehaviour, ITargetable
             if( currentHealth > currentMaxHP ){
                 currentHealth = currentMaxHP;
             }
+            // update health bar
+            statusUICanvas.GetComponent<UIStateFeedbackManager>().updateCurrentHealthBar();
+            statusUICanvas.GetComponent<UIStateFeedbackManager>().updateMaxHealthBar();
         }
     }
 

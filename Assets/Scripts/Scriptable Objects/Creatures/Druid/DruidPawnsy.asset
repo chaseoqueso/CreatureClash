@@ -20,7 +20,7 @@ MonoBehaviour:
   baseDefense: 10
   baseSpeed: 60
   texture: {fileID: 2800000, guid: 950245096df60374abbae0980a3a8463, type: 3}
-  heightMap: {fileID: 0}
+  normalMap: {fileID: 2800000, guid: 6db795a2fde4e6a459985967ff1167d6, type: 3}
   actions:
   - actionName: Stick Whack
     description: Pawnsy bonks target creature or player, dealing 6 damage. <color=#AA0000><i>Blocked

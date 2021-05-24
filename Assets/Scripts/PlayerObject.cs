@@ -9,6 +9,7 @@ public class PlayerObject : ScriptableObject
     public string characterName;
     public string characterClass;
     public Texture2D characterSprite;
+    public Texture2D characterNormalMap;
     public float baseHealth;
     public float baseDef;
     public float baseDamage;
