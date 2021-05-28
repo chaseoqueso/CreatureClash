@@ -16,14 +16,14 @@ MonoBehaviour:
   manaCost: 2
   flavorText: Sal flavor text
   maxHealth: 10
-  baseDamage: 6
+  baseDamage: 7
   baseDefense: 0
   baseSpeed: 60
   texture: {fileID: 2800000, guid: aa69eab8e62b3da48a3756c571cafaea, type: 3}
-  heightMap: {fileID: 0}
+  normalMap: {fileID: 0}
   actions:
   - actionName: Flame Spit
-    description: Sal spits a flame at the target, dealing 6 damage. <color=#AA0000><i>Blocked
+    description: Sal spits a flame at the target, dealing 7 damage. <color=#AA0000><i>Blocked
       by Frontline</i></color>
     actionIcon: {fileID: 0}
     attackAnim: {fileID: 7400000, guid: 18b55cbeeae6e404da7d5d022a3e7ce0, type: 2}

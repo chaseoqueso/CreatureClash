@@ -16,14 +16,14 @@ MonoBehaviour:
   manaCost: 5
   flavorText: "W\xF6lfingeist description"
   maxHealth: 20
-  baseDamage: 10
+  baseDamage: 12
   baseDefense: 15
   baseSpeed: 20
   texture: {fileID: 2800000, guid: bbe7a2c504ca2af4487a020c980d7866, type: 3}
-  heightMap: {fileID: 0}
+  normalMap: {fileID: 0}
   actions:
   - actionName: Haunting Bite
-    description: "W\xF6lfingeist bites target creature, dealing 7 damage. The creature
+    description: "W\xF6lfingeist bites target creature, dealing 12 damage. The creature
       is <color=#7f20c7>Frightened</color>, and their speed stat is lowered by 15
       for one round. <color=#AA0000><i>Blocked by Frontline</i></color>"
     actionIcon: {fileID: 0}
