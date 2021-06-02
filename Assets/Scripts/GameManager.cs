@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
 
     public void startGame(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name == "ForestArena") {
+        if(scene.name == "ForestArena" || scene.name == "CrossroadsArena") {
             data = DataManager.Instance;
 
             turnCount = 1;

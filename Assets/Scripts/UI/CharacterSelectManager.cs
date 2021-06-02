@@ -22,7 +22,8 @@ public class CharacterSelectManager : MonoBehaviour
         //Destroy(gameObject);
         if( readyP1 && readyP2 ){
             // Start game
-            SceneManager.LoadScene("ForestArena");
+            string level = Random.Range(0, 2) == 1 ? "ForestArena" : "CrossroadsArena";
+            SceneManager.LoadScene(level);
             Debug.Log("Start Game");
         }
     }

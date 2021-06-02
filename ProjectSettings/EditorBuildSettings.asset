@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ForestArena.unity
     guid: a9df7ada5eb1ba74b859a60838d74250
+  - enabled: 1
+    path: Assets/Scenes/CrossroadsArena.unity
+    guid: 02f6e1c68a79964478e6cdf01923d737
   m_configObjects: {}
