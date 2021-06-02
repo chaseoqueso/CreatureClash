@@ -123,6 +123,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public class SelfTargetable : ITargetable
+    {
+        public ITargetable.TargetType getTargetType()
+        {
+            return ITargetable.TargetType.bothRows;
+        }
+
+        public List<ITargetable> getTargets()
+        {
+            return null;
+        }
+
+        public float updateCurrentHealth(float num)
+        {
+            return 0;
+        }
+
+        public void setStatusEffect(Action.statusEffect effect)
+        {
+        }
+
+        public void updateStatusEffects()
+        {
+        }
+
+        public void playAnimationClip(AnimationClip clip)
+        {
+        }
+    }
+
     public delegate void targetCallback(ITargetable target);
 
     public DataManager data;
@@ -194,18 +224,23 @@ public class GameManager : MonoBehaviour
                 break;
 
             case Turn.resolveAttacks:
+                currentTurn = Turn.player1; 
+
                 ++turnCount;
                 data.player1.actionPoints = data.player2.actionPoints = turnCount + 2;
-
-                currentTurn = Turn.player1; 
-                data.p1Front.removeSummoningSickness();
-                data.p1Back.removeSummoningSickness();
-                data.p2Front.removeSummoningSickness();
-                data.p2Back.removeSummoningSickness();
                 data.player1.drawCardsUntilFull();
                 data.player2.drawCardsUntilFull();
                 data.player1.updateStatusEffects();
                 data.player2.updateStatusEffects();
+
+                data.p1Front.additionalCreatures = 0;
+                data.p1Back.additionalCreatures = 0;
+                data.p2Front.additionalCreatures = 0;
+                data.p2Back.additionalCreatures = 0;
+                data.p1Front.removeSummoningSickness();
+                data.p1Back.removeSummoningSickness();
+                data.p2Front.removeSummoningSickness();
+                data.p2Back.removeSummoningSickness();
                 data.p1Front.updateStatusEffects();
                 data.p1Back.updateStatusEffects();
                 data.p2Front.updateStatusEffects();
@@ -240,7 +275,7 @@ public class GameManager : MonoBehaviour
     }
 
     //Returns true if there are targets to select, false otherwise
-    public void performAfterTargetSelect(Player player, Action.targets targetType, Action.targetRestrictions restrictions, bool blockedByFrontline, targetCallback callback)
+    public void performAfterTargetSelect(Player player, Action.targets targetType, Action.targetRestrictions restrictions, bool blockedByFrontline, targetCallback callback, bool isSummoning = false)
     {
         if(player == null)
         {
@@ -249,7 +284,7 @@ public class GameManager : MonoBehaviour
         }
 
         if(targetType == Action.targets.self || restrictions == Action.targetRestrictions.self) {
-            callback(null);
+            callback(new SelfTargetable());
             StartCoroutine(resetTargetsAfterFrame());
             Debug.Log("Target was Self");
             return;
@@ -258,7 +293,7 @@ public class GameManager : MonoBehaviour
         int playerNumber = player == data.player1 ? 1 : 2;
         disableTargeting();
 
-        bool canTarget = enableTargetingOnTargets(playerNumber, targetType, restrictions, blockedByFrontline);
+        bool canTarget = enableTargetingOnTargets(playerNumber, targetType, restrictions, blockedByFrontline, isSummoning);
 
         if(canTarget)
         {
@@ -290,6 +325,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("Targeting Cancelled");
+            callback(null);
         }
 
         resetTargeting();
@@ -374,13 +410,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public RowManager selectFrontRowFromBackRow(RowManager row)
+    public RowManager getOtherRowForSamePlayer(RowManager row)
     {
         if(row == data.p1Back)
             return data.p1Front;
+
+        if(row == data.p1Front)
+            return data.p1Back;
         
         if(row == data.p2Back)
             return data.p2Front;
+        
+        if(row == data.p2Front)
+            return data.p2Back;
         
         return null;
     }
@@ -515,36 +557,15 @@ public class GameManager : MonoBehaviour
 
     public void swapCreatureRow(Creature creature)
     {
-        if(creature.player == data.player1)
-        {
-            if(creature.row == data.p1Front)
-            {
-                data.p1Front.removeCreature(creature);
-                data.p1Back.addCreature(creature);
-            }
-            else
-            {
-                data.p1Back.removeCreature(creature);
-                data.p1Front.addCreature(creature);
-            }
-        }
-        else
-        {
-            if(creature.row == data.p2Front)
-            {
-                data.p2Front.removeCreature(creature);
-                data.p2Back.addCreature(creature);
-            }
-            else
-            {
-                data.p2Back.removeCreature(creature);
-                data.p2Front.addCreature(creature);
-            }
-        }
+        RowManager currentRow = creature.row;
+        RowManager newRow = getOtherRowForSamePlayer(creature.row);
+
+        currentRow.removeCreature(creature);
+        newRow.addCreature(creature);
     }
 
     //returns true if there is a valid target for the given targetType and restrictions
-    public bool enableTargetingOnTargets(int playerNumber, Action.targets targetType, Action.targetRestrictions restrictions, bool blockedByFrontline)
+    public bool enableTargetingOnTargets(int playerNumber, Action.targets targetType, Action.targetRestrictions restrictions, bool blockedByFrontline, bool isSummoning)
     {
         //If the target is self, return true. Otherwise, we need to check the other cases to see if there's a valid target
         if(targetType == Action.targets.self || restrictions == Action.targetRestrictions.self)
@@ -632,11 +653,11 @@ public class GameManager : MonoBehaviour
                 {
                     if(playerNumber == 1)
                     {
-                        data.p1Back.enableTargeting = true;
+                        data.p1Back.enableTargeting(true, isSummoning);
                     }
                     else
                     {
-                        data.p2Back.enableTargeting = true;
+                        data.p2Back.enableTargeting(true, isSummoning);
                     }
                 }
 
@@ -644,11 +665,11 @@ public class GameManager : MonoBehaviour
                 {
                     if(playerNumber == 1)
                     {
-                        data.p2Back.enableTargeting = true;
+                        data.p2Back.enableTargeting(true, isSummoning);
                     }
                     else
                     {
-                        data.p1Back.enableTargeting = true;
+                        data.p1Back.enableTargeting(true, isSummoning);
                     }
                 }
                 break;
@@ -726,13 +747,13 @@ public class GameManager : MonoBehaviour
                 {
                     if(playerNumber == 1)
                     {
-                        data.p1Front.enableTargeting = true;
-                        data.p1Back.enableTargeting = true;
+                        data.p1Front.enableTargeting(true, isSummoning);
+                        data.p1Back.enableTargeting(true, isSummoning);
                     }
                     else
                     {
-                        data.p2Front.enableTargeting = true;
-                        data.p2Back.enableTargeting = true;
+                        data.p2Front.enableTargeting(true, isSummoning);
+                        data.p2Back.enableTargeting(true, isSummoning);
                     }
                 }
 
@@ -740,13 +761,13 @@ public class GameManager : MonoBehaviour
                 {
                     if(playerNumber == 1)
                     {
-                        data.p2Front.enableTargeting = true;
-                        data.p2Back.enableTargeting = true;
+                        data.p2Front.enableTargeting(true, isSummoning);
+                        data.p2Back.enableTargeting(true, isSummoning);
                     }
                     else
                     {
-                        data.p1Front.enableTargeting = true;
-                        data.p1Back.enableTargeting = true;
+                        data.p1Front.enableTargeting(true, isSummoning);
+                        data.p1Back.enableTargeting(true, isSummoning);
                     }
                 }
                 break;
@@ -758,13 +779,13 @@ public class GameManager : MonoBehaviour
                 {
                     if(playerNumber == 1)
                     {
-                        data.p1Front.enableTargeting = true;
-                        data.p1Back.enableTargeting = true;
+                        data.p1Front.enableTargeting(true, isSummoning);
+                        data.p1Back.enableTargeting(true, isSummoning);
                     }
                     else
                     {
-                        data.p2Front.enableTargeting = true;
-                        data.p2Back.enableTargeting = true;
+                        data.p2Front.enableTargeting(true, isSummoning);
+                        data.p2Back.enableTargeting(true, isSummoning);
                     }
                 }
 
@@ -772,13 +793,13 @@ public class GameManager : MonoBehaviour
                 {
                     if(playerNumber == 1)
                     {
-                        data.p2Front.enableTargeting = true;
-                        data.p2Back.enableTargeting = true;
+                        data.p2Front.enableTargeting(true, isSummoning);
+                        data.p2Back.enableTargeting(true, isSummoning);
                     }
                     else
                     {
-                        data.p1Front.enableTargeting = true;
-                        data.p1Back.enableTargeting = true;
+                        data.p1Front.enableTargeting(true, isSummoning);
+                        data.p1Back.enableTargeting(true, isSummoning);
                     }
                 }
                 break;
@@ -790,11 +811,11 @@ public class GameManager : MonoBehaviour
                 {
                     if(playerNumber == 1)
                     {
-                        data.p1Front.enableTargeting = true;
+                        data.p1Front.enableTargeting(true, isSummoning);
                     }
                     else
                     {
-                        data.p2Front.enableTargeting = true;
+                        data.p2Front.enableTargeting(true, isSummoning);
                     }
                 }
 
@@ -802,11 +823,11 @@ public class GameManager : MonoBehaviour
                 {
                     if(playerNumber == 1)
                     {
-                        data.p2Front.enableTargeting = true;
+                        data.p2Front.enableTargeting(true, isSummoning);
                     }
                     else
                     {
-                        data.p1Front.enableTargeting = true;
+                        data.p1Front.enableTargeting(true, isSummoning);
                     }
                 }
                 break;
@@ -900,10 +921,10 @@ public class GameManager : MonoBehaviour
 
     public void resetTargeting()
     {
-        data.p1Front.enableTargeting = false;
-        data.p1Back.enableTargeting = false;
-        data.p2Front.enableTargeting = false;
-        data.p2Back.enableTargeting = false;
+        data.p1Front.enableTargeting(false, false);
+        data.p1Back.enableTargeting(false, false);
+        data.p2Front.enableTargeting(false, false);
+        data.p2Back.enableTargeting(false, false);
         bothRowsTargeting = false;
 
         if(currentTurn == Turn.player1) {
@@ -929,13 +950,13 @@ public class GameManager : MonoBehaviour
     {
         data.player1.enableTargeting = false;
         data.player2.enableTargeting = false;
-        data.p1Front.enableTargeting = false;
+        data.p1Front.enableTargeting(false, false);
         data.p1Front.enableCreatureTargeting(false);
-        data.p1Back.enableTargeting = false;
+        data.p1Back.enableTargeting(false, false);
         data.p1Back.enableCreatureTargeting(false);
-        data.p2Front.enableTargeting = false;
+        data.p2Front.enableTargeting(false, false);
         data.p2Front.enableCreatureTargeting(false);
-        data.p2Back.enableTargeting = false;
+        data.p2Back.enableTargeting(false, false);
         data.p2Back.enableCreatureTargeting(false);
     }
 }

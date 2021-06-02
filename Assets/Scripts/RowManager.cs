@@ -5,27 +5,29 @@ using UnityEngine;
 public class RowManager : MonoBehaviour, ITargetable
 {
     private const float creatureLerpTime = 0.4f;
+    private const int maxCreatures = 8;
 
     public Vector3 topEndpoint;
     public Vector3 bottomEndpoint;
     public GameObject creaturePrefab;
-    public bool enableTargeting;
-
     public List<Creature> creatures;
+    public int additionalCreatures;
+
     private List<Vector3> creaturePositions;
     private SpriteRenderer[] renderers;
+    private bool targetingEnabled;
 
     void Awake()
     {
         creatures = new List<Creature>();
         creaturePositions = new List<Vector3>();
-        enableTargeting = false;
+        targetingEnabled = false;
         renderers = GetComponentsInChildren<SpriteRenderer>();
     }
 
     void Update()
     {
-        if(enableTargeting) {
+        if(targetingEnabled) {
             foreach(SpriteRenderer r in renderers)
             {
                 r.color = new Color(r.color.r, r.color.g, r.color.b, Mathf.Abs(Mathf.Sin(Time.time * 2f)));
@@ -42,7 +44,7 @@ public class RowManager : MonoBehaviour, ITargetable
 
     void OnMouseDown()
     {
-        if(!enableTargeting)
+        if(!targetingEnabled)
             return;
         
         GameManager.Instance.targetWasClicked(this);
@@ -202,5 +204,28 @@ public class RowManager : MonoBehaviour, ITargetable
         {
             c.playAnimationClip(clip);
         }
+    }
+
+    public void enableTargeting(bool enable, bool isSummoning)
+    {
+        if(isSummoning && enable)
+        {
+            Debug.Log("Current Creatures: " + creatures.Count);
+            Debug.Log("Additional Creatures: " + additionalCreatures);
+
+            if(!isAtMaxCreatures())
+            {
+                targetingEnabled = enable;
+            }
+        }
+        else
+        {
+            targetingEnabled = enable;
+        }
+    }
+
+    public bool isAtMaxCreatures()
+    {
+        return creatures.Count + additionalCreatures >= maxCreatures;
     }
 }

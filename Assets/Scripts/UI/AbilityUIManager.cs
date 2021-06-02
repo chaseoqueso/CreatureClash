@@ -55,6 +55,11 @@ public class AbilityUIManager : MonoBehaviour
             a.setUIValues(actionList[i]);
             a.abilityIndex = i;
 
+            if(actionList[i] == Action.swapRows && GameManager.Instance.getOtherRowForSamePlayer(creature.row).isAtMaxCreatures())
+            {
+                a.setInteractable(false);
+            }
+
             yPos -= 100;
 
             // actionSelectUI.GetComponent<RectTransform>().sizeDelta = new Vector2(abilityUIPanelWidth, panelSize);

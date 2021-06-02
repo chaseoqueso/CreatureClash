@@ -38,7 +38,7 @@ public class SpellPanel : MonoBehaviour
         // if no valid targets, set not interactable
         List<Action.EffectGroup> actionEffectGroups = a.actionEffectGroups;
         foreach( Action.EffectGroup effectGroup in actionEffectGroups ){
-            if(!GameManager.Instance.enableTargetingOnTargets(player.playerNumber, effectGroup.targetType, effectGroup.targetRestriction, effectGroup.blockedByFrontline)){
+            if(!GameManager.Instance.enableTargetingOnTargets(player.playerNumber, effectGroup.targetType, effectGroup.targetRestriction, effectGroup.blockedByFrontline, false)){
                 setInteractable(false);
                 GameManager.Instance.resetTargeting();
                 return;

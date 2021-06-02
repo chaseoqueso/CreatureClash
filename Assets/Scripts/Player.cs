@@ -156,6 +156,10 @@ public class Player : MonoBehaviour, ITargetable
         {
             if(target == null)
             {
+                clearActions();
+            }
+            else if(target is GameManager.SelfTargetable)
+            {
                 targetGroups.Add(this.getTargets());
             }
             else
@@ -181,13 +185,16 @@ public class Player : MonoBehaviour, ITargetable
                 Debug.LogError("Target other than row was selected to summon creature.");
                 return;
             }
+
+            RowManager row = (RowManager) target;
             
-            SummonAction summon = new SummonAction(index, cardsInHand[index], (RowManager) target);
+            ++row.additionalCreatures;
+            SummonAction summon = new SummonAction(index, cardsInHand[index], row);
             summon.manaCost = cardsInHand[index].ManaCost();
             queueAction(summon, null);
         }
 
-        GameManager.Instance.performAfterTargetSelect(this, Action.targets.eitherRow, Action.targetRestrictions.allies, false, summonInRow);
+        GameManager.Instance.performAfterTargetSelect(this, Action.targets.eitherRow, Action.targetRestrictions.allies, false, summonInRow, true);
     }
 
     public void performQueuedAction(int actionIndex)

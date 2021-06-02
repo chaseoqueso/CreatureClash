@@ -123,6 +123,10 @@ public class Creature : MonoBehaviour, ITargetable
         {
             if(target == null)
             {
+                clearActions();
+            }
+            else if(target is GameManager.SelfTargetable)
+            {
                 targetGroups.Add(this.getTargets());
             }
             else
@@ -150,6 +154,12 @@ public class Creature : MonoBehaviour, ITargetable
 
         currentTargets = targets;
         currentAction = actions[actionIndex];
+
+        if(currentAction == Action.swapRows)
+        {
+            row.additionalCreatures--;
+            GameManager.Instance.getOtherRowForSamePlayer(row).additionalCreatures++;
+        }
     }
 
     public List<ITargetable> performNextAction()
@@ -236,7 +246,7 @@ public class Creature : MonoBehaviour, ITargetable
                                     break;
                                 }
 
-                                newTarget = GameManager.Instance.selectFrontRowFromBackRow(((RowManager)target));
+                                newTarget = GameManager.Instance.getOtherRowForSamePlayer(((RowManager)target));
 
                                 if(newTarget != null) //if our row is in fact the back row (which it should be)
                                 {
@@ -495,6 +505,18 @@ public class Creature : MonoBehaviour, ITargetable
 
     public void clearActions()
     {
+        if(currentAction == Action.swapRows)
+        {
+            if(row.isAtMaxCreatures())
+            {
+                GameManager.Instance.resetTargeting();
+                return;
+            }
+
+            row.additionalCreatures++;
+            GameManager.Instance.getOtherRowForSamePlayer(row).additionalCreatures--;
+        }
+
         currentAction = null;
         currentTargets.Clear();
         GameManager.Instance.resetTargeting();
