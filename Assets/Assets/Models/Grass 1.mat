@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grass
+  m_Name: Grass 1
   m_Shader: {fileID: -6465566751694194690, guid: 48c842fca0477c349909a6b3fdf2eeee, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -35,7 +35,7 @@ Material:
     - Vector1_64950636178a4fce9000f290e6240b49: 0.3
     - Vector1_c58aab57364a4c4887456acce572882f: 0.06
     m_Colors:
-    - Color_GrassColor: {r: 0.14036138, g: 0.5849056, b: 0.06897471, a: 0}
+    - Color_GrassColor: {r: 0.101548664, g: 0.46226418, b: 0.041429326, a: 0}
     - Color_Top_Color: {r: 0.003921569, g: 0.01960784, b: 0.0009803922, a: 1}
     - Color_ec25721818fc4379bd948c4e3c88668e: {r: 0.0943384, g: 0.6603774, b: 0, a: 0}
     - Vector2_2d8098029a47440bb0f119bbe9ae4dfa: {r: 4, g: 0, b: 0, a: 0}
