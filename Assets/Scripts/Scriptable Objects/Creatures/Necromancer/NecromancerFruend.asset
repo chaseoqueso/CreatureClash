@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8045e0012911d948b453104250524ca, type: 3}
-  m_Name: DruidTheodore
+  m_Name: NecromancerFruend
   m_EditorClassIdentifier: 
-  creatureName: Theodore
-  manaCost: 8
-  flavorText: 
-  maxHealth: 50
-  baseDamage: 20
-  baseDefense: 15
-  baseSpeed: 10
-  texture: {fileID: 2800000, guid: e52416a1673ad4442bab431f97d1e7d7, type: 3}
+  creatureName: Freund
+  manaCost: 6
+  flavorText: Freund description
+  maxHealth: 15
+  baseDamage: 10
+  baseDefense: 0
+  baseSpeed: 20
+  texture: {fileID: 2800000, guid: 36355ed703c219542986d6492db1e8f2, type: 3}
   normalMap: {fileID: 0}
   actions:
-  - actionName: Maul
-    description: Theodore claws target creature or player, dealing 10 damage. The
-      target also <color=#770000>Bleeds</color> for 2 damage for 3 turns. <color=#AA0000><i>Blocked
+  - actionName: Frenzied Swipe
+    description: Freund swings toward target creature or player, dealing 10 damage.
+      Freund's speed increases by 20 and damage increases by 5 for 3 turns. <color=#AA0000><i>Blocked
       by Frontline</i></color>
     actionIcon: {fileID: 0}
     attackAnim: {fileID: 7400000, guid: 18b55cbeeae6e404da7d5d022a3e7ce0, type: 2}
     attackContactTime: 0.16
     hitAnim: {fileID: 7400000, guid: d65c9c6fb18403f4a9252b802f90f95c, type: 2}
     actionEffectGroups:
-    - groupName: Damage
+    - groupName: Damage Target
       targetType: 4
       targetRestriction: 0
       blockedByFrontline: 1
@@ -41,18 +41,33 @@ MonoBehaviour:
         status:
           statusType: 0
           modifierValue: 0
-          modifierMult: 1
-          effectDuration: 1
+          modifierMult: 0
+          effectDuration: 0
         hpValue: 0
         hpMulti: -1
         optionalSpecialEffect: {fileID: 0}
-      - effectName: Bleed
+    - groupName: Frenzy
+      targetType: 6
+      targetRestriction: 3
+      blockedByFrontline: 0
+      groupEffects:
+      - effectName: Speed
         type: 2
         status:
-          statusType: 4
-          modifierValue: -2
+          statusType: 1
+          modifierValue: 20
           modifierMult: 0
           effectDuration: 3
         hpValue: 0
-        hpMulti: 1
+        hpMulti: 0
+        optionalSpecialEffect: {fileID: 0}
+      - effectName: Damage
+        type: 2
+        status:
+          statusType: 2
+          modifierValue: 5
+          modifierMult: 0
+          effectDuration: 0
+        hpValue: 0
+        hpMulti: 0
         optionalSpecialEffect: {fileID: 0}

@@ -20,15 +20,15 @@ MonoBehaviour:
   baseDefense: 10
   baseSpeed: 60
   texture: {fileID: 2800000, guid: 04ec1d99b513121429cb00222710ed40, type: 3}
-  heightMap: {fileID: 0}
+  normalMap: {fileID: 0}
   actions:
   - actionName: Ember's Fury
-    description: Phoenix unleashes a fire storm, dealing 5 damage to all creatures
+    description: Phoenix unleashes a fire storm, dealing 8 damage to all creatures
       in target row. Each of these creatures is also <color=#CC4400>Burned</color>
       for 2 damage per round for 2 rounds.
     actionIcon: {fileID: 0}
     attackAnim: {fileID: 7400000, guid: 51e73bcad46c18246a700fa10cb8088d, type: 2}
-    attackContactTime: 0
+    attackContactTime: 0.51
     hitAnim: {fileID: 7400000, guid: d65c9c6fb18403f4a9252b802f90f95c, type: 2}
     actionEffectGroups:
     - groupName: DMG Target
