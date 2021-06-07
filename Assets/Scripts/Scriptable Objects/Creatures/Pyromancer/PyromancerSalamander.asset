@@ -27,7 +27,7 @@ MonoBehaviour:
       by Frontline</i></color>
     actionIcon: {fileID: 0}
     attackAnim: {fileID: 7400000, guid: 18b55cbeeae6e404da7d5d022a3e7ce0, type: 2}
-    attackContactTime: 0
+    attackContactTime: 0.16
     hitAnim: {fileID: 7400000, guid: d65c9c6fb18403f4a9252b802f90f95c, type: 2}
     actionEffectGroups:
     - groupName: Damage Target

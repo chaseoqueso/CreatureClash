@@ -10,37 +10,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8045e0012911d948b453104250524ca, type: 3}
-  m_Name: DruidWillow
+  m_Name: PyromancerHedgehog
   m_EditorClassIdentifier: 
-  creatureName: Willow, the Forest Guard
-  manaCost: 6
-  flavorText: 
-  maxHealth: 20
-  baseDamage: 8
-  baseDefense: 40
-  baseSpeed: 10
-  texture: {fileID: 2800000, guid: 828ca984f40b2e04ca4f46984994bf29, type: 3}
+  creatureName: Jennifer
+  manaCost: 3
+  flavorText: Jennifer
+  maxHealth: 10
+  baseDamage: 10
+  baseDefense: 20
+  baseSpeed: 40
+  texture: {fileID: 2800000, guid: 44d83cf940ed30246807a6b929cd297b, type: 3}
   normalMap: {fileID: 0}
   actions:
-  - actionName: Willow's Wisp
-    description: Willow lures target creature in, then attacks for 8 damage.
+  - actionName: Flare Blast
+    description: Jennifer burns brightly, dealing 10 damage to target creature or
+      player.
     actionIcon: {fileID: 0}
-    attackAnim: {fileID: 7400000, guid: 18b55cbeeae6e404da7d5d022a3e7ce0, type: 2}
-    attackContactTime: 0.16
+    attackAnim: {fileID: 7400000, guid: 51e73bcad46c18246a700fa10cb8088d, type: 2}
+    attackContactTime: 0.51
     hitAnim: {fileID: 7400000, guid: d65c9c6fb18403f4a9252b802f90f95c, type: 2}
     actionEffectGroups:
-    - groupName: Damage
-      targetType: 5
+    - groupName: DMG Target
+      targetType: 4
       targetRestriction: 0
-      blockedByFrontline: 0
+      blockedByFrontline: 1
       groupEffects:
-      - effectName: Damage
+      - effectName: DMG
         type: 0
         status:
           statusType: 0
           modifierValue: 0
-          modifierMult: 1
-          effectDuration: 1
+          modifierMult: 0
+          effectDuration: 0
         hpValue: 0
         hpMulti: -1
         optionalSpecialEffect: {fileID: 0}

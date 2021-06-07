@@ -10,27 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8045e0012911d948b453104250524ca, type: 3}
-  m_Name: DruidWillow
+  m_Name: DruidBlossom
   m_EditorClassIdentifier: 
-  creatureName: Willow, the Forest Guard
-  manaCost: 6
+  creatureName: Bloodroot Blossom
+  manaCost: 5
   flavorText: 
   maxHealth: 20
-  baseDamage: 8
-  baseDefense: 40
-  baseSpeed: 10
-  texture: {fileID: 2800000, guid: 828ca984f40b2e04ca4f46984994bf29, type: 3}
+  baseDamage: 15
+  baseDefense: 0
+  baseSpeed: 45
+  texture: {fileID: 2800000, guid: 5079172d107857d4d8b33bcdc594923b, type: 3}
   normalMap: {fileID: 0}
   actions:
-  - actionName: Willow's Wisp
-    description: Willow lures target creature in, then attacks for 8 damage.
+  - actionName: Petal Rush
+    description: Bloodroot Blossom dashes toward target creature or player, dealing
+      15 damage.
     actionIcon: {fileID: 0}
     attackAnim: {fileID: 7400000, guid: 18b55cbeeae6e404da7d5d022a3e7ce0, type: 2}
     attackContactTime: 0.16
     hitAnim: {fileID: 7400000, guid: d65c9c6fb18403f4a9252b802f90f95c, type: 2}
     actionEffectGroups:
     - groupName: Damage
-      targetType: 5
+      targetType: 4
       targetRestriction: 0
       blockedByFrontline: 0
       groupEffects:
