@@ -19,6 +19,18 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_GrassMetalic:
+        m_Texture: {fileID: 2800000, guid: 1c4ec099ccba02e4ca6495e74b6f9c4d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_GrassTexture:
+        m_Texture: {fileID: 2800000, guid: 45fd6df302e14af41998765a78f76896, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_a4f958bfbbb84d5db1c77afe07f6a162:
+        m_Texture: {fileID: 2800000, guid: 96600f69b9890f54bb8e1aa69194941f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -33,9 +45,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_64950636178a4fce9000f290e6240b49: 0.3
-    - Vector1_c58aab57364a4c4887456acce572882f: 0.06
+    - Vector1_c58aab57364a4c4887456acce572882f: 0.09
     m_Colors:
-    - Color_GrassColor: {r: 0.101548664, g: 0.46226418, b: 0.041429326, a: 0}
+    - Color_GrassColor: {r: 0.14036138, g: 0.5849056, b: 0.06897471, a: 0}
+    - Color_GrassVariant: {r: 0.022694904, g: 0.05352857, b: 0.3207547, a: 0}
     - Color_Top_Color: {r: 0.003921569, g: 0.01960784, b: 0.0009803922, a: 1}
     - Color_ec25721818fc4379bd948c4e3c88668e: {r: 0.0943384, g: 0.6603774, b: 0, a: 0}
     - Vector2_2d8098029a47440bb0f119bbe9ae4dfa: {r: 4, g: 0, b: 0, a: 0}
