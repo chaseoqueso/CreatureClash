@@ -144,8 +144,8 @@ MonoBehaviour:
   m_text: Lorem ipsum dolor sit amet, consectetura dipiscing elit, sed do eiusmod
     tempor incididunt.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a621e06cbcaedd34a868c86c0d1beed1, type: 2}
-  m_sharedMaterial: {fileID: -7746547861621102530, guid: a621e06cbcaedd34a868c86c0d1beed1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 32dc8d7850bf5194cb707f91ef8c0a69, type: 2}
+  m_sharedMaterial: {fileID: 7284533869017131764, guid: 32dc8d7850bf5194cb707f91ef8c0a69, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_margin: {x: -0.0052490234, y: 0, z: 0, w: -0.12483215}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7371893247079333115
@@ -278,8 +278,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: ABILITY
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a621e06cbcaedd34a868c86c0d1beed1, type: 2}
-  m_sharedMaterial: {fileID: -7746547861621102530, guid: a621e06cbcaedd34a868c86c0d1beed1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 32dc8d7850bf5194cb707f91ef8c0a69, type: 2}
+  m_sharedMaterial: {fileID: 7284533869017131764, guid: 32dc8d7850bf5194cb707f91ef8c0a69, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -573,6 +573,9 @@ MonoBehaviour:
     actionName: 
     description: 
     actionIcon: {fileID: 0}
+    attackAnim: {fileID: 0}
+    attackContactTime: 0
+    hitAnim: {fileID: 0}
     actionEffectGroups: []
   abilityIndex: 0
   abilityName: {fileID: 7371893247079333117}
