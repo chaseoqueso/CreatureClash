@@ -21,6 +21,7 @@ public class WInScreenPanel : MonoBehaviour
     public void loadMenu()
     {
         Destroy(GameManager.Instance.gameObject);
+        Destroy(MusicManager.instance.gameObject);
         SceneManager.LoadScene("MainMenu");
     }
 }

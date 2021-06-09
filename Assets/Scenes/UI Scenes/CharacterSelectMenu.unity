@@ -1106,6 +1106,9 @@ MonoBehaviour:
   data: {fileID: 0}
   player1Object: {fileID: 0}
   player2Object: {fileID: 0}
+  menuTrack: {fileID: 8300000, guid: de6d2730fc2fe2645bb237cb61e7dbaa, type: 3}
+  battleIntro: {fileID: 8300000, guid: c67f277814759c747b486ce18141dc06, type: 3}
+  battleLoop: {fileID: 8300000, guid: ec6f6523bcd5f2f4cae9bc4d4354c8e8, type: 3}
   turnCount: 0
   winScreenPrefab: {fileID: 6741732563181491539, guid: 6a2d0f62c2c3b534db9aede16ef6a869, type: 3}
 --- !u!4 &1991859056
