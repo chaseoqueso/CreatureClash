@@ -11,6 +11,7 @@ public class CharacterSelectMenu : MonoBehaviour
     public Button readyButton;
 
     // Player UI data
+    public Image banner;
     public TMP_Text playerName;
     public TMP_Text playerClass;
     public TMP_Text playerDescription;
@@ -75,6 +76,7 @@ public class CharacterSelectMenu : MonoBehaviour
 
     public void setUIValues(TMP_Text characterName, TMP_Text charClass, TMP_Text description, Image img, PlayerObject character)
     {
+        banner.sprite = charManager.bannerSprites[charIndex];
         characterName.text = character.characterName;
         charClass.text = character.characterClass;
         description.text = character.flavorText;
