@@ -15,6 +15,7 @@ MonoBehaviour:
   characterName: Chrysanthemum
   characterClass: The Druid
   characterSprite: {fileID: 2800000, guid: db90ea592dda3984db3a9dc48d8fc6de, type: 3}
+  characterNormalMap: {fileID: 0}
   baseHealth: 100
   baseDef: 0
   baseDamage: 10
@@ -30,6 +31,9 @@ MonoBehaviour:
   - actionName: Mend
     description: Heal target creature for 5 health.
     actionIcon: {fileID: 0}
+    attackAnim: {fileID: 0}
+    attackContactTime: 0
+    hitAnim: {fileID: 0}
     actionEffectGroups:
     - groupName: Single Creature
       targetType: 5
@@ -45,11 +49,15 @@ MonoBehaviour:
           effectDuration: 0
         hpValue: 5
         hpMulti: 0
+        optionalSpecialEffect: {fileID: 0}
     manaCost: 1
   - actionName: Sweet Breeze
     description: Summon a soothing breeze in target row, lowering creatures' speed
-      and attack by 10% for the following turn.
+      and attack by 20% for the following turn.
     actionIcon: {fileID: 0}
+    attackAnim: {fileID: 0}
+    attackContactTime: 0
+    hitAnim: {fileID: 0}
     actionEffectGroups:
     - groupName: Row
       targetType: 9
@@ -61,25 +69,30 @@ MonoBehaviour:
         status:
           statusType: 1
           modifierValue: 0
-          modifierMult: 0.9
+          modifierMult: 0.8
           effectDuration: 0
         hpValue: 0
         hpMulti: 0
+        optionalSpecialEffect: {fileID: 0}
       - effectName: Attack Reduction
         type: 2
         status:
           statusType: 2
           modifierValue: 0
-          modifierMult: 0.9
+          modifierMult: 0.8
           effectDuration: 0
         hpValue: 0
         hpMulti: 0
+        optionalSpecialEffect: {fileID: 0}
     manaCost: 3
   - actionName: Nature's Blessing
     description: Strengthen all allied creatures with raw primordial power, increasing
       health and maximum health by 10%, increasing attack by 20%, and reducing speed
       by 40% for 1 turn.
     actionIcon: {fileID: 0}
+    attackAnim: {fileID: 0}
+    attackContactTime: 0
+    hitAnim: {fileID: 0}
     actionEffectGroups:
     - groupName: Allied Creatures
       targetType: 10
@@ -95,6 +108,7 @@ MonoBehaviour:
           effectDuration: 1
         hpValue: 0
         hpMulti: 0
+        optionalSpecialEffect: {fileID: 0}
       - effectName: Attack Up
         type: 2
         status:
@@ -104,6 +118,7 @@ MonoBehaviour:
           effectDuration: 1
         hpValue: 0
         hpMulti: 0
+        optionalSpecialEffect: {fileID: 0}
       - effectName: Speed Down
         type: 2
         status:
@@ -113,7 +128,8 @@ MonoBehaviour:
           effectDuration: 1
         hpValue: 0
         hpMulti: 0
-    manaCost: 4
+        optionalSpecialEffect: {fileID: 0}
+    manaCost: 3
   characterPortrait: {fileID: 2800000, guid: 2a84e175433048e4db81ad0d17534f65, type: 3}
   challengeDialogue: []
   winDialogue: []

@@ -15,6 +15,7 @@ MonoBehaviour:
   characterName: Vladimir
   characterClass: The Necromancer
   characterSprite: {fileID: 2800000, guid: 33a69be124cce814ea4696c85be44267, type: 3}
+  characterNormalMap: {fileID: 0}
   baseHealth: 100
   baseDef: 0
   baseDamage: 10
@@ -28,10 +29,13 @@ MonoBehaviour:
     quantity: 5
   actions:
   - actionName: Blood Ritual
-    description: You take 2 damage to infuse target creature with increased vigor,
+    description: You take 4 damage to infuse target creature with increased vigor,
       increasing their maximum health by 5 and increasing their damage by 20% for
       1 turn.
     actionIcon: {fileID: 0}
+    attackAnim: {fileID: 0}
+    attackContactTime: 0
+    hitAnim: {fileID: 0}
     actionEffectGroups:
     - groupName: Self Damage
       targetType: 6
@@ -45,8 +49,9 @@ MonoBehaviour:
           modifierValue: 0
           modifierMult: 0
           effectDuration: 0
-        hpValue: -2
+        hpValue: -4
         hpMulti: 0
+        optionalSpecialEffect: {fileID: 0}
     - groupName: Creature Buff
       targetType: 5
       targetRestriction: 0
@@ -61,6 +66,7 @@ MonoBehaviour:
           effectDuration: 1
         hpValue: 0
         hpMulti: 0
+        optionalSpecialEffect: {fileID: 0}
       - effectName: Damage Buff
         type: 2
         status:
@@ -70,12 +76,16 @@ MonoBehaviour:
           effectDuration: 1
         hpValue: 0
         hpMulti: 0
+        optionalSpecialEffect: {fileID: 0}
     manaCost: 1
   - actionName: Corruption
     description: Choose a row. All creatures in the row are infected with a corrupting
-      disease that deals damage equal to 4% of the target's maximum health for 2
+      disease that deals damage equal to 5% of the target's maximum health for 2
       turns.
     actionIcon: {fileID: 0}
+    attackAnim: {fileID: 0}
+    attackContactTime: 0
+    hitAnim: {fileID: 0}
     actionEffectGroups:
     - groupName: Self Damage
       targetType: 9
@@ -87,16 +97,20 @@ MonoBehaviour:
         status:
           statusType: 4
           modifierValue: 0
-          modifierMult: -0.04
+          modifierMult: -0.05
           effectDuration: 2
         hpValue: 0
         hpMulti: 0
+        optionalSpecialEffect: {fileID: 0}
     manaCost: 2
   - actionName: Siphon Life
-    description: Target creature or player takes an amount of damage equal to 5%
+    description: Target creature or player takes an amount of damage equal to 25%
       of their maximum health, and another target creature heals for an amount equal
-      to 5% of their maximum health. <color=#AA0000><i>Blocked by Frontline</i></color>
+      to 25% of their maximum health. <color=#AA0000><i>Blocked by Frontline</i></color>
     actionIcon: {fileID: 0}
+    attackAnim: {fileID: 0}
+    attackContactTime: 0
+    hitAnim: {fileID: 0}
     actionEffectGroups:
     - groupName: Damage
       targetType: 4
@@ -111,7 +125,8 @@ MonoBehaviour:
           modifierMult: 0
           effectDuration: 0
         hpValue: 0
-        hpMulti: -0.05
+        hpMulti: -0.25
+        optionalSpecialEffect: {fileID: 0}
     - groupName: Heal
       targetType: 5
       targetRestriction: 0
@@ -125,8 +140,9 @@ MonoBehaviour:
           modifierMult: 0
           effectDuration: 0
         hpValue: 0
-        hpMulti: 0.05
-    manaCost: 3
+        hpMulti: 0.25
+        optionalSpecialEffect: {fileID: 0}
+    manaCost: 4
   characterPortrait: {fileID: 2800000, guid: f23d0483d543da34b90e9bc153c45d11, type: 3}
   challengeDialogue: []
   winDialogue: []
