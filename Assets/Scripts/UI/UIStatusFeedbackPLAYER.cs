@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIStateFeedbackManager : MonoBehaviour
+public class UIStatusFeedbackPLAYER : MonoBehaviour
 {
     public GameObject statusFeedbackUI;
     public TMP_Text statusText;
@@ -14,17 +14,17 @@ public class UIStateFeedbackManager : MonoBehaviour
     public Gradient healthGradient;
     public Image fill;
 
-    public Creature creature;
+    public Player player;
 
     void Start()
     {
         // Set starting health values
-        slider.maxValue = creature.currentMaxHP;
-        slider.value = creature.currentHealth;
+        slider.maxValue = player.maxHealth;
+        slider.value = player.currentHealth;
         fill.color = healthGradient.Evaluate(1f);
 
         // Status UI (on hover)
-        if(creature.player.playerNumber == 2){
+        if(player.playerNumber == 2){
             statusText.transform.localScale = new Vector3(-1, 1, 1);
         }
         setStatusFeedbackUIActive(false);
@@ -33,7 +33,7 @@ public class UIStateFeedbackManager : MonoBehaviour
     public void updateMaxHealthBar()
     {
         // set new max value
-        slider.maxValue = creature.currentMaxHP;
+        slider.maxValue = player.maxHealth;
         // update hp bar
         fill.color = healthGradient.Evaluate(slider.normalizedValue);
     }
@@ -41,20 +41,20 @@ public class UIStateFeedbackManager : MonoBehaviour
     public void updateCurrentHealthBar()
     {
         // set new current value
-        slider.value = creature.currentHealth;
+        slider.value = player.currentHealth;
         // update hp bar
         fill.color = healthGradient.Evaluate(slider.normalizedValue);
     }
 
     public void setStatusUI()
     {
-        string s = "<b>" + creature.creature.CreatureName() + "</b>";
-        s += "\nHP: " + creature.currentHealth + "/" + creature.currentMaxHP;
-        
-        if( creature.activeEffects.Count != 0 ){
+        string s = "<b>" + player.playerObject.characterName + "</b>";
+        s += "\nHP: " + player.currentHealth + "/" + player.maxHealth;
+
+        if( player.activeEffects.Count != 0 ){
             s += "\nStatus: ";
 
-            foreach( Action.statusEffect effect in creature.activeEffects.Keys ){
+            foreach( Action.statusEffect effect in player.activeEffects.Keys ){
                 s += effect.statusType; // Should probably be an effect NAME which we have to add
                 s += " (" + effect.effectDuration + " rounds)";
             }

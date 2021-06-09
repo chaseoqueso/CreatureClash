@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class CharacterSelectManager : MonoBehaviour
 {
     public List<PlayerObject> characters;
+    public List<Sprite> bannerSprites;
 
     [HideInInspector] public bool readyP1, readyP2;
 
