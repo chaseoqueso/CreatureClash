@@ -60,9 +60,24 @@ MonoBehaviour:
     attackContactTime: 0
     hitAnim: {fileID: 0}
     actionEffectGroups:
-    - groupName: Board Damage
+    - groupName: Board Damage Enemy
       targetType: 10
-      targetRestriction: 0
+      targetRestriction: 1
+      blockedByFrontline: 0
+      groupEffects:
+      - effectName: Damage
+        type: 0
+        status:
+          statusType: 0
+          modifierValue: 0
+          modifierMult: 0
+          effectDuration: 0
+        hpValue: -10
+        hpMulti: 0
+        optionalSpecialEffect: {fileID: 0}
+    - groupName: Board Damage Ally
+      targetType: 10
+      targetRestriction: 2
       blockedByFrontline: 0
       groupEffects:
       - effectName: Damage
