@@ -19,7 +19,7 @@ MonoBehaviour:
   baseDamage: 10
   baseDefense: 40
   baseSpeed: 30
-  texture: {fileID: 2800000, guid: 0e6563b402164f0419394ab05e2e43fd, type: 3}
+  texture: {fileID: 2800000, guid: db02aeeb72e29554ea328f7e89ebf1da, type: 3}
   normalMap: {fileID: 0}
   actions:
   - actionName: Warlord's Rage

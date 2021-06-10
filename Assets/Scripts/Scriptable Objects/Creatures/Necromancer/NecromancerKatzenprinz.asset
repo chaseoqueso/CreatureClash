@@ -19,7 +19,7 @@ MonoBehaviour:
   baseDamage: 8
   baseDefense: 0
   baseSpeed: 75
-  texture: {fileID: 2800000, guid: a8012986f61ad824bb536335ec75734c, type: 3}
+  texture: {fileID: 2800000, guid: cfa6d2ba8f6dd7a4f8463a97bce9fc72, type: 3}
   normalMap: {fileID: 0}
   actions:
   - actionName: Scratch

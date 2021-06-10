@@ -19,7 +19,7 @@ MonoBehaviour:
   baseDamage: 7
   baseDefense: 0
   baseSpeed: 60
-  texture: {fileID: 2800000, guid: aa69eab8e62b3da48a3756c571cafaea, type: 3}
+  texture: {fileID: 2800000, guid: bef06ad4ae4aede4a85847367c2fa760, type: 3}
   normalMap: {fileID: 0}
   actions:
   - actionName: Flame Spit

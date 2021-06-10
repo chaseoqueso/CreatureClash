@@ -19,7 +19,7 @@ MonoBehaviour:
   baseDamage: 12
   baseDefense: 15
   baseSpeed: 20
-  texture: {fileID: 2800000, guid: bbe7a2c504ca2af4487a020c980d7866, type: 3}
+  texture: {fileID: 2800000, guid: 65401a819c483dd418922cb980393c53, type: 3}
   normalMap: {fileID: 0}
   actions:
   - actionName: Haunting Bite
