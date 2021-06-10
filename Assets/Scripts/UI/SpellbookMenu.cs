@@ -18,12 +18,18 @@ public class SpellbookMenu : MonoBehaviour
     private List<GameObject> creaturePanels;
     private List<GameObject> spellPanels;
 
-    public float yPosValue = 800;
-    public float yPosValueDecrease = 200;
-
+    public float yPosValue;
+    public float yPosValueDecrease;
+    public float xPosValueCreature;
+    public float xPosValueSpell;
 
     void Start()
     {
+        yPosValue = 765;
+        yPosValueDecrease = 170;
+        xPosValueCreature = 590;
+        xPosValueSpell = 1380;
+
         creaturePanels = new List<GameObject>();
         spellPanels = new List<GameObject>();
 
@@ -39,7 +45,7 @@ public class SpellbookMenu : MonoBehaviour
             foreach(CreatureObject creature in currentPlayer.cardsInHand){
                 // Create the creature panel
                 GameObject creaturePanel = Instantiate(creaturePanelPrefab, new Vector3(0, 0, 0), Quaternion.identity, transform);
-                creaturePanel.transform.position = new Vector3(500, yPos, 0);
+                creaturePanel.transform.position = new Vector3(xPosValueCreature, yPos, 0);
                 creaturePanels.Add(creaturePanel);
 
                 CreaturePanel panel = creaturePanel.GetComponent<CreaturePanel>();
@@ -75,7 +81,7 @@ public class SpellbookMenu : MonoBehaviour
 
             // Create the panel
             GameObject spellPanel = Instantiate(spellPanelPrefab, new Vector3(0, 0, 0), Quaternion.identity, transform);
-            spellPanel.transform.position = new Vector3(1410, yPos, 0);
+            spellPanel.transform.position = new Vector3(xPosValueSpell, yPos, 0);
             spellPanels.Add(spellPanel);
 
             SpellPanel panel = spellPanel.GetComponent<SpellPanel>();
