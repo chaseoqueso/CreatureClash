@@ -158,6 +158,9 @@ public class GameManager : MonoBehaviour
     public DataManager data;
     public PlayerObject player1Object;
     public PlayerObject player2Object;
+    public AudioClip menuTrack;
+    public AudioClip battleIntro;
+    public AudioClip battleLoop;
     public Turn currentTurn {get; private set;}
     public int turnCount;
 
@@ -186,7 +189,10 @@ public class GameManager : MonoBehaviour
 
     public void startGame(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name == "ForestArena" || scene.name == "CrossroadsArena") {
+        if(scene.name == "ForestArena" || scene.name == "CrossroadsArena") 
+        {
+            MusicManager.instance.playMusic(battleLoop, battleIntro);
+
             data = DataManager.Instance;
 
             turnCount = 1;
@@ -201,6 +207,10 @@ public class GameManager : MonoBehaviour
             data.player1UI.GetComponentInChildren<Button>().onClick.AddListener(progressTurn);
             data.player2UI.GetComponentInChildren<Button>().onClick.AddListener(progressTurn);
             updateUI();
+        }
+        else
+        {
+            MusicManager.instance.playMusic(menuTrack);
         }
     }
 

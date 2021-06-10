@@ -15,6 +15,7 @@ MonoBehaviour:
   characterName: Ash
   characterClass: The Pyromancer
   characterSprite: {fileID: 2800000, guid: 4c0225fd794822942ac0518a0354dbf2, type: 3}
+  characterNormalMap: {fileID: 0}
   baseHealth: 100
   baseDef: 0
   baseDamage: 10
@@ -26,7 +27,94 @@ MonoBehaviour:
     quantity: 9
   - creatureType: {fileID: 11400000, guid: 4abf0f87eaac77a44b33faa4bf0453ee, type: 2}
     quantity: 5
-  actions: []
+  actions:
+  - actionName: Fireblast
+    description: You palm a small ball of fire and hurl it towards an enemy minion,
+      singeing them for 2 damage.
+    actionIcon: {fileID: 0}
+    attackAnim: {fileID: 0}
+    attackContactTime: 0
+    hitAnim: {fileID: 0}
+    actionEffectGroups:
+    - groupName: Damage
+      targetType: 5
+      targetRestriction: 1
+      blockedByFrontline: 0
+      groupEffects:
+      - effectName: Damage
+        type: 0
+        status:
+          statusType: 0
+          modifierValue: 0
+          modifierMult: 0
+          effectDuration: 0
+        hpValue: -2
+        hpMulti: 0
+        optionalSpecialEffect: {fileID: 0}
+    manaCost: 2
+  - actionName: 'Imploding Surface '
+    description: The ground below the battlefield implodes, inflicting 10 damage
+      to ALL minions.
+    actionIcon: {fileID: 0}
+    attackAnim: {fileID: 0}
+    attackContactTime: 0
+    hitAnim: {fileID: 0}
+    actionEffectGroups:
+    - groupName: Board Damage Enemy
+      targetType: 10
+      targetRestriction: 1
+      blockedByFrontline: 0
+      groupEffects:
+      - effectName: Damage
+        type: 0
+        status:
+          statusType: 0
+          modifierValue: 0
+          modifierMult: 0
+          effectDuration: 0
+        hpValue: -10
+        hpMulti: 0
+        optionalSpecialEffect: {fileID: 0}
+    - groupName: Board Damage Ally
+      targetType: 10
+      targetRestriction: 2
+      blockedByFrontline: 0
+      groupEffects:
+      - effectName: Damage
+        type: 0
+        status:
+          statusType: 0
+          modifierValue: 0
+          modifierMult: 0
+          effectDuration: 0
+        hpValue: -10
+        hpMulti: 0
+        optionalSpecialEffect: {fileID: 0}
+    manaCost: 5
+  - actionName: 'Incinerate '
+    description: 'You condense your mana into a fiery blaze in order to deal 10 direct
+      damage to the enemy hero. '
+    actionIcon: {fileID: 0}
+    attackAnim: {fileID: 0}
+    attackContactTime: 0
+    hitAnim: {fileID: 0}
+    actionEffectGroups:
+    - groupName: Hero Damage
+      targetType: 11
+      targetRestriction: 1
+      blockedByFrontline: 0
+      groupEffects:
+      - effectName: Damage
+        type: 0
+        status:
+          statusType: 0
+          modifierValue: 0
+          modifierMult: 0
+          effectDuration: 0
+        hpValue: -10
+        hpMulti: 0
+        optionalSpecialEffect: {fileID: 0}
+    manaCost: 8
   characterPortrait: {fileID: 2800000, guid: de92e07483af0dd42aa3c9cf0e967a42, type: 3}
   challengeDialogue: []
   winDialogue: []

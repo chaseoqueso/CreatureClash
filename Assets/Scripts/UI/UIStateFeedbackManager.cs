@@ -68,11 +68,3 @@ public class UIStateFeedbackManager : MonoBehaviour
         statusFeedbackUI.SetActive(value);
     }
 }
-
-
-/*
-
-Add health bars (non-interactable sliders, if possible have it change color as it decreases
-value -> see the tanks tutorial or others)
-
-*/

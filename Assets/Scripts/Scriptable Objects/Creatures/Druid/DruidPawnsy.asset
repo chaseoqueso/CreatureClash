@@ -17,7 +17,7 @@ MonoBehaviour:
   flavorText: 
   maxHealth: 10
   baseDamage: 6
-  baseDefense: 10
+  baseDefense: 0
   baseSpeed: 65
   texture: {fileID: 2800000, guid: 950245096df60374abbae0980a3a8463, type: 3}
   normalMap: {fileID: 2800000, guid: a35a36b0ca88d254c8d7b8581da1d2ae, type: 3}
