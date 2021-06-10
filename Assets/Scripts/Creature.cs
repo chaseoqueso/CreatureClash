@@ -524,6 +524,9 @@ public class Creature : MonoBehaviour, ITargetable
 
     public void playAnimationClip(AnimationClip clip)
     {
+        if(anim == null || clip == null)
+            return;
+
         anim.clip = clip;
         anim.Play();
     }

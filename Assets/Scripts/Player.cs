@@ -182,13 +182,13 @@ public class Player : MonoBehaviour, ITargetable
         void summonInRow(ITargetable target) {
             if(target == null)
             {
-                Debug.LogError("Target was null.");
+                Debug.LogWarning("Target was null.");
                 return;
             }
 
             if(target.getTargetType() != ITargetable.TargetType.row)
             {
-                Debug.LogError("Target other than row was selected to summon creature.");
+                Debug.LogWarning("Target other than row was selected to summon creature.");
                 return;
             }
 

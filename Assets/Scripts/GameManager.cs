@@ -528,10 +528,12 @@ public class GameManager : MonoBehaviour
             if(currentCreature != null && currentCreature.currentAction != null)
             {
                 Action currentAction = currentCreature.currentAction;
-                if(currentAction.attackAnim == null)
+                if(currentAction.attackAnim == null || (currentCreature.currentTargets.Count == 1 && 
+                                                        currentCreature.currentTargets[0].Count == 1 && 
+                                                        currentCreature.currentTargets[0][0].getTargetType() == ITargetable.TargetType.creature && 
+                                                        ( (Creature)currentCreature.currentTargets[0][0] ).isDead) )
                 {
                     currentCreature.performNextAction();
-                    yield return new WaitForSeconds(1f);
                 }
                 else
                 {
