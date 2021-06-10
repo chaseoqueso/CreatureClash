@@ -25,7 +25,7 @@ MonoBehaviour:
   - actionName: Stick Whack
     description: Pawnsy bonks target creature or player, dealing 6 damage. <color=#AA0000><i>Blocked
       by Frontline</i></color>
-    actionIcon: {fileID: 21300000, guid: 144df8fa85420e34690e0598c06ad5fd, type: 3}
+    actionIcon: {fileID: 21300000, guid: cc077012a582ab646a2c92fcdad95fe1, type: 3}
     attackAnim: {fileID: 7400000, guid: 18b55cbeeae6e404da7d5d022a3e7ce0, type: 2}
     attackContactTime: 0.16
     hitAnim: {fileID: 7400000, guid: d65c9c6fb18403f4a9252b802f90f95c, type: 2}

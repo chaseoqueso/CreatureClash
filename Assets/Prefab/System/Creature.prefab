@@ -50,6 +50,7 @@ MonoBehaviour:
   player: {fileID: 0}
   row: {fileID: 0}
   statusUICanvas: {fileID: 4037197119900544213}
+  swapRowIcon: {fileID: 21300000, guid: 80dcd2f1dcd05d843b6f81ad5c832fdf, type: 3}
   currentHealth: 0
   currentMaxHP: 0
   currentDef: 0

@@ -9,8 +9,8 @@ public class Creature : MonoBehaviour, ITargetable
     public CreatureObject creature;
     public Player player;
     public RowManager row;
-
     public Canvas statusUICanvas;
+    public Sprite swapRowIcon;
 
     // Saves the action list from the CreatureObject for more convenient access
     private List<Action> actions;
@@ -42,6 +42,7 @@ public class Creature : MonoBehaviour, ITargetable
 
         actions = new List<Action>(creature.Actions());
         actions.Insert(0, Action.swapRows);
+        actions[0].actionIcon = swapRowIcon;
 
         // on start, set current values to max values
         currentHealth = creature.MaxHealth();
