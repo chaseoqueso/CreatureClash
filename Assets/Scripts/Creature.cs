@@ -54,8 +54,8 @@ public class Creature : MonoBehaviour, ITargetable
         setIdle();
 
         col = GetComponent<Collider2D>();
-        material = GetComponent<Renderer>().material;
-        anim = GetComponent<Animation>();
+        material = GetComponentInChildren<Renderer>().material;
+        anim = GetComponentInChildren<Animation>();
         material.mainTexture = creature.Texture();
         material.SetTexture("normalMap", creature.NormalMap());
         transform.localScale = new Vector3(creature.Texture().width/material.GetFloat("pixelsPerUnit"), creature.Texture().height/material.GetFloat("pixelsPerUnit"), 1);
