@@ -27,6 +27,8 @@ MonoBehaviour:
     quantity: 9
   - creatureType: {fileID: 11400000, guid: 4abf0f87eaac77a44b33faa4bf0453ee, type: 2}
     quantity: 5
+  - creatureType: {fileID: 11400000, guid: f827b9eddb32ecc43afb395468af44de, type: 2}
+    quantity: 3
   actions:
   - actionName: Fireblast
     description: You palm a small ball of fire and hurl it towards an enemy minion,
