@@ -27,6 +27,8 @@ MonoBehaviour:
     quantity: 10
   - creatureType: {fileID: 11400000, guid: 04a9ca2570fd735488a4e5a785597d6f, type: 2}
     quantity: 5
+  - creatureType: {fileID: 11400000, guid: 617358b61bd393d47b876f334d8163a5, type: 2}
+    quantity: 3
   actions:
   - actionName: Blood Ritual
     description: You take 4 damage to infuse target creature with increased vigor,
