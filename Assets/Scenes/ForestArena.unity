@@ -237,6 +237,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7225607305678559073, guid: 233d9b058cf99df4b80ca601a9dcbd35, type: 3}
   m_PrefabInstance: {fileID: 71612514}
   m_PrefabAsset: {fileID: 0}
+--- !u!223 &71612516 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 2228647102755571058, guid: 233d9b058cf99df4b80ca601a9dcbd35, type: 3}
+  m_PrefabInstance: {fileID: 71612514}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &79684271
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,6 +550,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7225607305678559073, guid: 233d9b058cf99df4b80ca601a9dcbd35, type: 3}
   m_PrefabInstance: {fileID: 116042616}
   m_PrefabAsset: {fileID: 0}
+--- !u!223 &116042618 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 2228647102755571058, guid: 233d9b058cf99df4b80ca601a9dcbd35, type: 3}
+  m_PrefabInstance: {fileID: 116042616}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &120616593
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,6 +655,7 @@ MonoBehaviour:
   playerObject: {fileID: 0}
   deck: []
   playerNumber: 0
+  statusUICanvas: {fileID: 116042618}
   currentHealth: 0
   maxHealth: 0
   currentDef: 0
@@ -941,6 +952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionSelectUI: {fileID: 305172658}
   abilityUIPanelPrefab: {fileID: 7371893248051315190, guid: 0f42904ed731fee419a46b6b282f7112, type: 3}
+  abilityUIPanelBACKPrefab: {fileID: 7371893248051315190, guid: c6042240b5f2ece46b2adbd613ae51a1, type: 3}
   abilityUIPanels: []
   creature: {fileID: 0}
   abilityUIPanelHeight: 110
@@ -2853,6 +2865,7 @@ MonoBehaviour:
   playerObject: {fileID: 0}
   deck: []
   playerNumber: 0
+  statusUICanvas: {fileID: 71612516}
   currentHealth: 0
   maxHealth: 0
   currentDef: 0

@@ -15,7 +15,6 @@ public class SpellPanel : MonoBehaviour
     public TMP_Text spellName;
     public TMP_Text spellDescription;
     public TMP_Text spellCOST;
-    public Image spellIMG;
 
     public Button panelButton;
 
@@ -23,10 +22,6 @@ public class SpellPanel : MonoBehaviour
     {
         spellName.text = a.actionName;
         spellDescription.text = a.description;
-
-        spellIMG.sprite = a.actionIcon;
-        // Texture2D t = a.actionIcon;
-        // spellIMG.sprite = Sprite.Create(t, new Rect(0,0,t.width, t.height), new Vector2(0.5f, 0.5f));
 
         spellCostValue = a.manaCost;      
         spellCOST.text = spellCostValue + "";

@@ -41,8 +41,8 @@ public class Creature : MonoBehaviour, ITargetable
         activeEffects = new Dictionary<Action.statusEffect, int>();
 
         actions = new List<Action>(creature.Actions());
-        actions.Insert(0, Action.swapRows);
-        actions[0].actionIcon = swapRowIcon;
+        actions.Add(Action.swapRows);
+        actions[actions.Count - 1].actionIcon = swapRowIcon;
 
         // on start, set current values to max values
         currentHealth = creature.MaxHealth();
@@ -376,8 +376,8 @@ public class Creature : MonoBehaviour, ITargetable
                     currentHealth = currentMaxHP;
                 }
                 // update health bar
-                statusUICanvas.GetComponent<UIStateFeedbackManager>().updateCurrentHealthBar();
                 statusUICanvas.GetComponent<UIStateFeedbackManager>().updateMaxHealthBar();
+                statusUICanvas.GetComponent<UIStateFeedbackManager>().updateCurrentHealthBar();
             }
             return;
         }
@@ -404,8 +404,8 @@ public class Creature : MonoBehaviour, ITargetable
                 currentHealth = currentMaxHP;
             }
             // update health bar
-            statusUICanvas.GetComponent<UIStateFeedbackManager>().updateCurrentHealthBar();
             statusUICanvas.GetComponent<UIStateFeedbackManager>().updateMaxHealthBar();
+            statusUICanvas.GetComponent<UIStateFeedbackManager>().updateCurrentHealthBar();
         }
     }
 
