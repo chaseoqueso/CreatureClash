@@ -18,7 +18,7 @@ MonoBehaviour:
   maxHealth: 20
   baseDamage: 10
   baseDefense: 0
-  baseSpeed: 20
+  baseSpeed: 5
   texture: {fileID: 2800000, guid: a707cce3d8b75e44d857ea5e0bd1fc0c, type: 3}
   normalMap: {fileID: 0}
   actions:
@@ -41,8 +41,8 @@ MonoBehaviour:
           modifierValue: 0
           modifierMult: 0
           effectDuration: 0
-        hpValue: -10
-        hpMulti: 0
+        hpValue: 0
+        hpMulti: -1
         optionalSpecialEffect: {fileID: 0}
   - actionName: Toxic Regeneration
     description: 'Freund hones in on his undead form, regenerating to full health. '
@@ -53,7 +53,7 @@ MonoBehaviour:
     actionEffectGroups:
     - groupName: Heal
       targetType: 6
-      targetRestriction: 3
+      targetRestriction: 0
       blockedByFrontline: 0
       groupEffects:
       - effectName: Heal
@@ -64,5 +64,5 @@ MonoBehaviour:
           modifierMult: 0
           effectDuration: 0
         hpValue: 20
-        hpMulti: 1
+        hpMulti: 0
         optionalSpecialEffect: {fileID: 0}

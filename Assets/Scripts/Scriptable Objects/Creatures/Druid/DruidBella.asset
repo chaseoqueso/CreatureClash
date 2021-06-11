@@ -16,16 +16,15 @@ MonoBehaviour:
   manaCost: 4
   flavorText: 
   maxHealth: 15
-  baseDamage: 5
-  baseDefense: 20
+  baseDamage: 9
+  baseDefense: 15
   baseSpeed: 20
   texture: {fileID: 2800000, guid: 156edceaed271284e8b9fdd50cd09aa9, type: 3}
   normalMap: {fileID: 0}
   actions:
   - actionName: Leeching Spore
     description: Bella sends a parasitic spore toward target creature or player,
-      dealing 5 damage and healing Bella for 5 health. <color=#AA0000><i>Blocked
-      by Frontline</i></color>
+      dealing 9 damage. <color=#AA0000><i>Blocked by Frontline</i></color>
     actionIcon: {fileID: 0}
     attackAnim: {fileID: 7400000, guid: 51e73bcad46c18246a700fa10cb8088d, type: 2}
     attackContactTime: 0.51
@@ -46,56 +45,25 @@ MonoBehaviour:
         hpValue: 0
         hpMulti: -1
         optionalSpecialEffect: {fileID: 0}
-    - groupName: Heal
-      targetType: 6
-      targetRestriction: 3
-      blockedByFrontline: 0
-      groupEffects:
-      - effectName: Heal
-        type: 1
-        status:
-          statusType: 0
-          modifierValue: 0
-          modifierMult: 0
-          effectDuration: 0
-        hpValue: 5
-        hpMulti: 0
-        optionalSpecialEffect: {fileID: 0}
-  - actionName: Healing Spore
-    description: Bella sends a healing spore toward target creature or player, dealing
-      5 damage to Bella and healing the target for 10 health.
+  - actionName: Fungal Overgrowth
+    description: Bella concentrates on her vitality to increase her defense by 20%
     actionIcon: {fileID: 0}
     attackAnim: {fileID: 7400000, guid: 51e73bcad46c18246a700fa10cb8088d, type: 2}
     attackContactTime: 0.51
     hitAnim: {fileID: 7400000, guid: 5114f8caf67da5b469340a77978ff211, type: 2}
     actionEffectGroups:
-    - groupName: Damage
+    - groupName: Defense Up
       targetType: 6
       targetRestriction: 3
-      blockedByFrontline: 1
-      groupEffects:
-      - effectName: Damage
-        type: 0
-        status:
-          statusType: 0
-          modifierValue: 0
-          modifierMult: 1
-          effectDuration: 1
-        hpValue: 0
-        hpMulti: -1
-        optionalSpecialEffect: {fileID: 0}
-    - groupName: Heal
-      targetType: 5
-      targetRestriction: 0
       blockedByFrontline: 0
       groupEffects:
-      - effectName: Heal
-        type: 1
+      - effectName: Defense Up
+        type: 2
         status:
-          statusType: 0
+          statusType: 5
           modifierValue: 0
-          modifierMult: 1
-          effectDuration: 1
-        hpValue: 10
+          modifierMult: 0.2
+          effectDuration: 0
+        hpValue: 0
         hpMulti: 0
         optionalSpecialEffect: {fileID: 0}
