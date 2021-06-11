@@ -155,21 +155,30 @@ public class Player : MonoBehaviour, ITargetable
 
     public void queueSpell(int index)
     {
+        StartCoroutine(queueSpellRoutine(index));
+    }
+
+    private IEnumerator queueSpellRoutine(int index)
+    {
         List<List<ITargetable>> targetGroups = new List<List<ITargetable>>();
+        bool targetSelected = false;
 
         void setActionCallback(ITargetable target)
         {
             if(target == null)
             {
                 clearActions();
+                StopAllCoroutines();
             }
             else if(target is GameManager.SelfTargetable)
             {
                 targetGroups.Add(this.getTargets());
+                targetSelected = true;
             }
             else
             {
                 targetGroups.Add(target.getTargets());
+                targetSelected = true;
             }
         }
 
@@ -177,6 +186,12 @@ public class Player : MonoBehaviour, ITargetable
 
         foreach(Action.EffectGroup group in action.actionEffectGroups) {
             GameManager.Instance.performAfterTargetSelect(this, group.targetType, group.targetRestriction, group.blockedByFrontline, setActionCallback);
+
+            while(!targetSelected)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            yield return new WaitForEndOfFrame();
         }
             
         queueAction(action, targetGroups);

@@ -352,6 +352,7 @@ public class GameManager : MonoBehaviour
 
     public void targetWasClicked(ITargetable target)
     {
+        Debug.Log(target);
         if(targeting) {
             if(bothRowsTargeting)
             {
@@ -482,9 +483,8 @@ public class GameManager : MonoBehaviour
                 {
                     b.interactable = false;
                 }
-
-                data.turnText.text = "Current Turn: Player 1";
                 break;
+
             case Turn.player2:
                 foreach(Button b in data.player1UI.GetComponentsInChildren<Button>())
                 {
@@ -494,9 +494,8 @@ public class GameManager : MonoBehaviour
                 {
                     b.interactable = true;
                 }
-
-                data.turnText.text = "Current Turn: Player 2";
                 break;
+
             case Turn.resolveAttacks:
                 foreach(Button b in data.player1UI.GetComponentsInChildren<Button>())
                 {
@@ -506,7 +505,6 @@ public class GameManager : MonoBehaviour
                 {
                     b.interactable = false;
                 }
-                data.turnText.text = "Resolving Attacks";
                 break;
         }
     }

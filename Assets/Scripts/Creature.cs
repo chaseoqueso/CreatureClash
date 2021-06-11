@@ -118,21 +118,30 @@ public class Creature : MonoBehaviour, ITargetable
 
     public void selectTargetsForAction(int actionIndex)
     {
+        StartCoroutine(selectTargetsRoutine(actionIndex));
+    }
+
+    private IEnumerator selectTargetsRoutine(int actionIndex)
+    {
         List<List<ITargetable>> targetGroups = new List<List<ITargetable>>();
+        bool targetSelected = false;
 
         void setActionCallback(ITargetable target)
         {
             if(target == null)
             {
+                StopAllCoroutines();
                 clearActions();
             }
             else if(target is GameManager.SelfTargetable)
             {
                 targetGroups.Add(this.getTargets());
+                targetSelected = true;
             }
             else
             {
                 targetGroups.Add(target.getTargets());
+                targetSelected = true;
             }
         }
 
@@ -140,6 +149,12 @@ public class Creature : MonoBehaviour, ITargetable
 
         foreach(Action.EffectGroup group in action.actionEffectGroups) {
             GameManager.Instance.performAfterTargetSelect(player, group.targetType, group.targetRestriction, group.blockedByFrontline, setActionCallback);
+
+            while(!targetSelected)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            yield return new WaitForEndOfFrame();
         }
             
         setNextAction(actionIndex, targetGroups);
@@ -183,6 +198,8 @@ public class Creature : MonoBehaviour, ITargetable
         for( int i = 0; i < currentTargets.Count; i++ ) {
             Action.EffectGroup currentEffectGroup = currentAction.actionEffectGroups[i];
             List<Action.Effect> effectsOnTargets = currentEffectGroup.groupEffects;
+            Debug.Log(currentEffectGroup);
+            Debug.Log(effectsOnTargets);
 
             if(currentEffectGroup.blockedByFrontline) //Process for selecting a new target if the attack can be blocked by the frontline
             {
