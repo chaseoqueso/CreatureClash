@@ -8,6 +8,7 @@ public class AbilityUIManager : MonoBehaviour
     public GameObject actionSelectUI;
 
     public GameObject abilityUIPanelPrefab;
+    public GameObject abilityUIPanelBACKPrefab;
     [HideInInspector] public List<GameObject> abilityUIPanels;
 
     [HideInInspector] public Creature creature;
@@ -38,6 +39,12 @@ public class AbilityUIManager : MonoBehaviour
         abilityUIPanels.Clear();
     }
 
+    public void backButtonClick()
+    {
+        closeActionSelectUI();
+        GameManager.Instance.resetTargeting();
+    }
+
     private void setActionUIValues()
     {
         List<Action> actionList = creature.getActionList();
@@ -59,12 +66,16 @@ public class AbilityUIManager : MonoBehaviour
             {
                 a.setInteractable(false);
             }
-
             yPos -= 100;
-
             // actionSelectUI.GetComponent<RectTransform>().sizeDelta = new Vector2(abilityUIPanelWidth, panelSize);
             // panelSize += abilityUIPanelHeight;
         }
+
+        GameObject backPanel = Instantiate(abilityUIPanelBACKPrefab, new Vector3(0, 0, 0), Quaternion.identity, transform);
+        backPanel.transform.position = new Vector3(xPos, yPos, 0);
+        abilityUIPanels.Add(backPanel);
+        backPanel.GetComponent<Button>().onClick.AddListener(backButtonClick);
+
         // Could add stuff to check for cooldowns here and keep things disabled if on cooldown
         // and add a number visual for how many rounds left
     }

@@ -20,6 +20,7 @@ public class Player : MonoBehaviour, ITargetable
     public PlayerObject playerObject;
     public List<CreatureObject> deck;
     public int playerNumber;
+    public Canvas statusUICanvas;
 
     [HideInInspector] public float currentHealth;
     [HideInInspector] public float maxHealth;
@@ -55,6 +56,10 @@ public class Player : MonoBehaviour, ITargetable
         material.mainTexture = playerObject.characterSprite;
         material.SetTexture("normalMap", playerObject.characterNormalMap);
         transform.localScale = new Vector3(playerObject.characterSprite.width/material.GetFloat("pixelsPerUnit"), playerObject.characterSprite.height/material.GetFloat("pixelsPerUnit"), 1);
+
+        // update health bar
+        statusUICanvas.GetComponent<UIStatusFeedbackPLAYER>().updateMaxHealthBar();
+        statusUICanvas.GetComponent<UIStatusFeedbackPLAYER>().updateCurrentHealthBar();
 
         loadDeck();
 
@@ -150,21 +155,30 @@ public class Player : MonoBehaviour, ITargetable
 
     public void queueSpell(int index)
     {
+        StartCoroutine(queueSpellRoutine(index));
+    }
+
+    private IEnumerator queueSpellRoutine(int index)
+    {
         List<List<ITargetable>> targetGroups = new List<List<ITargetable>>();
+        bool targetSelected = false;
 
         void setActionCallback(ITargetable target)
         {
             if(target == null)
             {
                 clearActions();
+                StopAllCoroutines();
             }
             else if(target is GameManager.SelfTargetable)
             {
                 targetGroups.Add(this.getTargets());
+                targetSelected = true;
             }
             else
             {
                 targetGroups.Add(target.getTargets());
+                targetSelected = true;
             }
         }
 
@@ -172,6 +186,12 @@ public class Player : MonoBehaviour, ITargetable
 
         foreach(Action.EffectGroup group in action.actionEffectGroups) {
             GameManager.Instance.performAfterTargetSelect(this, group.targetType, group.targetRestriction, group.blockedByFrontline, setActionCallback);
+
+            while(!targetSelected)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            yield return new WaitForEndOfFrame();
         }
             
         queueAction(action, targetGroups);
@@ -182,13 +202,13 @@ public class Player : MonoBehaviour, ITargetable
         void summonInRow(ITargetable target) {
             if(target == null)
             {
-                Debug.LogError("Target was null.");
+                Debug.LogWarning("Target was null.");
                 return;
             }
 
             if(target.getTargetType() != ITargetable.TargetType.row)
             {
-                Debug.LogError("Target other than row was selected to summon creature.");
+                Debug.LogWarning("Target other than row was selected to summon creature.");
                 return;
             }
 
@@ -327,6 +347,9 @@ public class Player : MonoBehaviour, ITargetable
             currentHealth = maxHealth;
         }
 
+        // update health bar
+        statusUICanvas.GetComponent<UIStatusFeedbackPLAYER>().updateCurrentHealthBar();
+
         // If HP drops to 0, this creature is killed
         if(currentHealth <= 0){
             excess = currentHealth;
@@ -371,6 +394,9 @@ public class Player : MonoBehaviour, ITargetable
                 if( currentHealth > maxHealth ){
                     currentHealth = maxHealth;
                 }
+                // update health bar
+                statusUICanvas.GetComponent<UIStatusFeedbackPLAYER>().updateMaxHealthBar();
+                statusUICanvas.GetComponent<UIStatusFeedbackPLAYER>().updateCurrentHealthBar();
             }
             return;
         }
@@ -392,6 +418,9 @@ public class Player : MonoBehaviour, ITargetable
             if( currentHealth > maxHealth ){
                 currentHealth = maxHealth;
             }
+            // update health bar
+            statusUICanvas.GetComponent<UIStatusFeedbackPLAYER>().updateMaxHealthBar();
+            statusUICanvas.GetComponent<UIStatusFeedbackPLAYER>().updateCurrentHealthBar();
         }
     }
 
@@ -448,6 +477,27 @@ public class Player : MonoBehaviour, ITargetable
             {
                 ( (SummonAction)a ).creatureIndex = -1;
             }
+        }
+    }
+
+    void OnMouseEnter()
+    {
+        toggleUIStatus(true);
+    }
+
+    void OnMouseExit()
+    {
+        toggleUIStatus(false);
+    }
+
+    private void toggleUIStatus(bool value)
+    {
+        UIStatusFeedbackPLAYER UIManager = statusUICanvas.GetComponent<UIStatusFeedbackPLAYER>();
+        
+        UIManager.setStatusFeedbackUIActive(value);
+
+        if(value){    
+            UIManager.setStatusUI();
         }
     }
 }

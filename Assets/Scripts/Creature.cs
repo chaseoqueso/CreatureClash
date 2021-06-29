@@ -9,8 +9,8 @@ public class Creature : MonoBehaviour, ITargetable
     public CreatureObject creature;
     public Player player;
     public RowManager row;
-
     public Canvas statusUICanvas;
+    public Sprite swapRowIcon;
 
     // Saves the action list from the CreatureObject for more convenient access
     private List<Action> actions;
@@ -41,7 +41,8 @@ public class Creature : MonoBehaviour, ITargetable
         activeEffects = new Dictionary<Action.statusEffect, int>();
 
         actions = new List<Action>(creature.Actions());
-        actions.Insert(0, Action.swapRows);
+        actions.Add(Action.swapRows);
+        actions[actions.Count - 1].actionIcon = swapRowIcon;
 
         // on start, set current values to max values
         currentHealth = creature.MaxHealth();
@@ -54,8 +55,8 @@ public class Creature : MonoBehaviour, ITargetable
         setIdle();
 
         col = GetComponent<Collider2D>();
-        material = GetComponent<Renderer>().material;
-        anim = GetComponent<Animation>();
+        material = GetComponentInChildren<Renderer>().material;
+        anim = GetComponentInChildren<Animation>();
         material.mainTexture = creature.Texture();
         material.SetTexture("normalMap", creature.NormalMap());
         transform.localScale = new Vector3(creature.Texture().width/material.GetFloat("pixelsPerUnit"), creature.Texture().height/material.GetFloat("pixelsPerUnit"), 1);
@@ -117,21 +118,30 @@ public class Creature : MonoBehaviour, ITargetable
 
     public void selectTargetsForAction(int actionIndex)
     {
+        StartCoroutine(selectTargetsRoutine(actionIndex));
+    }
+
+    private IEnumerator selectTargetsRoutine(int actionIndex)
+    {
         List<List<ITargetable>> targetGroups = new List<List<ITargetable>>();
+        bool targetSelected = false;
 
         void setActionCallback(ITargetable target)
         {
             if(target == null)
             {
+                StopAllCoroutines();
                 clearActions();
             }
             else if(target is GameManager.SelfTargetable)
             {
                 targetGroups.Add(this.getTargets());
+                targetSelected = true;
             }
             else
             {
                 targetGroups.Add(target.getTargets());
+                targetSelected = true;
             }
         }
 
@@ -139,6 +149,12 @@ public class Creature : MonoBehaviour, ITargetable
 
         foreach(Action.EffectGroup group in action.actionEffectGroups) {
             GameManager.Instance.performAfterTargetSelect(player, group.targetType, group.targetRestriction, group.blockedByFrontline, setActionCallback);
+
+            while(!targetSelected)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            yield return new WaitForEndOfFrame();
         }
             
         setNextAction(actionIndex, targetGroups);
@@ -182,6 +198,8 @@ public class Creature : MonoBehaviour, ITargetable
         for( int i = 0; i < currentTargets.Count; i++ ) {
             Action.EffectGroup currentEffectGroup = currentAction.actionEffectGroups[i];
             List<Action.Effect> effectsOnTargets = currentEffectGroup.groupEffects;
+            Debug.Log(currentEffectGroup);
+            Debug.Log(effectsOnTargets);
 
             if(currentEffectGroup.blockedByFrontline) //Process for selecting a new target if the attack can be blocked by the frontline
             {
@@ -375,8 +393,8 @@ public class Creature : MonoBehaviour, ITargetable
                     currentHealth = currentMaxHP;
                 }
                 // update health bar
-                statusUICanvas.GetComponent<UIStateFeedbackManager>().updateCurrentHealthBar();
                 statusUICanvas.GetComponent<UIStateFeedbackManager>().updateMaxHealthBar();
+                statusUICanvas.GetComponent<UIStateFeedbackManager>().updateCurrentHealthBar();
             }
             return;
         }
@@ -403,8 +421,8 @@ public class Creature : MonoBehaviour, ITargetable
                 currentHealth = currentMaxHP;
             }
             // update health bar
-            statusUICanvas.GetComponent<UIStateFeedbackManager>().updateCurrentHealthBar();
             statusUICanvas.GetComponent<UIStateFeedbackManager>().updateMaxHealthBar();
+            statusUICanvas.GetComponent<UIStateFeedbackManager>().updateCurrentHealthBar();
         }
     }
 
@@ -524,6 +542,9 @@ public class Creature : MonoBehaviour, ITargetable
 
     public void playAnimationClip(AnimationClip clip)
     {
+        if(anim == null || clip == null)
+            return;
+
         anim.clip = clip;
         anim.Play();
     }

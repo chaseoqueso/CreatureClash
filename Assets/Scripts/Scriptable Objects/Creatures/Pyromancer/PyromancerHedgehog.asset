@@ -19,12 +19,12 @@ MonoBehaviour:
   baseDamage: 20
   baseDefense: 0
   baseSpeed: 99
-  texture: {fileID: 2800000, guid: 44d83cf940ed30246807a6b929cd297b, type: 3}
+  texture: {fileID: 2800000, guid: 9c8a2380ca6eb1447b337cb8bb901c60, type: 3}
   normalMap: {fileID: 0}
   actions:
   - actionName: Flare Blast
     description: Genj'hog burns brightly, dealing 20 damage to target creature or
-      player.
+      player.  <color=#AA0000><i>Blocked by Frontline</i></color>
     actionIcon: {fileID: 0}
     attackAnim: {fileID: 7400000, guid: 51e73bcad46c18246a700fa10cb8088d, type: 2}
     attackContactTime: 0.51
@@ -42,8 +42,8 @@ MonoBehaviour:
           modifierValue: 0
           modifierMult: 0
           effectDuration: 0
-        hpValue: -20
-        hpMulti: 0
+        hpValue: 0
+        hpMulti: -1
         optionalSpecialEffect: {fileID: 0}
   - actionName: Final Lap
     description: Genj'hog runs in circles around an enemy creature and as a result
@@ -66,7 +66,7 @@ MonoBehaviour:
           modifierMult: 0
           effectDuration: 0
         hpValue: -999
-        hpMulti: 0
+        hpMulti: -1
         optionalSpecialEffect: {fileID: 0}
     - groupName: DMG Target
       targetType: 5
@@ -81,5 +81,5 @@ MonoBehaviour:
           modifierMult: 0
           effectDuration: 0
         hpValue: -999
-        hpMulti: 0
+        hpMulti: -1
         optionalSpecialEffect: {fileID: 0}

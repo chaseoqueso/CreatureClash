@@ -49,7 +49,7 @@ public class MusicManager : MonoBehaviour
     {
         while(source.isPlaying)
         {
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
 
         source.clip = loop;

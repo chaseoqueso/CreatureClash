@@ -34,7 +34,6 @@ public class DataManager : MonoBehaviour
     public GameObject player2UI;
     public SpellbookMenu spellBook;
     public AbilityUIManager abilityUI;
-    public Text turnText;
     public Canvas UICanvas;
 
     void Awake()

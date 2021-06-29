@@ -26,6 +26,8 @@ MonoBehaviour:
   - creatureType: {fileID: 11400000, guid: 746b46311ca0914459760f131bbccaa0, type: 2}
     quantity: 10
   - creatureType: {fileID: 11400000, guid: c38eae27401d3664caa2af8d5f765812, type: 2}
+    quantity: 3
+  - creatureType: {fileID: 11400000, guid: af38d953843e08d4d9edaf8333c78b79, type: 2}
     quantity: 6
   actions:
   - actionName: Mend
